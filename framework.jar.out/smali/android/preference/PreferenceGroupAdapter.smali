@@ -113,57 +113,48 @@
 
     iput-object v0, p0, Landroid/preference/PreferenceGroupAdapter;->mTempPreferenceLayout:Landroid/preference/PreferenceGroupAdapter$PreferenceLayout;
 
-    .line 96
     iput-boolean v2, p0, Landroid/preference/PreferenceGroupAdapter;->mHasReturnedViewTypeCount:Z
 
-    .line 98
     iput-boolean v2, p0, Landroid/preference/PreferenceGroupAdapter;->mIsSyncing:Z
 
-    .line 100
     new-instance v0, Landroid/os/Handler;
 
     invoke-direct {v0}, Landroid/os/Handler;-><init>()V
 
     iput-object v0, p0, Landroid/preference/PreferenceGroupAdapter;->mHandler:Landroid/os/Handler;
 
-    .line 178
     new-instance v0, Landroid/preference/PreferenceGroupAdapter$1;
 
     invoke-direct {v0, p0}, Landroid/preference/PreferenceGroupAdapter$1;-><init>(Landroid/preference/PreferenceGroupAdapter;)V
 
     iput-object v0, p0, Landroid/preference/PreferenceGroupAdapter;->mSyncRunnable:Ljava/lang/Runnable;
 
-    .line 184
     const/4 v0, -0x1
 
     iput v0, p0, Landroid/preference/PreferenceGroupAdapter;->mHighlightedPosition:I
 
-    .line 214
     iput-object p1, p0, Landroid/preference/PreferenceGroupAdapter;->mPreferenceGroup:Landroid/preference/PreferenceGroup;
 
-    .line 216
     iget-object v0, p0, Landroid/preference/PreferenceGroupAdapter;->mPreferenceGroup:Landroid/preference/PreferenceGroup;
 
     invoke-virtual {v0, p0}, Landroid/preference/PreferenceGroup;->setOnPreferenceChangeInternalListener(Landroid/preference/Preference$OnPreferenceChangeInternalListener;)V
 
-    .line 218
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Landroid/preference/PreferenceGroupAdapter;->mPreferenceList:Ljava/util/List;
 
-    .line 219
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
     iput-object v0, p0, Landroid/preference/PreferenceGroupAdapter;->mPreferenceLayouts:Ljava/util/ArrayList;
 
-    .line 221
     invoke-direct {p0}, Landroid/preference/PreferenceGroupAdapter;->syncMyPreferences()V
 
-    .line 213
+    invoke-direct/range {p0 .. p0}, Landroid/preference/PreferenceGroupAdapter;->initFlymeExtraFields()V
+
     return-void
 .end method
 
@@ -486,7 +477,17 @@
     .locals 1
 
     .prologue
-    .line 360
+
+    iget-boolean v0, p0, Landroid/preference/PreferenceGroupAdapter;->mIsFlymeThemeLight:Z
+
+    if-eqz v0, :cond_flyme_0
+
+    const/4 v0, 0x1
+
+    return v0
+
+    :cond_flyme_0
+
     const/4 v0, 0x0
 
     return v0
@@ -940,6 +941,19 @@
 
     .line 353
     :cond_1
+
+    iget-boolean v0, p0, Landroid/preference/PreferenceGroupAdapter;->mIsFlymeThemeLight:Z
+
+    if-eqz v0, :cond_flyme_0
+
+    invoke-direct/range {p0 .. p1}, Landroid/preference/PreferenceGroupAdapter;->isFlymePreferenceEnabled(I)Z
+
+    move-result v0
+
+    return v0
+
+    :cond_flyme_0
+
     invoke-virtual {p0, p1}, Landroid/preference/PreferenceGroupAdapter;->getItem(I)Landroid/preference/Preference;
 
     move-result-object v0
@@ -1134,4 +1148,78 @@
     const/4 v0, 0x0
 
     return v0
+.end method
+
+.method private initFlymeExtraFields()V
+    .locals 1
+
+    .prologue
+    invoke-direct {p0}, Landroid/preference/PreferenceGroupAdapter;->isFlymeDeviceDefaultLightTheme()Z
+
+    move-result v0
+
+    iput-boolean v0, p0, Landroid/preference/PreferenceGroupAdapter;->mIsFlymeThemeLight:Z
+
+    return-void
+.end method
+
+.method private isFlymeDeviceDefaultLightTheme()Z
+    .locals 3
+
+    .prologue
+    const/4 v2, 0x0
+
+    iget-object v1, p0, Landroid/preference/PreferenceGroupAdapter;->mPreferenceGroup:Landroid/preference/PreferenceGroup;
+
+    invoke-virtual {v1}, Landroid/preference/PreferenceGroup;->getContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    .local v0, "context":Landroid/content/Context;
+    if-nez v0, :cond_0
+
+    return v2
+
+    :cond_0
+    invoke-virtual {v0}, Landroid/content/Context;->isColorTheme()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_1
+
+    const/4 v1, 0x1
+
+    return v1
+
+    :cond_1
+    return v2
+.end method
+
+.method private isFlymePreferenceEnabled(I)Z
+    .locals 2
+    .param p1, "position"    # I
+
+    .prologue
+    invoke-virtual {p0, p1}, Landroid/preference/PreferenceGroupAdapter;->getItem(I)Landroid/preference/Preference;
+
+    move-result-object v0
+
+    .local v0, "preference":Landroid/preference/Preference;
+    invoke-virtual {v0}, Landroid/preference/Preference;->isEnabled()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    invoke-virtual {v0}, Landroid/preference/Preference;->isSelectable()Z
+
+    move-result v1
+
+    :goto_0
+    return v1
+
+    :cond_0
+    const/4 v1, 0x0
+
+    goto :goto_0
 .end method

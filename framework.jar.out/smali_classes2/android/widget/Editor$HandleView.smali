@@ -161,53 +161,42 @@
 
     const/4 v3, 0x0
 
-    .line 3656
-    const v4, 0x10102c8
+    const v4, #android:attr@textSelectHandleWindowStyle#t
 
-    .line 3655
     invoke-direct {v1, v2, v3, v4}, Landroid/widget/PopupWindow;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
 
     iput-object v1, p0, Landroid/widget/Editor$HandleView;->mContainer:Landroid/widget/PopupWindow;
 
-    .line 3657
     iget-object v1, p0, Landroid/widget/Editor$HandleView;->mContainer:Landroid/widget/PopupWindow;
 
     invoke-virtual {v1, v7}, Landroid/widget/PopupWindow;->setSplitTouchEnabled(Z)V
 
-    .line 3658
     iget-object v1, p0, Landroid/widget/Editor$HandleView;->mContainer:Landroid/widget/PopupWindow;
 
     invoke-virtual {v1, v5}, Landroid/widget/PopupWindow;->setClippingEnabled(Z)V
 
-    .line 3659
     iget-object v1, p0, Landroid/widget/Editor$HandleView;->mContainer:Landroid/widget/PopupWindow;
 
     const/16 v2, 0x3ea
 
     invoke-virtual {v1, v2}, Landroid/widget/PopupWindow;->setWindowLayoutType(I)V
 
-    .line 3660
     iget-object v1, p0, Landroid/widget/Editor$HandleView;->mContainer:Landroid/widget/PopupWindow;
 
     invoke-virtual {v1, v6}, Landroid/widget/PopupWindow;->setWidth(I)V
 
-    .line 3661
     iget-object v1, p0, Landroid/widget/Editor$HandleView;->mContainer:Landroid/widget/PopupWindow;
 
     invoke-virtual {v1, v6}, Landroid/widget/PopupWindow;->setHeight(I)V
 
-    .line 3662
     iget-object v1, p0, Landroid/widget/Editor$HandleView;->mContainer:Landroid/widget/PopupWindow;
 
     invoke-virtual {v1, p0}, Landroid/widget/PopupWindow;->setContentView(Landroid/view/View;)V
 
-    .line 3664
     iput-object p2, p0, Landroid/widget/Editor$HandleView;->mDrawableLtr:Landroid/graphics/drawable/Drawable;
 
-    .line 3665
     iput-object p3, p0, Landroid/widget/Editor$HandleView;->mDrawableRtl:Landroid/graphics/drawable/Drawable;
 
-    .line 3666
     invoke-static {p1}, Landroid/widget/Editor;->-get7(Landroid/widget/Editor;)Landroid/widget/TextView;
 
     move-result-object v1
@@ -220,25 +209,20 @@
 
     move-result-object v1
 
-    .line 3667
-    const v2, 0x105008f
+    const v2, #android:dimen@text_handle_min_size#t
 
-    .line 3666
     invoke-virtual {v1, v2}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
     move-result v1
 
     iput v1, p0, Landroid/widget/Editor$HandleView;->mMinSize:I
 
-    .line 3669
     invoke-virtual {p0}, Landroid/widget/Editor$HandleView;->updateDrawable()V
 
-    .line 3671
     invoke-direct {p0}, Landroid/widget/Editor$HandleView;->getPreferredHeight()I
 
     move-result v0
 
-    .line 3672
     .local v0, "handleHeight":I
     int-to-float v1, v0
 
@@ -930,37 +914,34 @@
 
     iput v8, p0, Landroid/widget/Editor$HandleView;->mLastParentX:I
 
-    .line 3957
     invoke-virtual {v4}, Landroid/widget/Editor$PositionListener;->getPositionY()I
 
     move-result v8
 
     iput v8, p0, Landroid/widget/Editor$HandleView;->mLastParentY:I
 
-    .line 3958
     iput-boolean v10, p0, Landroid/widget/Editor$HandleView;->mIsDragging:Z
 
-    .line 3959
     const/4 v8, -0x1
 
     iput v8, p0, Landroid/widget/Editor$HandleView;->mPreviousLineTouched:I
 
     goto :goto_0
 
-    .line 3964
     .end local v4    # "positionListener":Landroid/widget/Editor$PositionListener;
     :pswitch_1
+
+    invoke-direct/range {p0 .. p0}, Landroid/widget/Editor$HandleView;->flymeHideOptionWrapper()V
+
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getRawX()F
 
     move-result v6
 
-    .line 3965
     .local v6, "rawX":F
     invoke-virtual {p1}, Landroid/view/MotionEvent;->getRawY()F
 
     move-result v7
 
-    .line 3968
     .local v7, "rawY":F
     iget v8, p0, Landroid/widget/Editor$HandleView;->mTouchToWindowOffsetY:F
 
@@ -1078,24 +1059,21 @@
     :pswitch_2
     invoke-direct {p0}, Landroid/widget/Editor$HandleView;->filterOnTouchUp()V
 
-    .line 3990
     iput-boolean v9, p0, Landroid/widget/Editor$HandleView;->mIsDragging:Z
 
-    .line 3991
+    invoke-direct/range {p0 .. p0}, Landroid/widget/Editor$HandleView;->flymeShowOptionWrapper()V
+
     invoke-virtual {p0}, Landroid/widget/Editor$HandleView;->updateDrawable()V
 
     goto/16 :goto_0
 
-    .line 3995
     :pswitch_3
     iput-boolean v9, p0, Landroid/widget/Editor$HandleView;->mIsDragging:Z
 
-    .line 3996
     invoke-virtual {p0}, Landroid/widget/Editor$HandleView;->updateDrawable()V
 
     goto/16 :goto_0
 
-    .line 3949
     :pswitch_data_0
     .packed-switch 0x0
         :pswitch_0
@@ -1142,55 +1120,56 @@
 
     move-result-object v0
 
-    .line 3828
     iget v3, p0, Landroid/widget/Editor$HandleView;->mPreviousOffset:I
 
     if-eq p1, v3, :cond_4
 
     const/4 v2, 0x1
 
-    .line 3829
     .local v2, "offsetChanged":Z
     :goto_0
     if-nez v2, :cond_1
 
     if-eqz p2, :cond_3
 
-    .line 3830
     :cond_1
+
+    invoke-direct/range {p0 .. p1}, Landroid/widget/Editor$HandleView;->flymePositionAtCursorOffset(I)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
     if-eqz v2, :cond_2
 
-    .line 3831
     invoke-virtual {p0, p1}, Landroid/widget/Editor$HandleView;->updateSelection(I)V
 
-    .line 3832
     invoke-direct {p0, p1}, Landroid/widget/Editor$HandleView;->addPositionToTouchUpFilter(I)V
 
-    .line 3834
     :cond_2
     invoke-virtual {v0, p1}, Landroid/text/Layout;->getLineForOffset(I)I
 
     move-result v1
 
-    .line 3835
     .local v1, "line":I
     iput v1, p0, Landroid/widget/Editor$HandleView;->mPrevLine:I
 
-    .line 3841
     invoke-virtual {p0, v0, p1, v1}, Landroid/widget/Editor$HandleView;->getPosX(Landroid/text/Layout;II)I
 
     move-result v3
 
     iput v3, p0, Landroid/widget/Editor$HandleView;->mPositionX:I
 
-    .line 3842
     invoke-virtual {p0, v0, p1, v1}, Landroid/widget/Editor$HandleView;->getPosY(Landroid/text/Layout;II)I
 
     move-result v3
 
     iput v3, p0, Landroid/widget/Editor$HandleView;->mPositionY:I
 
-    .line 3846
     iget v3, p0, Landroid/widget/Editor$HandleView;->mPositionX:I
 
     iget-object v4, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
@@ -1484,6 +1463,8 @@
     :goto_0
     iput-object v4, p0, Landroid/widget/Editor$HandleView;->mDrawable:Landroid/graphics/drawable/Drawable;
 
+    invoke-virtual/range {p0 .. p0}, Landroid/widget/Editor$HandleView;->postInvalidate()V
+
     .line 3689
     iget-object v4, p0, Landroid/widget/Editor$HandleView;->mDrawable:Landroid/graphics/drawable/Drawable;
 
@@ -1725,23 +1706,21 @@
 
     if-eqz v2, :cond_6
 
-    .line 3874
     iget-object v2, p0, Landroid/widget/Editor$HandleView;->mContainer:Landroid/widget/PopupWindow;
 
     invoke-virtual {v2, v0, v1, v4, v4}, Landroid/widget/PopupWindow;->update(IIII)V
 
-    .line 3885
+    invoke-direct/range {p0 .. p0}, Landroid/widget/Editor$HandleView;->flymeSendShowMessage()V
+
     .end local v0    # "positionX":I
     .end local v1    # "positionY":I
     :cond_4
     :goto_0
     iput-boolean v5, p0, Landroid/widget/Editor$HandleView;->mPositionHasChanged:Z
 
-    .line 3855
     :cond_5
     return-void
 
-    .line 3876
     .restart local v0    # "positionX":I
     .restart local v1    # "positionY":I
     :cond_6
@@ -1755,6 +1734,7 @@
 
     invoke-virtual {v2, v3, v5, v0, v1}, Landroid/widget/PopupWindow;->showAtLocation(Landroid/view/View;III)V
 
+    invoke-direct/range {p0 .. p0}, Landroid/widget/Editor$HandleView;->flymeSendShowMessage()V
     goto :goto_0
 
     .line 3880
@@ -1770,8 +1750,198 @@
     .line 3881
     invoke-virtual {p0}, Landroid/widget/Editor$HandleView;->dismiss()V
 
+    invoke-direct/range {p0 .. p0}, Landroid/widget/Editor$HandleView;->flymeSendHideMessage()V
+
     goto :goto_0
 .end method
 
 .method protected abstract updateSelection(I)V
+.end method
+
+.method private flymeHideOptionWrapper()V
+    .locals 1
+
+    .prologue
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mTextActionMode:Landroid/view/ActionMode;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mOptionWrapper:Landroid/widget/Editor$OptionWrapper;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mOptionWrapper:Landroid/widget/Editor$OptionWrapper;
+
+    invoke-virtual {v0}, Landroid/widget/Editor$OptionWrapper;->hide()Z
+
+    :cond_0
+    return-void
+.end method
+
+.method private flymePositionAtCursorOffset(I)Z
+    .locals 4
+    .param p1, "offset"    # I
+
+    .prologue
+    invoke-virtual {p0}, Landroid/widget/Editor$HandleView;->isDragging()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    invoke-virtual {v0}, Landroid/widget/Editor;->flymeGetFieldTextView()Landroid/widget/TextView;
+
+    move-result-object v0
+
+    invoke-virtual {v0, p1}, Landroid/widget/TextView;->isOffsetOutOfVisible(I)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    invoke-static {}, Landroid/view/animation/AnimationUtils;->currentAnimationTimeMillis()J
+
+    move-result-wide v0
+
+    iget-object v2, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-wide v2, v2, Landroid/widget/Editor;->mLastScrollTime:J
+
+    sub-long/2addr v0, v2
+
+    const-wide/16 v2, 0xc8
+
+    cmp-long v0, v0, v2
+
+    if-gez v0, :cond_0
+
+    const/4 v0, 0x1
+
+    return v0
+
+    :cond_0
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    invoke-static {}, Landroid/view/animation/AnimationUtils;->currentAnimationTimeMillis()J
+
+    move-result-wide v2
+
+    iput-wide v2, v0, Landroid/widget/Editor;->mLastScrollTime:J
+
+    const/4 v0, 0x0
+
+    return v0
+.end method
+
+.method private flymeSendEmptyMessage(I)V
+    .locals 1
+    .param p1, "option"    # I
+
+    .prologue
+    const/16 v0, 0x2712
+
+    if-ne p1, v0, :cond_1
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mTextActionMode:Landroid/view/ActionMode;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mOptionWrapper:Landroid/widget/Editor$OptionWrapper;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mOptionWrapper:Landroid/widget/Editor$OptionWrapper;
+
+    invoke-virtual {v0}, Landroid/widget/Editor$OptionWrapper;->show()Z
+
+    :cond_0
+    :goto_0
+    return-void
+
+    :cond_1
+    const/16 v0, 0x2711
+
+    if-ne p1, v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mTextActionMode:Landroid/view/ActionMode;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mOptionWrapper:Landroid/widget/Editor$OptionWrapper;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mOptionWrapper:Landroid/widget/Editor$OptionWrapper;
+
+    invoke-virtual {v0}, Landroid/widget/Editor$OptionWrapper;->hide()Z
+
+    goto :goto_0
+.end method
+
+.method private flymeSendHideMessage()V
+    .locals 1
+
+    .prologue
+    const/16 v0, 0x2711
+
+    invoke-direct {p0, v0}, Landroid/widget/Editor$HandleView;->flymeSendEmptyMessage(I)V
+
+    return-void
+.end method
+
+.method private flymeSendShowMessage()V
+    .locals 1
+
+    .prologue
+    const/16 v0, 0x2712
+
+    invoke-direct {p0, v0}, Landroid/widget/Editor$HandleView;->flymeSendEmptyMessage(I)V
+
+    return-void
+.end method
+
+.method private flymeShowOptionWrapper()V
+    .locals 1
+
+    .prologue
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mTextActionMode:Landroid/view/ActionMode;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mOptionWrapper:Landroid/widget/Editor$OptionWrapper;
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Landroid/widget/Editor$HandleView;->this$0:Landroid/widget/Editor;
+
+    iget-object v0, v0, Landroid/widget/Editor;->mOptionWrapper:Landroid/widget/Editor$OptionWrapper;
+
+    invoke-virtual {v0}, Landroid/widget/Editor$OptionWrapper;->show()Z
+
+    :cond_0
+    return-void
 .end method

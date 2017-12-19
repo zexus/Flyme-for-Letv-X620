@@ -467,15 +467,12 @@
 
     move-result-object v9
 
-    .line 917
-    const-string/jumbo v10, ", IIntentReceiver="
+    const-string v10, ", IIntentReceiver="
 
-    .line 913
     invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v9
 
-    .line 919
     iget-object v10, p0, Landroid/app/LoadedApk$ReceiverDispatcher$Args;->this$1:Landroid/app/LoadedApk$ReceiverDispatcher;
 
     iget-object v10, v10, Landroid/app/LoadedApk$ReceiverDispatcher;->mIIntentReceiver:Landroid/content/IIntentReceiver$Stub;

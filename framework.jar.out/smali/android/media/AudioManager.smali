@@ -842,17 +842,14 @@
 
     move-result-object v0
 
-    .line 676
-    const v1, 0x1120010
+    const v1, #android:bool@config_useVolumeKeySounds#t
 
-    .line 675
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v0
 
     iput-boolean v0, p0, Landroid/media/AudioManager;->mUseVolumeKeySounds:Z
 
-    .line 677
     invoke-direct {p0}, Landroid/media/AudioManager;->getContext()Landroid/content/Context;
 
     move-result-object v0
@@ -861,17 +858,14 @@
 
     move-result-object v0
 
-    .line 678
-    const v1, 0x1120079
+    const v1, #android:bool@config_useFixedVolume#t
 
-    .line 677
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v0
 
     iput-boolean v0, p0, Landroid/media/AudioManager;->mUseFixedVolume:Z
 
-    .line 673
     return-void
 .end method
 
@@ -3070,14 +3064,13 @@
     .param p3, "flags"    # I
 
     .prologue
-    .line 915
     sget-object v1, Landroid/media/AudioManager;->TAG:Ljava/lang/String;
 
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string/jumbo v3, "adjustSuggestedStreamVolume: Direction = "
+    const-string v3, "adjustSuggestedStreamVolume: Direction = "
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -3105,7 +3098,6 @@
 
     invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 917
     invoke-direct {p0}, Landroid/media/AudioManager;->getContext()Landroid/content/Context;
 
     move-result-object v1
@@ -3114,11 +3106,9 @@
 
     move-result-object v0
 
-    .line 918
     .local v0, "helper":Landroid/media/session/MediaSessionLegacyHelper;
     invoke-virtual {v0, p2, p1, p3}, Landroid/media/session/MediaSessionLegacyHelper;->sendAdjustVolumeBy(III)V
 
-    .line 914
     return-void
 .end method
 
@@ -3128,14 +3118,13 @@
     .param p2, "flags"    # I
 
     .prologue
-    .line 885
     sget-object v1, Landroid/media/AudioManager;->TAG:Ljava/lang/String;
 
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string/jumbo v3, "adjustVolume: Flags = "
+    const-string v3, "adjustVolume: Flags = "
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -3145,7 +3134,7 @@
 
     move-result-object v2
 
-    const-string/jumbo v3, ", direction = "
+    const-string v3, ", direction = "
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -3161,6 +3150,7 @@
 
     invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
+    .line 917
     .line 886
     invoke-direct {p0}, Landroid/media/AudioManager;->getContext()Landroid/content/Context;
 
@@ -3590,10 +3580,8 @@
 
     move-result-object v2
 
-    .line 3459
-    const v3, 0x112009c
+    const v3, #android:bool@config_supportMicNearUltrasound#t
 
-    .line 3458
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -3623,10 +3611,8 @@
 
     move-result-object v2
 
-    .line 3462
-    const v3, 0x112009d
+    const v3, #android:bool@config_supportSpeakerNearUltrasound#t
 
-    .line 3461
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -4326,10 +4312,8 @@
 
     move-result-object v0
 
-    .line 1434
-    const v1, 0x112004f
+    const v1, #android:bool@config_bluetooth_sco_off_call#t
 
-    .line 1433
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v0
@@ -8468,4 +8452,36 @@
     const/4 v2, 0x0
 
     return v2
+.end method
+
+.method private adjustFlymeFlags(III)I
+    .locals 2
+    .param p1, "direction"    # I
+    .param p2, "suggestedStreamType"    # I
+    .param p3, "flags"    # I
+
+    .prologue
+    invoke-direct {p0}, Landroid/media/AudioManager;->getContext()Landroid/content/Context;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Landroid/content/Context;->getOpPackageName()Ljava/lang/String;
+
+    move-result-object v0
+
+    .local v0, "packageName":Ljava/lang/String;
+    if-nez p3, :cond_0
+
+    const-string v1, "com.android.systemui"
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    const/16 p3, 0x10
+
+    :cond_0
+    return p3
 .end method

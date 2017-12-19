@@ -350,29 +350,25 @@
 
     move-object/from16 v7, p8
 
-    .line 1843
     invoke-virtual/range {v1 .. v8}, Landroid/app/ResourcesManager;->getTopLevelResources(Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;ILandroid/content/res/Configuration;Landroid/content/res/CompatibilityInfo;)Landroid/content/res/Resources;
 
     move-result-object v10
 
-    .line 1849
+    invoke-direct {p0, v10}, Landroid/app/ContextImpl;->setFlymeThemeResource(Landroid/content/res/Resources;)V
+
     :cond_4
     iput-object v10, p0, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
 
-    .line 1851
     if-eqz p1, :cond_a
 
-    .line 1852
     iget-object v1, p1, Landroid/app/ContextImpl;->mBasePackageName:Ljava/lang/String;
 
     iput-object v1, p0, Landroid/app/ContextImpl;->mBasePackageName:Ljava/lang/String;
 
-    .line 1853
     iget-object v1, p1, Landroid/app/ContextImpl;->mOpPackageName:Ljava/lang/String;
 
     iput-object v1, p0, Landroid/app/ContextImpl;->mOpPackageName:Ljava/lang/String;
 
-    .line 1868
     :goto_4
     new-instance v1, Landroid/app/ContextImpl$ApplicationContentResolver;
 
@@ -5914,6 +5910,214 @@
     .param p2, "receiverPermission"    # Ljava/lang/String;
 
     .prologue
+    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
+
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    move-object/from16 v0, p1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+
+    move-result-object v4
+
+    .local v4, "resolvedType":Ljava/lang/String;
+    if-nez p2, :cond_0
+
+    const/4 v9, 0x0
+
+    :goto_0
+    :try_start_0
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+
+    move-result-object v2
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
+
+    move-result v14
+
+    const/4 v5, 0x0
+
+    const/4 v6, -0x1
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/4 v10, -0x1
+
+    const/4 v11, 0x0
+
+    const/4 v12, 0x0
+
+    const/4 v13, 0x0
+
+    move-object/from16 v3, p1
+
+    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    :cond_0
+    const/4 v1, 0x1
+
+    new-array v9, v1, [Ljava/lang/String;
+
+    const/4 v1, 0x0
+
+    aput-object p2, v9, v1
+
+    .local v9, "receiverPermissions":[Ljava/lang/String;
+    goto :goto_0
+
+    .end local v9    # "receiverPermissions":[Ljava/lang/String;
+    :catch_0
+    move-exception v15
+
+    .local v15, "e":Landroid/os/RemoteException;
+    new-instance v1, Ljava/lang/RuntimeException;
+
+    const-string v2, "Failure from system"
+
+    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public sendBroadcast(Landroid/content/Intent;Ljava/lang/String;I)V
+    .locals 16
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "receiverPermission"    # Ljava/lang/String;
+    .param p3, "appOp"    # I
+
+    .prologue
+    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
+
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    move-object/from16 v0, p1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+
+    move-result-object v4
+
+    .local v4, "resolvedType":Ljava/lang/String;
+    if-nez p2, :cond_0
+
+    const/4 v9, 0x0
+
+    :goto_0
+    :try_start_0
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+
+    move-result-object v2
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
+
+    move-result v14
+
+    const/4 v5, 0x0
+
+    const/4 v6, -0x1
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/4 v11, 0x0
+
+    const/4 v12, 0x0
+
+    const/4 v13, 0x0
+
+    move-object/from16 v3, p1
+
+    move/from16 v10, p3
+
+    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    :cond_0
+    const/4 v1, 0x1
+
+    new-array v9, v1, [Ljava/lang/String;
+
+    const/4 v1, 0x0
+
+    aput-object p2, v9, v1
+
+    .local v9, "receiverPermissions":[Ljava/lang/String;
+    goto :goto_0
+
+    .end local v9    # "receiverPermissions":[Ljava/lang/String;
+    :catch_0
+    move-exception v15
+
+    .local v15, "e":Landroid/os/RemoteException;
+    new-instance v1, Ljava/lang/RuntimeException;
+
+    const-string v2, "Failure from system"
+
+    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public sendBroadcast(Landroid/content/Intent;Ljava/lang/String;Landroid/os/Bundle;)V
+    .locals 16
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "receiverPermission"    # Ljava/lang/String;
+    .param p3, "options"    # Landroid/os/Bundle;
+
+    .prologue
     .line 783
     invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
 
@@ -5970,10 +6174,394 @@
 
     const/4 v10, -0x1
 
+    const/4 v12, 0x0
+
+    const/4 v13, 0x0
+
+    move-object/from16 v3, p1
+
+    move-object/from16 v11, p3
+
+    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    :cond_0
+    const/4 v1, 0x1
+
+    new-array v9, v1, [Ljava/lang/String;
+
+    const/4 v1, 0x0
+
+    aput-object p2, v9, v1
+
+    .local v9, "receiverPermissions":[Ljava/lang/String;
+    goto :goto_0
+
+    .end local v9    # "receiverPermissions":[Ljava/lang/String;
+    :catch_0
+    move-exception v15
+
+    .local v15, "e":Landroid/os/RemoteException;
+    new-instance v1, Ljava/lang/RuntimeException;
+
+    const-string v2, "Failure from system"
+
+    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public sendBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;)V
+    .locals 16
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "user"    # Landroid/os/UserHandle;
+
+    .prologue
+
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    move-object/from16 v0, p1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+
+    move-result-object v4
+
+    .local v4, "resolvedType":Ljava/lang/String;
+    :try_start_0
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+
+    move-result-object v2
+
+    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
+
+    move-result v14
+
+    const/4 v5, 0x0
+
+    const/4 v6, -0x1
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/4 v9, 0x0
+
+    const/4 v10, -0x1
+
     .line 792
     const/4 v11, 0x0
 
     const/4 v12, 0x0
+
+    const/4 v13, 0x0
+
+    move-object/from16 v3, p1
+
+    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    :catch_0
+    move-exception v15
+
+    .local v15, "e":Landroid/os/RemoteException;
+    new-instance v1, Ljava/lang/RuntimeException;
+
+    const-string v2, "Failure from system"
+
+    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public sendBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;)V
+    .locals 1
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "user"    # Landroid/os/UserHandle;
+    .param p3, "receiverPermission"    # Ljava/lang/String;
+
+    .prologue
+    const/4 v0, -0x1
+
+    invoke-virtual {p0, p1, p2, p3, v0}, Landroid/app/ContextImpl;->sendBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;I)V
+
+    return-void
+.end method
+
+.method public sendBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;I)V
+    .locals 16
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "user"    # Landroid/os/UserHandle;
+    .param p3, "receiverPermission"    # Ljava/lang/String;
+    .param p4, "appOp"    # I
+
+    .prologue
+
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    move-object/from16 v0, p1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+
+    move-result-object v4
+
+    .local v4, "resolvedType":Ljava/lang/String;
+    if-nez p3, :cond_0
+
+    const/4 v9, 0x0
+
+    :goto_0
+    :try_start_0
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+
+    move-result-object v2
+
+    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
+
+    move-result v14
+
+    const/4 v5, 0x0
+
+    const/4 v6, -0x1
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/4 v11, 0x0
+
+    const/4 v12, 0x0
+
+    const/4 v13, 0x0
+
+    move-object/from16 v3, p1
+
+    move/from16 v10, p4
+
+    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    :cond_0
+    const/4 v1, 0x1
+
+    new-array v9, v1, [Ljava/lang/String;
+
+    const/4 v1, 0x0
+
+    aput-object p3, v9, v1
+
+    .local v9, "receiverPermissions":[Ljava/lang/String;
+    goto :goto_0
+
+    .end local v9    # "receiverPermissions":[Ljava/lang/String;
+    :catch_0
+    move-exception v15
+
+    .local v15, "e":Landroid/os/RemoteException;
+    new-instance v1, Ljava/lang/RuntimeException;
+
+    const-string v2, "Failure from system"
+
+    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public sendBroadcastMultiplePermissions(Landroid/content/Intent;[Ljava/lang/String;)V
+    .locals 16
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "receiverPermissions"    # [Ljava/lang/String;
+
+    .prologue
+    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    move-object/from16 v0, p1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+
+    move-result-object v4
+
+    .local v4, "resolvedType":Ljava/lang/String;
+    :try_start_0
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+
+    move-result-object v2
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
+
+    move-result v14
+
+    const/4 v5, 0x0
+
+    const/4 v6, -0x1
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/4 v10, -0x1
+
+    const/4 v11, 0x0
+
+    const/4 v12, 0x0
+
+    const/4 v13, 0x0
+
+    move-object/from16 v3, p1
+
+    move-object/from16 v9, p2
+
+    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    :catch_0
+    move-exception v15
+
+    .local v15, "e":Landroid/os/RemoteException;
+    new-instance v1, Ljava/lang/RuntimeException;
+
+    const-string v2, "Failure from system"
+
+    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
+    .locals 16
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "receiverPermission"    # Ljava/lang/String;
+
+    .prologue
+    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
+
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    move-object/from16 v0, p1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+
+    move-result-object v4
+
+    .local v4, "resolvedType":Ljava/lang/String;
+    if-nez p2, :cond_0
+
+    const/4 v9, 0x0
+
+    :goto_0
+    :try_start_0
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+
+    move-result-object v2
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
+
+    move-result v14
+
+    const/4 v5, 0x0
+
+    const/4 v6, -0x1
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/4 v10, -0x1
+
+    const/4 v11, 0x0
+
+    const/4 v12, 0x1
 
     const/4 v13, 0x0
 
@@ -6016,17 +6604,119 @@
     throw v1
 .end method
 
-.method public sendBroadcast(Landroid/content/Intent;Ljava/lang/String;I)V
+.method public sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
+    .locals 10
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "receiverPermission"    # Ljava/lang/String;
+    .param p3, "appOp"    # I
+    .param p4, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p5, "scheduler"    # Landroid/os/Handler;
+    .param p6, "initialCode"    # I
+    .param p7, "initialData"    # Ljava/lang/String;
+    .param p8, "initialExtras"    # Landroid/os/Bundle;
+
+    .prologue
+    const/4 v9, 0x0
+
+    move-object v0, p0
+
+    move-object v1, p1
+
+    move-object v2, p2
+
+    move v3, p3
+
+    move-object v4, p4
+
+    move-object v5, p5
+
+    move/from16 v6, p6
+
+    move-object/from16 v7, p7
+
+    move-object/from16 v8, p8
+
+    invoke-virtual/range {v0 .. v9}, Landroid/app/ContextImpl;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;Landroid/os/Bundle;)V
+
+    return-void
+.end method
+
+.method sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;Landroid/os/Bundle;)V
     .locals 16
     .param p1, "intent"    # Landroid/content/Intent;
     .param p2, "receiverPermission"    # Ljava/lang/String;
     .param p3, "appOp"    # I
+    .param p4, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p5, "scheduler"    # Landroid/os/Handler;
+    .param p6, "initialCode"    # I
+    .param p7, "initialData"    # Ljava/lang/String;
+    .param p8, "initialExtras"    # Landroid/os/Bundle;
+    .param p9, "options"    # Landroid/os/Bundle;
 
     .prologue
-    .line 832
     invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
 
-    .line 833
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    const/4 v5, 0x0
+
+    .local v5, "rd":Landroid/content/IIntentReceiver;
+    if-eqz p4, :cond_1
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
+
+    if-eqz v1, :cond_2
+
+    if-nez p5, :cond_0
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
+
+    move-result-object p5
+
+    :cond_0
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
+
+    move-result-object v3
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getInstrumentation()Landroid/app/Instrumentation;
+
+    move-result-object v5
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    const/4 v6, 0x0
+
+    move-object/from16 v2, p4
+
+    move-object/from16 v4, p5
+
+    invoke-virtual/range {v1 .. v6}, Landroid/app/LoadedApk;->getReceiverDispatcher(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)Landroid/content/IIntentReceiver;
+
+    move-result-object v5
+
+    :cond_1
+    :goto_0
     invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v1
@@ -6037,23 +6727,506 @@
 
     move-result-object v4
 
-    .line 834
     .local v4, "resolvedType":Ljava/lang/String;
-    if-nez p2, :cond_0
+    if-nez p2, :cond_4
 
     const/4 v9, 0x0
 
-    .line 837
-    :goto_0
+    :goto_1
     :try_start_0
     invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
 
-    .line 838
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
 
     move-result-object v1
 
-    .line 839
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+
+    move-result-object v2
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
+
+    move-result v14
+
+    const/4 v12, 0x1
+
+    const/4 v13, 0x0
+
+    move-object/from16 v3, p1
+
+    move/from16 v6, p6
+
+    move-object/from16 v7, p7
+
+    move-object/from16 v8, p8
+
+    move/from16 v10, p3
+
+    move-object/from16 v11, p9
+
+    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    .end local v4    # "resolvedType":Ljava/lang/String;
+    .restart local v5    # "rd":Landroid/content/IIntentReceiver;
+    :cond_2
+    if-nez p5, :cond_3
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
+
+    move-result-object p5
+
+    :cond_3
+    new-instance v1, Landroid/app/LoadedApk$ReceiverDispatcher;
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
+
+    move-result-object v3
+
+    const/4 v5, 0x0
+
+    const/4 v6, 0x0
+
+    move-object/from16 v2, p4
+
+    move-object/from16 v4, p5
+
+    invoke-direct/range {v1 .. v6}, Landroid/app/LoadedApk$ReceiverDispatcher;-><init>(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)V
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    invoke-virtual {v1}, Landroid/app/LoadedApk$ReceiverDispatcher;->getIIntentReceiver()Landroid/content/IIntentReceiver;
+
+    move-result-object v5
+
+    .local v5, "rd":Landroid/content/IIntentReceiver;
+    goto :goto_0
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    .restart local v4    # "resolvedType":Ljava/lang/String;
+    :cond_4
+    const/4 v1, 0x1
+
+    new-array v9, v1, [Ljava/lang/String;
+
+    const/4 v1, 0x0
+
+    aput-object p2, v9, v1
+
+    .local v9, "receiverPermissions":[Ljava/lang/String;
+    goto :goto_1
+
+    .end local v9    # "receiverPermissions":[Ljava/lang/String;
+    :catch_0
+    move-exception v15
+
+    .local v15, "e":Landroid/os/RemoteException;
+    new-instance v1, Ljava/lang/RuntimeException;
+
+    const-string v2, "Failure from system"
+
+    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
+    .locals 10
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "receiverPermission"    # Ljava/lang/String;
+    .param p3, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p4, "scheduler"    # Landroid/os/Handler;
+    .param p5, "initialCode"    # I
+    .param p6, "initialData"    # Ljava/lang/String;
+    .param p7, "initialExtras"    # Landroid/os/Bundle;
+
+    .prologue
+    const/4 v3, -0x1
+
+    const/4 v9, 0x0
+
+    move-object v0, p0
+
+    move-object v1, p1
+
+    move-object v2, p2
+
+    move-object v4, p3
+
+    move-object v5, p4
+
+    move v6, p5
+
+    move-object/from16 v7, p6
+
+    move-object/from16 v8, p7
+
+    invoke-virtual/range {v0 .. v9}, Landroid/app/ContextImpl;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;Landroid/os/Bundle;)V
+
+    return-void
+.end method
+
+.method public sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
+    .locals 10
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "receiverPermission"    # Ljava/lang/String;
+    .param p3, "options"    # Landroid/os/Bundle;
+    .param p4, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p5, "scheduler"    # Landroid/os/Handler;
+    .param p6, "initialCode"    # I
+    .param p7, "initialData"    # Ljava/lang/String;
+    .param p8, "initialExtras"    # Landroid/os/Bundle;
+
+    .prologue
+    const/4 v3, -0x1
+
+    move-object v0, p0
+
+    move-object v1, p1
+
+    move-object v2, p2
+
+    move-object v4, p4
+
+    move-object v5, p5
+
+    move/from16 v6, p6
+
+    move-object/from16 v7, p7
+
+    move-object/from16 v8, p8
+
+    move-object v9, p3
+
+    invoke-virtual/range {v0 .. v9}, Landroid/app/ContextImpl;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;Landroid/os/Bundle;)V
+
+    return-void
+.end method
+
+.method public sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
+    .locals 11
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "user"    # Landroid/os/UserHandle;
+    .param p3, "receiverPermission"    # Ljava/lang/String;
+    .param p4, "appOp"    # I
+    .param p5, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p6, "scheduler"    # Landroid/os/Handler;
+    .param p7, "initialCode"    # I
+    .param p8, "initialData"    # Ljava/lang/String;
+    .param p9, "initialExtras"    # Landroid/os/Bundle;
+
+    .prologue
+    const/4 v5, 0x0
+
+    move-object v0, p0
+
+    move-object v1, p1
+
+    move-object v2, p2
+
+    move-object v3, p3
+
+    move v4, p4
+
+    move-object/from16 v6, p5
+
+    move-object/from16 v7, p6
+
+    move/from16 v8, p7
+
+    move-object/from16 v9, p8
+
+    move-object/from16 v10, p9
+
+    invoke-virtual/range {v0 .. v10}, Landroid/app/ContextImpl;->sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;ILandroid/os/Bundle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
+
+    return-void
+.end method
+
+.method public sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;ILandroid/os/Bundle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
+    .locals 16
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "user"    # Landroid/os/UserHandle;
+    .param p3, "receiverPermission"    # Ljava/lang/String;
+    .param p4, "appOp"    # I
+    .param p5, "options"    # Landroid/os/Bundle;
+    .param p6, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p7, "scheduler"    # Landroid/os/Handler;
+    .param p8, "initialCode"    # I
+    .param p9, "initialData"    # Ljava/lang/String;
+    .param p10, "initialExtras"    # Landroid/os/Bundle;
+
+    .prologue
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    const/4 v5, 0x0
+
+    .local v5, "rd":Landroid/content/IIntentReceiver;
+    if-eqz p6, :cond_1
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
+
+    if-eqz v1, :cond_2
+
+    if-nez p7, :cond_0
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
+
+    move-result-object p7
+
+    :cond_0
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
+
+    move-result-object v3
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getInstrumentation()Landroid/app/Instrumentation;
+
+    move-result-object v5
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    const/4 v6, 0x0
+
+    move-object/from16 v2, p6
+
+    move-object/from16 v4, p7
+
+    invoke-virtual/range {v1 .. v6}, Landroid/app/LoadedApk;->getReceiverDispatcher(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)Landroid/content/IIntentReceiver;
+
+    move-result-object v5
+
+    :cond_1
+    :goto_0
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    move-object/from16 v0, p1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+
+    move-result-object v4
+
+    .local v4, "resolvedType":Ljava/lang/String;
+    if-nez p3, :cond_4
+
+    const/4 v9, 0x0
+
+    :goto_1
+    :try_start_0
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+
+    move-result-object v2
+
+    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
+
+    move-result v14
+
+    const/4 v12, 0x1
+
+    const/4 v13, 0x0
+
+    move-object/from16 v3, p1
+
+    move/from16 v6, p8
+
+    move-object/from16 v7, p9
+
+    move-object/from16 v8, p10
+
+    move/from16 v10, p4
+
+    move-object/from16 v11, p5
+
+    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-void
+
+    .end local v4    # "resolvedType":Ljava/lang/String;
+    .restart local v5    # "rd":Landroid/content/IIntentReceiver;
+    :cond_2
+    if-nez p7, :cond_3
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
+
+    move-result-object p7
+
+    :cond_3
+    new-instance v1, Landroid/app/LoadedApk$ReceiverDispatcher;
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
+
+    move-result-object v3
+
+    const/4 v5, 0x0
+
+    const/4 v6, 0x0
+
+    move-object/from16 v2, p6
+
+    move-object/from16 v4, p7
+
+    invoke-direct/range {v1 .. v6}, Landroid/app/LoadedApk$ReceiverDispatcher;-><init>(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)V
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    invoke-virtual {v1}, Landroid/app/LoadedApk$ReceiverDispatcher;->getIIntentReceiver()Landroid/content/IIntentReceiver;
+
+    move-result-object v5
+
+    .local v5, "rd":Landroid/content/IIntentReceiver;
+    goto :goto_0
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    .restart local v4    # "resolvedType":Ljava/lang/String;
+    :cond_4
+    const/4 v1, 0x1
+
+    new-array v9, v1, [Ljava/lang/String;
+
+    const/4 v1, 0x0
+
+    aput-object p3, v9, v1
+
+    .local v9, "receiverPermissions":[Ljava/lang/String;
+    goto :goto_1
+
+    .end local v9    # "receiverPermissions":[Ljava/lang/String;
+    :catch_0
+    move-exception v15
+
+    .local v15, "e":Landroid/os/RemoteException;
+    new-instance v1, Ljava/lang/RuntimeException;
+
+    const-string v2, "Failure from system"
+
+    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw v1
+.end method
+
+.method public sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
+    .locals 11
+    .param p1, "intent"    # Landroid/content/Intent;
+    .param p2, "user"    # Landroid/os/UserHandle;
+    .param p3, "receiverPermission"    # Ljava/lang/String;
+    .param p4, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p5, "scheduler"    # Landroid/os/Handler;
+    .param p6, "initialCode"    # I
+    .param p7, "initialData"    # Ljava/lang/String;
+    .param p8, "initialExtras"    # Landroid/os/Bundle;
+
+    .prologue
+    const/4 v4, -0x1
+
+    const/4 v5, 0x0
+
+    move-object v0, p0
+
+    move-object v1, p1
+
+    move-object v2, p2
+
+    move-object v3, p3
+
+    move-object v6, p4
+
+    move-object/from16 v7, p5
+
+    move/from16 v8, p6
+
+    move-object/from16 v9, p7
+
+    move-object/from16 v10, p8
+
+    invoke-virtual/range {v0 .. v10}, Landroid/app/ContextImpl;->sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;ILandroid/os/Bundle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
+
+    return-void
+.end method
+
+.method public sendStickyBroadcast(Landroid/content/Intent;)V
+    .locals 16
+    .param p1, "intent"    # Landroid/content/Intent;
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
+
+    .prologue
+    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
+
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
+
+    move-result-object v1
+
+    move-object/from16 v0, p1
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+
+    move-result-object v4
+
+    .local v4, "resolvedType":Ljava/lang/String;
+    :try_start_0
+    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+
+    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+
+    move-result-object v1
+
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
@@ -6077,64 +7250,55 @@
 
     const/4 v8, 0x0
 
+    const/4 v9, 0x0
+
+    const/4 v10, -0x1
+
     const/4 v11, 0x0
 
     const/4 v12, 0x0
 
-    const/4 v13, 0x0
+    const/4 v13, 0x1
 
     move-object/from16 v3, p1
 
-    move/from16 v10, p3
-
-    .line 838
     invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 831
     return-void
 
-    .line 835
-    :cond_0
-    const/4 v1, 0x1
-
-    new-array v9, v1, [Ljava/lang/String;
-
-    const/4 v1, 0x0
-
-    aput-object p2, v9, v1
-
-    .local v9, "receiverPermissions":[Ljava/lang/String;
-    goto :goto_0
-
-    .line 842
-    .end local v9    # "receiverPermissions":[Ljava/lang/String;
     :catch_0
     move-exception v15
 
-    .line 843
     .local v15, "e":Landroid/os/RemoteException;
     new-instance v1, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v2, "Failure from system"
+    const-string v2, "Failure from system"
 
     invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
     throw v1
 .end method
 
-.method public sendBroadcast(Landroid/content/Intent;Ljava/lang/String;Landroid/os/Bundle;)V
+.method public sendStickyBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;)V
     .locals 16
     .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "receiverPermission"    # Ljava/lang/String;
-    .param p3, "options"    # Landroid/os/Bundle;
+    .param p2, "user"    # Landroid/os/UserHandle;
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
 
     .prologue
-    .line 815
-    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
 
-    .line 816
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
     invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v1
@@ -6145,23 +7309,14 @@
 
     move-result-object v4
 
-    .line 817
     .local v4, "resolvedType":Ljava/lang/String;
-    if-nez p2, :cond_0
-
-    const/4 v9, 0x0
-
-    .line 820
-    :goto_0
     :try_start_0
     invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
 
-    .line 821
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
 
     move-result-object v1
 
-    .line 822
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
@@ -6170,76 +7325,125 @@
 
     move-result-object v2
 
-    .line 824
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
+    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
 
     move-result v14
 
-    .line 822
     const/4 v5, 0x0
 
-    .line 823
     const/4 v6, -0x1
 
     const/4 v7, 0x0
 
     const/4 v8, 0x0
 
+    const/4 v9, 0x0
+
     const/4 v10, -0x1
+
+    const/4 v11, 0x0
 
     .line 824
     const/4 v12, 0x0
 
-    const/4 v13, 0x0
+    const/4 v13, 0x1
 
     move-object/from16 v3, p1
 
-    move-object/from16 v11, p3
-
-    .line 821
     invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 814
     return-void
 
-    .line 818
-    :cond_0
-    const/4 v1, 0x1
-
-    new-array v9, v1, [Ljava/lang/String;
-
-    const/4 v1, 0x0
-
-    aput-object p2, v9, v1
-
-    .local v9, "receiverPermissions":[Ljava/lang/String;
-    goto :goto_0
-
-    .line 825
-    .end local v9    # "receiverPermissions":[Ljava/lang/String;
     :catch_0
     move-exception v15
 
-    .line 826
     .local v15, "e":Landroid/os/RemoteException;
     new-instance v1, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v2, "Failure from system"
+    const-string v2, "Failure from system"
 
     invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
     throw v1
 .end method
 
-.method public sendBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;)V
+.method public sendStickyOrderedBroadcast(Landroid/content/Intent;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
     .locals 16
     .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "user"    # Landroid/os/UserHandle;
+    .param p2, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p3, "scheduler"    # Landroid/os/Handler;
+    .param p4, "initialCode"    # I
+    .param p5, "initialData"    # Ljava/lang/String;
+    .param p6, "initialExtras"    # Landroid/os/Bundle;
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
 
     .prologue
-    .line 929
+    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
+
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    const/4 v5, 0x0
+
+    .local v5, "rd":Landroid/content/IIntentReceiver;
+    if-eqz p2, :cond_1
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
+
+    if-eqz v1, :cond_2
+
+    if-nez p3, :cond_0
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
+
+    move-result-object p3
+
+    :cond_0
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
+
+    move-result-object v3
+
+    move-object/from16 v0, p0
+
+    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getInstrumentation()Landroid/app/Instrumentation;
+
+    move-result-object v5
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    const/4 v6, 0x0
+
+    move-object/from16 v2, p2
+
+    move-object/from16 v4, p3
+
+    invoke-virtual/range {v1 .. v6}, Landroid/app/LoadedApk;->getReceiverDispatcher(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)Landroid/content/IIntentReceiver;
+
+    move-result-object v5
+
+    :cond_1
+    :goto_0
     invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v1
@@ -6268,19 +7472,9 @@
 
     move-result-object v2
 
-    .line 934
-    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
 
     move-result v14
-
-    .line 933
-    const/4 v5, 0x0
-
-    const/4 v6, -0x1
-
-    const/4 v7, 0x0
-
-    const/4 v8, 0x0
 
     const/4 v9, 0x0
 
@@ -6289,167 +7483,152 @@
 
     const/4 v11, 0x0
 
-    const/4 v12, 0x0
+    const/4 v12, 0x1
 
-    const/4 v13, 0x0
+    const/4 v13, 0x1
 
     move-object/from16 v3, p1
 
-    .line 932
+    move/from16 v6, p4
+
+    move-object/from16 v7, p5
+
+    move-object/from16 v8, p6
+
     invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 928
     return-void
 
-    .line 935
+    .end local v4    # "resolvedType":Ljava/lang/String;
+    .restart local v5    # "rd":Landroid/content/IIntentReceiver;
+    :cond_2
+    if-nez p3, :cond_3
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
+
+    move-result-object p3
+
+    :cond_3
+    new-instance v1, Landroid/app/LoadedApk$ReceiverDispatcher;
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
+
+    move-result-object v3
+
+    const/4 v5, 0x0
+
+    const/4 v6, 0x0
+
+    move-object/from16 v2, p2
+
+    move-object/from16 v4, p3
+
+    invoke-direct/range {v1 .. v6}, Landroid/app/LoadedApk$ReceiverDispatcher;-><init>(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)V
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    invoke-virtual {v1}, Landroid/app/LoadedApk$ReceiverDispatcher;->getIIntentReceiver()Landroid/content/IIntentReceiver;
+
+    move-result-object v5
+
+    .local v5, "rd":Landroid/content/IIntentReceiver;
+    goto :goto_0
+
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    .restart local v4    # "resolvedType":Ljava/lang/String;
     :catch_0
     move-exception v15
 
-    .line 936
     .local v15, "e":Landroid/os/RemoteException;
     new-instance v1, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v2, "Failure from system"
+    const-string v2, "Failure from system"
 
     invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
     throw v1
 .end method
 
-.method public sendBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;)V
-    .locals 1
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "user"    # Landroid/os/UserHandle;
-    .param p3, "receiverPermission"    # Ljava/lang/String;
-
-    .prologue
-    .line 943
-    const/4 v0, -0x1
-
-    invoke-virtual {p0, p1, p2, p3, v0}, Landroid/app/ContextImpl;->sendBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;I)V
-
-    .line 942
-    return-void
-.end method
-
-.method public sendBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;I)V
+.method public sendStickyOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
     .locals 16
     .param p1, "intent"    # Landroid/content/Intent;
     .param p2, "user"    # Landroid/os/UserHandle;
-    .param p3, "receiverPermission"    # Ljava/lang/String;
-    .param p4, "appOp"    # I
+    .param p3, "resultReceiver"    # Landroid/content/BroadcastReceiver;
+    .param p4, "scheduler"    # Landroid/os/Handler;
+    .param p5, "initialCode"    # I
+    .param p6, "initialData"    # Ljava/lang/String;
+    .param p7, "initialExtras"    # Landroid/os/Bundle;
+    .annotation runtime Ljava/lang/Deprecated;
+    .end annotation
 
     .prologue
-    .line 949
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
 
-    move-result-object v1
+    invoke-direct/range {p0 .. p1}, Landroid/app/ContextImpl;->sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
 
-    move-object/from16 v0, p1
+    move-result v0
 
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
+    if-nez v0, :cond_flyme_0
 
-    move-result-object v4
+    return-void
 
-    .line 950
-    .local v4, "resolvedType":Ljava/lang/String;
-    if-nez p3, :cond_0
+    :cond_flyme_0
 
-    const/4 v9, 0x0
+    const/4 v5, 0x0
 
-    .line 953
-    :goto_0
-    :try_start_0
-    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
+    .local v5, "rd":Landroid/content/IIntentReceiver;
+    if-eqz p3, :cond_1
 
-    .line 954
-    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+    move-object/from16 v0, p0
 
-    move-result-object v1
+    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
 
-    .line 955
+    if-eqz v1, :cond_2
+
+    if-nez p4, :cond_0
+
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+
+    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
+
+    move-result-object p4
+
+    :cond_0
+    move-object/from16 v0, p0
+
+    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
+
+    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
+
+    move-result-object v3
+
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
 
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
+    invoke-virtual {v2}, Landroid/app/ActivityThread;->getInstrumentation()Landroid/app/Instrumentation;
 
-    move-result-object v2
+    move-result-object v5
 
-    .line 957
-    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
+    .end local v5    # "rd":Landroid/content/IIntentReceiver;
+    const/4 v6, 0x0
 
-    move-result v14
+    move-object/from16 v2, p3
 
-    .line 955
-    const/4 v5, 0x0
+    move-object/from16 v4, p4
 
-    .line 956
-    const/4 v6, -0x1
+    invoke-virtual/range {v1 .. v6}, Landroid/app/LoadedApk;->getReceiverDispatcher(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)Landroid/content/IIntentReceiver;
 
-    const/4 v7, 0x0
+    move-result-object v5
 
-    const/4 v8, 0x0
-
-    const/4 v11, 0x0
-
-    const/4 v12, 0x0
-
-    const/4 v13, 0x0
-
-    move-object/from16 v3, p1
-
-    move/from16 v10, p4
-
-    .line 954
-    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 948
-    return-void
-
-    .line 951
-    :cond_0
-    const/4 v1, 0x1
-
-    new-array v9, v1, [Ljava/lang/String;
-
-    const/4 v1, 0x0
-
-    aput-object p3, v9, v1
-
-    .local v9, "receiverPermissions":[Ljava/lang/String;
-    goto :goto_0
-
-    .line 958
-    .end local v9    # "receiverPermissions":[Ljava/lang/String;
-    :catch_0
-    move-exception v15
-
-    .line 959
-    .local v15, "e":Landroid/os/RemoteException;
-    new-instance v1, Ljava/lang/RuntimeException;
-
-    const-string/jumbo v2, "Failure from system"
-
-    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
-
-    throw v1
-.end method
-
-.method public sendBroadcastMultiplePermissions(Landroid/content/Intent;[Ljava/lang/String;)V
-    .locals 16
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "receiverPermissions"    # [Ljava/lang/String;
-
-    .prologue
-    .line 800
-    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
-
-    .line 801
+    :cond_1
+    :goto_0
     invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v1
@@ -6479,360 +7658,48 @@
 
     move-result-object v2
 
-    .line 807
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
+    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
 
     move-result v14
-
-    .line 805
-    const/4 v5, 0x0
-
-    .line 806
-    const/4 v6, -0x1
-
-    const/4 v7, 0x0
-
-    const/4 v8, 0x0
-
-    const/4 v10, -0x1
-
-    .line 807
-    const/4 v11, 0x0
-
-    const/4 v12, 0x0
-
-    const/4 v13, 0x0
-
-    move-object/from16 v3, p1
-
-    move-object/from16 v9, p2
-
-    .line 804
-    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 799
-    return-void
-
-    .line 808
-    :catch_0
-    move-exception v15
-
-    .line 809
-    .local v15, "e":Landroid/os/RemoteException;
-    new-instance v1, Ljava/lang/RuntimeException;
-
-    const-string/jumbo v2, "Failure from system"
-
-    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
-
-    throw v1
-.end method
-
-.method public sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
-    .locals 16
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "receiverPermission"    # Ljava/lang/String;
-
-    .prologue
-    .line 849
-    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
-
-    .line 850
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v1
-
-    move-object/from16 v0, p1
-
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 851
-    .local v4, "resolvedType":Ljava/lang/String;
-    if-nez p2, :cond_0
 
     const/4 v9, 0x0
 
-    .line 854
-    :goto_0
-    :try_start_0
-    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
-
-    .line 855
-    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
-
-    move-result-object v1
-
-    .line 856
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
-
-    move-result-object v2
-
-    .line 858
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
-
-    move-result v14
-
-    .line 856
-    const/4 v5, 0x0
-
-    .line 857
-    const/4 v6, -0x1
-
-    const/4 v7, 0x0
-
-    const/4 v8, 0x0
-
     const/4 v10, -0x1
 
+    .line 807
     .line 858
     const/4 v11, 0x0
 
     const/4 v12, 0x1
 
-    const/4 v13, 0x0
+    const/4 v13, 0x1
 
     move-object/from16 v3, p1
 
-    .line 855
+    move/from16 v6, p5
+
+    move-object/from16 v7, p6
+
+    move-object/from16 v8, p7
+
     invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 848
     return-void
 
-    .line 852
-    :cond_0
-    const/4 v1, 0x1
-
-    new-array v9, v1, [Ljava/lang/String;
-
-    const/4 v1, 0x0
-
-    aput-object p2, v9, v1
-
-    .local v9, "receiverPermissions":[Ljava/lang/String;
-    goto :goto_0
-
-    .line 859
-    .end local v9    # "receiverPermissions":[Ljava/lang/String;
-    :catch_0
-    move-exception v15
-
-    .line 860
-    .local v15, "e":Landroid/os/RemoteException;
-    new-instance v1, Ljava/lang/RuntimeException;
-
-    const-string/jumbo v2, "Failure from system"
-
-    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
-
-    throw v1
-.end method
-
-.method public sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-    .locals 10
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "receiverPermission"    # Ljava/lang/String;
-    .param p3, "appOp"    # I
-    .param p4, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p5, "scheduler"    # Landroid/os/Handler;
-    .param p6, "initialCode"    # I
-    .param p7, "initialData"    # Ljava/lang/String;
-    .param p8, "initialExtras"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 888
-    const/4 v9, 0x0
-
-    move-object v0, p0
-
-    move-object v1, p1
-
-    move-object v2, p2
-
-    move v3, p3
-
-    move-object v4, p4
-
-    move-object v5, p5
-
-    move/from16 v6, p6
-
-    move-object/from16 v7, p7
-
-    move-object/from16 v8, p8
-
-    .line 887
-    invoke-virtual/range {v0 .. v9}, Landroid/app/ContextImpl;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;Landroid/os/Bundle;)V
-
-    .line 886
-    return-void
-.end method
-
-.method sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;Landroid/os/Bundle;)V
-    .locals 16
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "receiverPermission"    # Ljava/lang/String;
-    .param p3, "appOp"    # I
-    .param p4, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p5, "scheduler"    # Landroid/os/Handler;
-    .param p6, "initialCode"    # I
-    .param p7, "initialData"    # Ljava/lang/String;
-    .param p8, "initialExtras"    # Landroid/os/Bundle;
-    .param p9, "options"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 895
-    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
-
-    .line 896
-    const/4 v5, 0x0
-
-    .line 897
-    .local v5, "rd":Landroid/content/IIntentReceiver;
-    if-eqz p4, :cond_1
-
-    .line 898
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
-
-    if-eqz v1, :cond_2
-
-    .line 899
-    if-nez p5, :cond_0
-
-    .line 900
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
-
-    move-result-object p5
-
-    .line 902
-    :cond_0
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
-
-    .line 903
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
-
-    move-result-object v3
-
-    .line 904
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getInstrumentation()Landroid/app/Instrumentation;
-
-    move-result-object v5
-
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    const/4 v6, 0x0
-
-    move-object/from16 v2, p4
-
-    move-object/from16 v4, p5
-
-    .line 902
-    invoke-virtual/range {v1 .. v6}, Landroid/app/LoadedApk;->getReceiverDispatcher(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)Landroid/content/IIntentReceiver;
-
-    move-result-object v5
-
-    .line 913
-    :cond_1
-    :goto_0
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v1
-
-    move-object/from16 v0, p1
-
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 914
-    .local v4, "resolvedType":Ljava/lang/String;
-    if-nez p2, :cond_4
-
-    const/4 v9, 0x0
-
-    .line 917
-    :goto_1
-    :try_start_0
-    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
-
-    .line 918
-    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
-
-    move-result-object v1
-
-    .line 919
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
-
-    move-result-object v2
-
-    .line 921
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
-
-    move-result v14
-
-    const/4 v12, 0x1
-
-    const/4 v13, 0x0
-
-    move-object/from16 v3, p1
-
-    move/from16 v6, p6
-
-    move-object/from16 v7, p7
-
-    move-object/from16 v8, p8
-
-    move/from16 v10, p3
-
-    move-object/from16 v11, p9
-
-    .line 918
-    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 894
-    return-void
-
-    .line 906
     .end local v4    # "resolvedType":Ljava/lang/String;
     .restart local v5    # "rd":Landroid/content/IIntentReceiver;
     :cond_2
-    if-nez p5, :cond_3
+    if-nez p4, :cond_3
 
-    .line 907
     move-object/from16 v0, p0
 
     iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
 
     invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
 
-    move-result-object p5
+    move-result-object p4
 
     .line 909
     :cond_3
@@ -6847,9 +7714,9 @@
 
     const/4 v6, 0x0
 
-    move-object/from16 v2, p4
+    move-object/from16 v2, p3
 
-    move-object/from16 v4, p5
+    move-object/from16 v4, p4
 
     .line 909
     invoke-direct/range {v1 .. v6}, Landroid/app/LoadedApk$ReceiverDispatcher;-><init>(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)V
@@ -6865,978 +7732,13 @@
     .line 915
     .end local v5    # "rd":Landroid/content/IIntentReceiver;
     .restart local v4    # "resolvedType":Ljava/lang/String;
-    :cond_4
-    const/4 v1, 0x1
-
-    new-array v9, v1, [Ljava/lang/String;
-
-    const/4 v1, 0x0
-
-    aput-object p2, v9, v1
-
-    .local v9, "receiverPermissions":[Ljava/lang/String;
-    goto :goto_1
-
-    .line 922
-    .end local v9    # "receiverPermissions":[Ljava/lang/String;
     :catch_0
     move-exception v15
 
-    .line 923
     .local v15, "e":Landroid/os/RemoteException;
     new-instance v1, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v2, "Failure from system"
-
-    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
-
-    throw v1
-.end method
-
-.method public sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-    .locals 10
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "receiverPermission"    # Ljava/lang/String;
-    .param p3, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p4, "scheduler"    # Landroid/os/Handler;
-    .param p5, "initialCode"    # I
-    .param p6, "initialData"    # Ljava/lang/String;
-    .param p7, "initialExtras"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 869
-    const/4 v3, -0x1
-
-    .line 870
-    const/4 v9, 0x0
-
-    move-object v0, p0
-
-    move-object v1, p1
-
-    move-object v2, p2
-
-    move-object v4, p3
-
-    move-object v5, p4
-
-    move v6, p5
-
-    move-object/from16 v7, p6
-
-    move-object/from16 v8, p7
-
-    .line 869
-    invoke-virtual/range {v0 .. v9}, Landroid/app/ContextImpl;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;Landroid/os/Bundle;)V
-
-    .line 868
-    return-void
-.end method
-
-.method public sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-    .locals 10
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "receiverPermission"    # Ljava/lang/String;
-    .param p3, "options"    # Landroid/os/Bundle;
-    .param p4, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p5, "scheduler"    # Landroid/os/Handler;
-    .param p6, "initialCode"    # I
-    .param p7, "initialData"    # Ljava/lang/String;
-    .param p8, "initialExtras"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 878
-    const/4 v3, -0x1
-
-    move-object v0, p0
-
-    move-object v1, p1
-
-    move-object v2, p2
-
-    move-object v4, p4
-
-    move-object v5, p5
-
-    move/from16 v6, p6
-
-    move-object/from16 v7, p7
-
-    move-object/from16 v8, p8
-
-    move-object v9, p3
-
-    invoke-virtual/range {v0 .. v9}, Landroid/app/ContextImpl;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;Landroid/os/Bundle;)V
-
-    .line 877
-    return-void
-.end method
-
-.method public sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;ILandroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-    .locals 11
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "user"    # Landroid/os/UserHandle;
-    .param p3, "receiverPermission"    # Ljava/lang/String;
-    .param p4, "appOp"    # I
-    .param p5, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p6, "scheduler"    # Landroid/os/Handler;
-    .param p7, "initialCode"    # I
-    .param p8, "initialData"    # Ljava/lang/String;
-    .param p9, "initialExtras"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 976
-    const/4 v5, 0x0
-
-    move-object v0, p0
-
-    move-object v1, p1
-
-    move-object v2, p2
-
-    move-object v3, p3
-
-    move v4, p4
-
-    move-object/from16 v6, p5
-
-    move-object/from16 v7, p6
-
-    move/from16 v8, p7
-
-    move-object/from16 v9, p8
-
-    move-object/from16 v10, p9
-
-    .line 975
-    invoke-virtual/range {v0 .. v10}, Landroid/app/ContextImpl;->sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;ILandroid/os/Bundle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-
-    .line 974
-    return-void
-.end method
-
-.method public sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;ILandroid/os/Bundle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-    .locals 16
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "user"    # Landroid/os/UserHandle;
-    .param p3, "receiverPermission"    # Ljava/lang/String;
-    .param p4, "appOp"    # I
-    .param p5, "options"    # Landroid/os/Bundle;
-    .param p6, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p7, "scheduler"    # Landroid/os/Handler;
-    .param p8, "initialCode"    # I
-    .param p9, "initialData"    # Ljava/lang/String;
-    .param p10, "initialExtras"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 983
-    const/4 v5, 0x0
-
-    .line 984
-    .local v5, "rd":Landroid/content/IIntentReceiver;
-    if-eqz p6, :cond_1
-
-    .line 985
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
-
-    if-eqz v1, :cond_2
-
-    .line 986
-    if-nez p7, :cond_0
-
-    .line 987
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
-
-    move-result-object p7
-
-    .line 989
-    :cond_0
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
-
-    .line 990
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
-
-    move-result-object v3
-
-    .line 991
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getInstrumentation()Landroid/app/Instrumentation;
-
-    move-result-object v5
-
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    const/4 v6, 0x0
-
-    move-object/from16 v2, p6
-
-    move-object/from16 v4, p7
-
-    .line 989
-    invoke-virtual/range {v1 .. v6}, Landroid/app/LoadedApk;->getReceiverDispatcher(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)Landroid/content/IIntentReceiver;
-
-    move-result-object v5
-
-    .line 1000
-    :cond_1
-    :goto_0
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v1
-
-    move-object/from16 v0, p1
-
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 1001
-    .local v4, "resolvedType":Ljava/lang/String;
-    if-nez p3, :cond_4
-
-    const/4 v9, 0x0
-
-    .line 1004
-    :goto_1
-    :try_start_0
-    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
-
-    .line 1005
-    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
-
-    move-result-object v1
-
-    .line 1006
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
-
-    move-result-object v2
-
-    .line 1008
-    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
-
-    move-result v14
-
-    const/4 v12, 0x1
-
-    const/4 v13, 0x0
-
-    move-object/from16 v3, p1
-
-    move/from16 v6, p8
-
-    move-object/from16 v7, p9
-
-    move-object/from16 v8, p10
-
-    move/from16 v10, p4
-
-    move-object/from16 v11, p5
-
-    .line 1005
-    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 982
-    return-void
-
-    .line 993
-    .end local v4    # "resolvedType":Ljava/lang/String;
-    .restart local v5    # "rd":Landroid/content/IIntentReceiver;
-    :cond_2
-    if-nez p7, :cond_3
-
-    .line 994
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
-
-    move-result-object p7
-
-    .line 996
-    :cond_3
-    new-instance v1, Landroid/app/LoadedApk$ReceiverDispatcher;
-
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
-
-    move-result-object v3
-
-    .line 997
-    const/4 v5, 0x0
-
-    const/4 v6, 0x0
-
-    move-object/from16 v2, p6
-
-    move-object/from16 v4, p7
-
-    .line 996
-    invoke-direct/range {v1 .. v6}, Landroid/app/LoadedApk$ReceiverDispatcher;-><init>(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)V
-
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    invoke-virtual {v1}, Landroid/app/LoadedApk$ReceiverDispatcher;->getIIntentReceiver()Landroid/content/IIntentReceiver;
-
-    move-result-object v5
-
-    .local v5, "rd":Landroid/content/IIntentReceiver;
-    goto :goto_0
-
-    .line 1002
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    .restart local v4    # "resolvedType":Ljava/lang/String;
-    :cond_4
-    const/4 v1, 0x1
-
-    new-array v9, v1, [Ljava/lang/String;
-
-    const/4 v1, 0x0
-
-    aput-object p3, v9, v1
-
-    .local v9, "receiverPermissions":[Ljava/lang/String;
-    goto :goto_1
-
-    .line 1009
-    .end local v9    # "receiverPermissions":[Ljava/lang/String;
-    :catch_0
-    move-exception v15
-
-    .line 1010
-    .local v15, "e":Landroid/os/RemoteException;
-    new-instance v1, Ljava/lang/RuntimeException;
-
-    const-string/jumbo v2, "Failure from system"
-
-    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
-
-    throw v1
-.end method
-
-.method public sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-    .locals 11
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "user"    # Landroid/os/UserHandle;
-    .param p3, "receiverPermission"    # Ljava/lang/String;
-    .param p4, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p5, "scheduler"    # Landroid/os/Handler;
-    .param p6, "initialCode"    # I
-    .param p7, "initialData"    # Ljava/lang/String;
-    .param p8, "initialExtras"    # Landroid/os/Bundle;
-
-    .prologue
-    .line 967
-    const/4 v4, -0x1
-
-    .line 968
-    const/4 v5, 0x0
-
-    move-object v0, p0
-
-    move-object v1, p1
-
-    move-object v2, p2
-
-    move-object v3, p3
-
-    move-object v6, p4
-
-    move-object/from16 v7, p5
-
-    move/from16 v8, p6
-
-    move-object/from16 v9, p7
-
-    move-object/from16 v10, p8
-
-    .line 967
-    invoke-virtual/range {v0 .. v10}, Landroid/app/ContextImpl;->sendOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Ljava/lang/String;ILandroid/os/Bundle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-
-    .line 966
-    return-void
-.end method
-
-.method public sendStickyBroadcast(Landroid/content/Intent;)V
-    .locals 16
-    .param p1, "intent"    # Landroid/content/Intent;
-    .annotation runtime Ljava/lang/Deprecated;
-    .end annotation
-
-    .prologue
-    .line 1017
-    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
-
-    .line 1018
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v1
-
-    move-object/from16 v0, p1
-
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 1020
-    .local v4, "resolvedType":Ljava/lang/String;
-    :try_start_0
-    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
-
-    .line 1021
-    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
-
-    move-result-object v1
-
-    .line 1022
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
-
-    move-result-object v2
-
-    .line 1024
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
-
-    move-result v14
-
-    .line 1022
-    const/4 v5, 0x0
-
-    .line 1023
-    const/4 v6, -0x1
-
-    const/4 v7, 0x0
-
-    const/4 v8, 0x0
-
-    const/4 v9, 0x0
-
-    const/4 v10, -0x1
-
-    const/4 v11, 0x0
-
-    const/4 v12, 0x0
-
-    const/4 v13, 0x1
-
-    move-object/from16 v3, p1
-
-    .line 1021
-    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 1016
-    return-void
-
-    .line 1025
-    :catch_0
-    move-exception v15
-
-    .line 1026
-    .local v15, "e":Landroid/os/RemoteException;
-    new-instance v1, Ljava/lang/RuntimeException;
-
-    const-string/jumbo v2, "Failure from system"
-
-    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
-
-    throw v1
-.end method
-
-.method public sendStickyBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;)V
-    .locals 16
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "user"    # Landroid/os/UserHandle;
-    .annotation runtime Ljava/lang/Deprecated;
-    .end annotation
-
-    .prologue
-    .line 1086
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v1
-
-    move-object/from16 v0, p1
-
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 1088
-    .local v4, "resolvedType":Ljava/lang/String;
-    :try_start_0
-    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
-
-    .line 1089
-    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
-
-    move-result-object v1
-
-    .line 1090
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
-
-    move-result-object v2
-
-    .line 1091
-    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
-
-    move-result v14
-
-    .line 1090
-    const/4 v5, 0x0
-
-    .line 1091
-    const/4 v6, -0x1
-
-    const/4 v7, 0x0
-
-    const/4 v8, 0x0
-
-    const/4 v9, 0x0
-
-    const/4 v10, -0x1
-
-    const/4 v11, 0x0
-
-    const/4 v12, 0x0
-
-    const/4 v13, 0x1
-
-    move-object/from16 v3, p1
-
-    .line 1089
-    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 1085
-    return-void
-
-    .line 1092
-    :catch_0
-    move-exception v15
-
-    .line 1093
-    .local v15, "e":Landroid/os/RemoteException;
-    new-instance v1, Ljava/lang/RuntimeException;
-
-    const-string/jumbo v2, "Failure from system"
-
-    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
-
-    throw v1
-.end method
-
-.method public sendStickyOrderedBroadcast(Landroid/content/Intent;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-    .locals 16
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p3, "scheduler"    # Landroid/os/Handler;
-    .param p4, "initialCode"    # I
-    .param p5, "initialData"    # Ljava/lang/String;
-    .param p6, "initialExtras"    # Landroid/os/Bundle;
-    .annotation runtime Ljava/lang/Deprecated;
-    .end annotation
-
-    .prologue
-    .line 1036
-    invoke-direct/range {p0 .. p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
-
-    .line 1037
-    const/4 v5, 0x0
-
-    .line 1038
-    .local v5, "rd":Landroid/content/IIntentReceiver;
-    if-eqz p2, :cond_1
-
-    .line 1039
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
-
-    if-eqz v1, :cond_2
-
-    .line 1040
-    if-nez p3, :cond_0
-
-    .line 1041
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
-
-    move-result-object p3
-
-    .line 1043
-    :cond_0
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
-
-    .line 1044
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
-
-    move-result-object v3
-
-    .line 1045
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getInstrumentation()Landroid/app/Instrumentation;
-
-    move-result-object v5
-
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    const/4 v6, 0x0
-
-    move-object/from16 v2, p2
-
-    move-object/from16 v4, p3
-
-    .line 1043
-    invoke-virtual/range {v1 .. v6}, Landroid/app/LoadedApk;->getReceiverDispatcher(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)Landroid/content/IIntentReceiver;
-
-    move-result-object v5
-
-    .line 1054
-    :cond_1
-    :goto_0
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v1
-
-    move-object/from16 v0, p1
-
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 1056
-    .local v4, "resolvedType":Ljava/lang/String;
-    :try_start_0
-    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
-
-    .line 1057
-    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
-
-    move-result-object v1
-
-    .line 1058
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
-
-    move-result-object v2
-
-    .line 1060
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getUserId()I
-
-    move-result v14
-
-    .line 1059
-    const/4 v9, 0x0
-
-    .line 1060
-    const/4 v10, -0x1
-
-    const/4 v11, 0x0
-
-    const/4 v12, 0x1
-
-    const/4 v13, 0x1
-
-    move-object/from16 v3, p1
-
-    move/from16 v6, p4
-
-    move-object/from16 v7, p5
-
-    move-object/from16 v8, p6
-
-    .line 1057
-    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 1035
-    return-void
-
-    .line 1047
-    .end local v4    # "resolvedType":Ljava/lang/String;
-    .restart local v5    # "rd":Landroid/content/IIntentReceiver;
-    :cond_2
-    if-nez p3, :cond_3
-
-    .line 1048
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
-
-    move-result-object p3
-
-    .line 1050
-    :cond_3
-    new-instance v1, Landroid/app/LoadedApk$ReceiverDispatcher;
-
-    .line 1051
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
-
-    move-result-object v3
-
-    const/4 v5, 0x0
-
-    const/4 v6, 0x0
-
-    move-object/from16 v2, p2
-
-    move-object/from16 v4, p3
-
-    .line 1050
-    invoke-direct/range {v1 .. v6}, Landroid/app/LoadedApk$ReceiverDispatcher;-><init>(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)V
-
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    invoke-virtual {v1}, Landroid/app/LoadedApk$ReceiverDispatcher;->getIIntentReceiver()Landroid/content/IIntentReceiver;
-
-    move-result-object v5
-
-    .local v5, "rd":Landroid/content/IIntentReceiver;
-    goto :goto_0
-
-    .line 1061
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    .restart local v4    # "resolvedType":Ljava/lang/String;
-    :catch_0
-    move-exception v15
-
-    .line 1062
-    .local v15, "e":Landroid/os/RemoteException;
-    new-instance v1, Ljava/lang/RuntimeException;
-
-    const-string/jumbo v2, "Failure from system"
-
-    invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
-
-    throw v1
-.end method
-
-.method public sendStickyOrderedBroadcastAsUser(Landroid/content/Intent;Landroid/os/UserHandle;Landroid/content/BroadcastReceiver;Landroid/os/Handler;ILjava/lang/String;Landroid/os/Bundle;)V
-    .locals 16
-    .param p1, "intent"    # Landroid/content/Intent;
-    .param p2, "user"    # Landroid/os/UserHandle;
-    .param p3, "resultReceiver"    # Landroid/content/BroadcastReceiver;
-    .param p4, "scheduler"    # Landroid/os/Handler;
-    .param p5, "initialCode"    # I
-    .param p6, "initialData"    # Ljava/lang/String;
-    .param p7, "initialExtras"    # Landroid/os/Bundle;
-    .annotation runtime Ljava/lang/Deprecated;
-    .end annotation
-
-    .prologue
-    .line 1103
-    const/4 v5, 0x0
-
-    .line 1104
-    .local v5, "rd":Landroid/content/IIntentReceiver;
-    if-eqz p3, :cond_1
-
-    .line 1105
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
-
-    if-eqz v1, :cond_2
-
-    .line 1106
-    if-nez p4, :cond_0
-
-    .line 1107
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
-
-    move-result-object p4
-
-    .line 1109
-    :cond_0
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
-
-    .line 1110
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
-
-    move-result-object v3
-
-    .line 1111
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getInstrumentation()Landroid/app/Instrumentation;
-
-    move-result-object v5
-
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    const/4 v6, 0x0
-
-    move-object/from16 v2, p3
-
-    move-object/from16 v4, p4
-
-    .line 1109
-    invoke-virtual/range {v1 .. v6}, Landroid/app/LoadedApk;->getReceiverDispatcher(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)Landroid/content/IIntentReceiver;
-
-    move-result-object v5
-
-    .line 1120
-    :cond_1
-    :goto_0
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v1
-
-    move-object/from16 v0, p1
-
-    invoke-virtual {v0, v1}, Landroid/content/Intent;->resolveTypeIfNeeded(Landroid/content/ContentResolver;)Ljava/lang/String;
-
-    move-result-object v4
-
-    .line 1122
-    .local v4, "resolvedType":Ljava/lang/String;
-    :try_start_0
-    invoke-virtual/range {p1 .. p1}, Landroid/content/Intent;->prepareToLeaveProcess()V
-
-    .line 1123
-    invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
-
-    move-result-object v1
-
-    .line 1124
-    move-object/from16 v0, p0
-
-    iget-object v2, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v2}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
-
-    move-result-object v2
-
-    .line 1126
-    invoke-virtual/range {p2 .. p2}, Landroid/os/UserHandle;->getIdentifier()I
-
-    move-result v14
-
-    .line 1125
-    const/4 v9, 0x0
-
-    .line 1126
-    const/4 v10, -0x1
-
-    const/4 v11, 0x0
-
-    const/4 v12, 0x1
-
-    const/4 v13, 0x1
-
-    move-object/from16 v3, p1
-
-    move/from16 v6, p5
-
-    move-object/from16 v7, p6
-
-    move-object/from16 v8, p7
-
-    .line 1123
-    invoke-interface/range {v1 .. v14}, Landroid/app/IActivityManager;->broadcastIntent(Landroid/app/IApplicationThread;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;[Ljava/lang/String;ILandroid/os/Bundle;ZZI)I
-    :try_end_0
-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 1102
-    return-void
-
-    .line 1113
-    .end local v4    # "resolvedType":Ljava/lang/String;
-    .restart local v5    # "rd":Landroid/content/IIntentReceiver;
-    :cond_2
-    if-nez p4, :cond_3
-
-    .line 1114
-    move-object/from16 v0, p0
-
-    iget-object v1, v0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
-
-    invoke-virtual {v1}, Landroid/app/ActivityThread;->getHandler()Landroid/os/Handler;
-
-    move-result-object p4
-
-    .line 1116
-    :cond_3
-    new-instance v1, Landroid/app/LoadedApk$ReceiverDispatcher;
-
-    .line 1117
-    invoke-virtual/range {p0 .. p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
-
-    move-result-object v3
-
-    const/4 v5, 0x0
-
-    const/4 v6, 0x0
-
-    move-object/from16 v2, p3
-
-    move-object/from16 v4, p4
-
-    .line 1116
-    invoke-direct/range {v1 .. v6}, Landroid/app/LoadedApk$ReceiverDispatcher;-><init>(Landroid/content/BroadcastReceiver;Landroid/content/Context;Landroid/os/Handler;Landroid/app/Instrumentation;Z)V
-
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    invoke-virtual {v1}, Landroid/app/LoadedApk$ReceiverDispatcher;->getIIntentReceiver()Landroid/content/IIntentReceiver;
-
-    move-result-object v5
-
-    .local v5, "rd":Landroid/content/IIntentReceiver;
-    goto :goto_0
-
-    .line 1127
-    .end local v5    # "rd":Landroid/content/IIntentReceiver;
-    .restart local v4    # "resolvedType":Ljava/lang/String;
-    :catch_0
-    move-exception v15
-
-    .line 1128
-    .local v15, "e":Landroid/os/RemoteException;
-    new-instance v1, Ljava/lang/RuntimeException;
-
-    const-string/jumbo v2, "Failure from system"
+    const-string v2, "Failure from system"
 
     invoke-direct {v1, v2, v15}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
@@ -7848,10 +7750,8 @@
     .param p1, "context"    # Landroid/content/Context;
 
     .prologue
-    .line 1892
     iput-object p1, p0, Landroid/app/ContextImpl;->mOuterContext:Landroid/content/Context;
 
-    .line 1891
     return-void
 .end method
 
@@ -7860,18 +7760,14 @@
     .param p1, "resId"    # I
 
     .prologue
-    .line 245
     iget v0, p0, Landroid/app/ContextImpl;->mThemeResource:I
 
     if-eq v0, p1, :cond_0
 
-    .line 246
     iput p1, p0, Landroid/app/ContextImpl;->mThemeResource:I
 
-    .line 247
     invoke-direct {p0}, Landroid/app/ContextImpl;->initializeTheme()V
 
-    .line 244
     :cond_0
     return-void
 .end method
@@ -7889,14 +7785,12 @@
     .end annotation
 
     .prologue
-    .line 642
     invoke-direct {p0}, Landroid/app/ContextImpl;->getWallpaperManager()Landroid/app/WallpaperManager;
 
     move-result-object v0
 
     invoke-virtual {v0, p1}, Landroid/app/WallpaperManager;->setBitmap(Landroid/graphics/Bitmap;)V
 
-    .line 641
     return-void
 .end method
 
@@ -7913,14 +7807,12 @@
     .end annotation
 
     .prologue
-    .line 648
     invoke-direct {p0}, Landroid/app/ContextImpl;->getWallpaperManager()Landroid/app/WallpaperManager;
 
     move-result-object v0
 
     invoke-virtual {v0, p1}, Landroid/app/WallpaperManager;->setStream(Ljava/io/InputStream;)V
 
-    .line 647
     return-void
 .end method
 
@@ -7929,15 +7821,13 @@
     .param p1, "intents"    # [Landroid/content/Intent;
 
     .prologue
-    .line 703
     invoke-direct {p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
 
-    .line 704
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, v0}, Landroid/app/ContextImpl;->startActivities([Landroid/content/Intent;Landroid/os/Bundle;)V
 
-    .line 702
+    .line 877
     return-void
 .end method
 
@@ -7951,10 +7841,8 @@
 
     const/4 v0, 0x0
 
-    .line 723
     invoke-direct {p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
 
-    .line 724
     aget-object v0, p1, v0
 
     invoke-virtual {v0}, Landroid/content/Intent;->getFlags()I
@@ -7967,18 +7855,14 @@
 
     if-nez v0, :cond_0
 
-    .line 725
     new-instance v0, Landroid/util/AndroidRuntimeException;
 
-    .line 726
-    const-string/jumbo v1, "Calling startActivities() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag on first Intent. Is this really what you want?"
+    const-string v1, "Calling startActivities() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag on first Intent. Is this really what you want?"
 
-    .line 725
     invoke-direct {v0, v1}, Landroid/util/AndroidRuntimeException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
-    .line 730
     :cond_0
     iget-object v0, p0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
 
@@ -7986,7 +7870,6 @@
 
     move-result-object v0
 
-    .line 731
     invoke-virtual {p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
 
     move-result-object v1
@@ -7999,17 +7882,14 @@
 
     move-object v4, v3
 
-    .line 732
     check-cast v4, Landroid/app/Activity;
 
     move-object v5, p1
 
     move-object v6, p2
 
-    .line 730
     invoke-virtual/range {v0 .. v6}, Landroid/app/Instrumentation;->execStartActivities(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;[Landroid/content/Intent;Landroid/os/Bundle;)V
 
-    .line 722
     return-void
 .end method
 
@@ -8024,7 +7904,6 @@
 
     const/4 v0, 0x0
 
-    .line 710
     aget-object v0, p1, v0
 
     invoke-virtual {v0}, Landroid/content/Intent;->getFlags()I
@@ -8037,18 +7916,14 @@
 
     if-nez v0, :cond_0
 
-    .line 711
     new-instance v0, Landroid/util/AndroidRuntimeException;
 
-    .line 712
-    const-string/jumbo v1, "Calling startActivities() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag on first Intent. Is this really what you want?"
+    const-string v1, "Calling startActivities() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag on first Intent. Is this really what you want?"
 
-    .line 711
     invoke-direct {v0, v1}, Landroid/util/AndroidRuntimeException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
-    .line 716
     :cond_0
     iget-object v0, p0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
 
@@ -8056,7 +7931,6 @@
 
     move-result-object v0
 
-    .line 717
     invoke-virtual {p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
 
     move-result-object v1
@@ -8069,7 +7943,6 @@
 
     move-object v4, v3
 
-    .line 718
     check-cast v4, Landroid/app/Activity;
 
     invoke-virtual {p3}, Landroid/os/UserHandle;->getIdentifier()I
@@ -8080,10 +7953,8 @@
 
     move-object v6, p2
 
-    .line 716
     invoke-virtual/range {v0 .. v7}, Landroid/app/Instrumentation;->execStartActivitiesAsUser(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;[Landroid/content/Intent;Landroid/os/Bundle;I)V
 
-    .line 709
     return-void
 .end method
 
@@ -8092,15 +7963,12 @@
     .param p1, "intent"    # Landroid/content/Intent;
 
     .prologue
-    .line 663
     invoke-direct {p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
 
-    .line 664
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, v0}, Landroid/app/ContextImpl;->startActivity(Landroid/content/Intent;Landroid/os/Bundle;)V
 
-    .line 662
     return-void
 .end method
 
@@ -8112,10 +7980,8 @@
     .prologue
     const/4 v3, 0x0
 
-    .line 675
     invoke-direct {p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
 
-    .line 676
     invoke-virtual {p1}, Landroid/content/Intent;->getFlags()I
 
     move-result v0
@@ -8126,18 +7992,14 @@
 
     if-nez v0, :cond_0
 
-    .line 677
     new-instance v0, Landroid/util/AndroidRuntimeException;
 
-    .line 678
-    const-string/jumbo v1, "Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?"
+    const-string v1, "Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?"
 
-    .line 677
     invoke-direct {v0, v1}, Landroid/util/AndroidRuntimeException;-><init>(Ljava/lang/String;)V
 
     throw v0
 
-    .line 682
     :cond_0
     iget-object v0, p0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
 
@@ -8145,7 +8007,6 @@
 
     move-result-object v0
 
-    .line 683
     invoke-virtual {p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
 
     move-result-object v1
@@ -8158,7 +8019,6 @@
 
     move-object v4, v3
 
-    .line 684
     check-cast v4, Landroid/app/Activity;
 
     const/4 v6, -0x1
@@ -8167,10 +8027,8 @@
 
     move-object v7, p2
 
-    .line 682
     invoke-virtual/range {v0 .. v7}, Landroid/app/Instrumentation;->execStartActivity(Landroid/content/Context;Landroid/os/IBinder;Landroid/os/IBinder;Landroid/app/Activity;Landroid/content/Intent;ILandroid/os/Bundle;)Landroid/app/Instrumentation$ActivityResult;
 
-    .line 674
     return-void
 .end method
 
@@ -8181,13 +8039,11 @@
     .param p3, "user"    # Landroid/os/UserHandle;
 
     .prologue
-    .line 691
     :try_start_0
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
 
     move-result-object v0
 
-    .line 692
     iget-object v1, p0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
 
     invoke-virtual {v1}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
@@ -8198,7 +8054,6 @@
 
     move-result-object v2
 
-    .line 693
     invoke-virtual {p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v3
@@ -8207,12 +8062,11 @@
 
     move-result-object v4
 
-    .line 695
     invoke-virtual/range {p3 .. p3}, Landroid/os/UserHandle;->getIdentifier()I
 
     move-result v11
 
-    .line 694
+    .line 997
     const/4 v5, 0x0
 
     const/4 v6, 0x0
@@ -8227,23 +8081,19 @@
 
     move-object v10, p2
 
-    .line 691
     invoke-interface/range {v0 .. v11}, Landroid/app/IActivityManager;->startActivityAsUser(Landroid/app/IApplicationThread;Ljava/lang/String;Landroid/content/Intent;Ljava/lang/String;Landroid/os/IBinder;Ljava/lang/String;IILandroid/app/ProfilerInfo;Landroid/os/Bundle;I)I
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 689
     return-void
 
-    .line 696
     :catch_0
     move-exception v12
 
-    .line 697
     .local v12, "e":Landroid/os/RemoteException;
     new-instance v0, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v1, "Failure from system"
+    const-string v1, "Failure from system"
 
     invoke-direct {v0, v1, v12}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
@@ -8256,12 +8106,10 @@
     .param p2, "user"    # Landroid/os/UserHandle;
 
     .prologue
-    .line 670
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, v0, p2}, Landroid/app/ContextImpl;->startActivityAsUser(Landroid/content/Intent;Landroid/os/Bundle;Landroid/os/UserHandle;)V
 
-    .line 669
     return-void
 .end method
 
@@ -8272,22 +8120,18 @@
     .param p3, "arguments"    # Landroid/os/Bundle;
 
     .prologue
-    .line 1357
     if-eqz p3, :cond_0
 
-    .line 1358
     const/4 v0, 0x0
 
     :try_start_0
     invoke-virtual {p3, v0}, Landroid/os/Bundle;->setAllowFds(Z)Z
 
-    .line 1360
     :cond_0
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
 
     move-result-object v0
 
-    .line 1361
     invoke-virtual {p0}, Landroid/app/ContextImpl;->getUserId()I
 
     move-result v7
@@ -8298,7 +8142,6 @@
 
     const/4 v6, 0x0
 
-    .line 1362
     const/4 v8, 0x0
 
     move-object v1, p1
@@ -8307,7 +8150,6 @@
 
     move-object v4, p3
 
-    .line 1360
     invoke-interface/range {v0 .. v8}, Landroid/app/IActivityManager;->startInstrumentation(Landroid/content/ComponentName;Ljava/lang/String;ILandroid/os/Bundle;Landroid/app/IInstrumentationWatcher;Landroid/app/IUiAutomationConnection;ILjava/lang/String;)Z
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
@@ -8316,15 +8158,13 @@
 
     return v0
 
-    .line 1363
     :catch_0
     move-exception v9
 
-    .line 1364
     .local v9, "e":Landroid/os/RemoteException;
     new-instance v0, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v1, "Failure from system"
+    const-string v1, "Failure from system"
 
     invoke-direct {v0, v1, v9}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
@@ -8345,7 +8185,6 @@
     .end annotation
 
     .prologue
-    .line 739
     const/4 v6, 0x0
 
     move-object v0, p0
@@ -8362,7 +8201,6 @@
 
     invoke-virtual/range {v0 .. v6}, Landroid/app/ContextImpl;->startIntentSender(Landroid/content/IntentSender;Landroid/content/Intent;IIILandroid/os/Bundle;)V
 
-    .line 738
     return-void
 .end method
 
@@ -8381,21 +8219,16 @@
     .end annotation
 
     .prologue
-    .line 747
     const/4 v4, 0x0
 
-    .line 748
     .local v4, "resolvedType":Ljava/lang/String;
     if-eqz p2, :cond_0
 
-    .line 749
     :try_start_0
     invoke-virtual {p2}, Landroid/content/Intent;->migrateExtraStreamToClipData()Z
 
-    .line 750
     invoke-virtual {p2}, Landroid/content/Intent;->prepareToLeaveProcess()V
 
-    .line 751
     invoke-virtual {p0}, Landroid/app/ContextImpl;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v0
@@ -8404,26 +8237,22 @@
 
     move-result-object v4
 
-    .line 753
     .end local v4    # "resolvedType":Ljava/lang/String;
     :cond_0
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
 
     move-result-object v0
 
-    .line 754
     iget-object v1, p0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
 
     invoke-virtual {v1}, Landroid/app/ActivityThread;->getApplicationThread()Landroid/app/ActivityThread$ApplicationThread;
 
     move-result-object v1
 
-    .line 755
     const/4 v5, 0x0
 
     const/4 v6, 0x0
 
-    .line 756
     const/4 v7, 0x0
 
     move-object v2, p1
@@ -8436,18 +8265,15 @@
 
     move-object/from16 v10, p6
 
-    .line 753
     invoke-interface/range {v0 .. v10}, Landroid/app/IActivityManager;->startActivityIntentSender(Landroid/app/IApplicationThread;Landroid/content/IntentSender;Landroid/content/Intent;Ljava/lang/String;Landroid/os/IBinder;Ljava/lang/String;IIILandroid/os/Bundle;)I
 
     move-result v12
 
-    .line 757
     .local v12, "result":I
     const/4 v0, -0x6
 
     if-ne v12, v0, :cond_1
 
-    .line 758
     new-instance v0, Landroid/content/IntentSender$SendIntentException;
 
     invoke-direct {v0}, Landroid/content/IntentSender$SendIntentException;-><init>()V
@@ -8456,22 +8282,19 @@
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 761
     .end local v12    # "result":I
     :catch_0
     move-exception v11
 
-    .line 762
     .local v11, "e":Landroid/os/RemoteException;
     new-instance v0, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v1, "Failure from system"
+    const-string v1, "Failure from system"
 
     invoke-direct {v0, v1, v11}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
 
     throw v0
 
-    .line 760
     .end local v11    # "e":Landroid/os/RemoteException;
     .restart local v12    # "result":I
     :cond_1
@@ -8482,7 +8305,6 @@
     :try_end_1
     .catch Landroid/os/RemoteException; {:try_start_1 .. :try_end_1} :catch_0
 
-    .line 745
     return-void
 .end method
 
@@ -8491,10 +8313,8 @@
     .param p1, "service"    # Landroid/content/Intent;
 
     .prologue
-    .line 1226
     invoke-direct {p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
 
-    .line 1227
     iget-object v0, p0, Landroid/app/ContextImpl;->mUser:Landroid/os/UserHandle;
 
     invoke-direct {p0, p1, v0}, Landroid/app/ContextImpl;->startServiceCommon(Landroid/content/Intent;Landroid/os/UserHandle;)Landroid/content/ComponentName;
@@ -8510,7 +8330,6 @@
     .param p2, "user"    # Landroid/os/UserHandle;
 
     .prologue
-    .line 1238
     invoke-direct {p0, p1, p2}, Landroid/app/ContextImpl;->startServiceCommon(Landroid/content/Intent;Landroid/os/UserHandle;)Landroid/content/ComponentName;
 
     move-result-object v0
@@ -8523,10 +8342,8 @@
     .param p1, "service"    # Landroid/content/Intent;
 
     .prologue
-    .line 1232
     invoke-direct {p0}, Landroid/app/ContextImpl;->warnIfCallingFromSystemProcess()V
 
-    .line 1233
     iget-object v0, p0, Landroid/app/ContextImpl;->mUser:Landroid/os/UserHandle;
 
     invoke-direct {p0, p1, v0}, Landroid/app/ContextImpl;->stopServiceCommon(Landroid/content/Intent;Landroid/os/UserHandle;)Z
@@ -8542,7 +8359,6 @@
     .param p2, "user"    # Landroid/os/UserHandle;
 
     .prologue
-    .line 1267
     invoke-direct {p0, p1, p2}, Landroid/app/ContextImpl;->stopServiceCommon(Landroid/content/Intent;Landroid/os/UserHandle;)Z
 
     move-result v0
@@ -8555,38 +8371,31 @@
     .param p1, "conn"    # Landroid/content/ServiceConnection;
 
     .prologue
-    .line 1338
     if-nez p1, :cond_0
 
-    .line 1339
     new-instance v2, Ljava/lang/IllegalArgumentException;
 
-    const-string/jumbo v3, "connection is null"
+    const-string v3, "connection is null"
 
     invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
 
     throw v2
 
-    .line 1341
     :cond_0
     iget-object v2, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
 
     if-eqz v2, :cond_1
 
-    .line 1342
     iget-object v2, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
 
-    .line 1343
     invoke-virtual {p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
 
     move-result-object v3
 
-    .line 1342
     invoke-virtual {v2, v3, p1}, Landroid/app/LoadedApk;->forgetServiceDispatcher(Landroid/content/Context;Landroid/content/ServiceConnection;)Landroid/app/IServiceConnection;
 
     move-result-object v1
 
-    .line 1345
     .local v1, "sd":Landroid/app/IServiceConnection;
     :try_start_0
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
@@ -8597,22 +8406,19 @@
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 1337
     :goto_0
     return-void
 
-    .line 1349
     .end local v1    # "sd":Landroid/app/IServiceConnection;
     :cond_1
     new-instance v2, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v3, "Not supported in system context"
+    const-string v3, "Not supported in system context"
 
     invoke-direct {v2, v3}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
 
     throw v2
 
-    .line 1346
     .restart local v1    # "sd":Landroid/app/IServiceConnection;
     :catch_0
     move-exception v0
@@ -8626,25 +8432,21 @@
     .param p1, "receiver"    # Landroid/content/BroadcastReceiver;
 
     .prologue
-    .line 1199
     iget-object v2, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
 
     if-eqz v2, :cond_0
 
-    .line 1200
     iget-object v2, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
 
-    .line 1201
+    .line 731
     invoke-virtual {p0}, Landroid/app/ContextImpl;->getOuterContext()Landroid/content/Context;
 
     move-result-object v3
 
-    .line 1200
     invoke-virtual {v2, v3, p1}, Landroid/app/LoadedApk;->forgetReceiverDispatcher(Landroid/content/Context;Landroid/content/BroadcastReceiver;)Landroid/content/IIntentReceiver;
 
     move-result-object v1
 
-    .line 1203
     .local v1, "rd":Landroid/content/IIntentReceiver;
     :try_start_0
     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
@@ -8655,26 +8457,63 @@
     :try_end_0
     .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 1198
     :goto_0
     return-void
 
-    .line 1207
     .end local v1    # "rd":Landroid/content/IIntentReceiver;
     :cond_0
     new-instance v2, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v3, "Not supported in system context"
+    const-string v3, "Not supported in system context"
 
     invoke-direct {v2, v3}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
 
     throw v2
 
-    .line 1204
     .restart local v1    # "rd":Landroid/content/IIntentReceiver;
     :catch_0
     move-exception v0
 
     .local v0, "e":Landroid/os/RemoteException;
     goto :goto_0
+.end method
+
+.method private sendFlymeBroadcastPermissionGranted(Landroid/content/Intent;)Z
+    .locals 1
+    .param p1, "intent"    # Landroid/content/Intent;
+
+    .prologue
+    const/16 v0, 0x3b
+
+    invoke-static {v0, p1}, Lmeizu/security/FlymePermissionManager;->isSendBroacastGranted(ILandroid/content/Intent;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
+    const/4 v0, 0x0
+
+    return v0
+
+    :cond_0
+    const/4 v0, 0x1
+
+    return v0
+.end method
+
+.method private setFlymeThemeResource(Landroid/content/res/Resources;)V
+    .locals 1
+    .param p1, "resources"    # Landroid/content/res/Resources;
+
+    .prologue
+    iget-object v0, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
+
+    invoke-virtual {v0}, Landroid/app/LoadedApk;->getPackageName()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p1, v0}, Landroid/content/res/Resources;->setFlymeThemeResource(Ljava/lang/String;)V
+
+    .line 738
+    return-void
 .end method

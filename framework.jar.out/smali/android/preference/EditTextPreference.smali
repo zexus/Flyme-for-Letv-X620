@@ -38,12 +38,10 @@
     .param p2, "attrs"    # Landroid/util/AttributeSet;
 
     .prologue
-    .line 83
-    const v0, 0x1010092
+    const v0, #android:attr@editTextPreferenceStyle#t
 
     invoke-direct {p0, p1, p2, v0}, Landroid/preference/EditTextPreference;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;I)V
 
-    .line 82
     return-void
 .end method
 
@@ -71,38 +69,34 @@
     .param p4, "defStyleRes"    # I
 
     .prologue
-    .line 59
     invoke-direct {p0, p1, p2, p3, p4}, Landroid/preference/DialogPreference;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;II)V
 
-    .line 61
     new-instance v0, Landroid/widget/EditText;
 
     invoke-direct {v0, p1, p2}, Landroid/widget/EditText;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
 
     iput-object v0, p0, Landroid/preference/EditTextPreference;->mEditText:Landroid/widget/EditText;
 
-    .line 64
+    invoke-direct/range {p0 .. p2}, Landroid/preference/EditTextPreference;->setFlymeDialogStyleEditText(Landroid/content/Context;Landroid/util/AttributeSet;)V
+
     iget-object v0, p0, Landroid/preference/EditTextPreference;->mEditText:Landroid/widget/EditText;
 
-    const v1, 0x1020003
+    const v1, #android:id@edit#t
 
     invoke-virtual {v0, v1}, Landroid/widget/EditText;->setId(I)V
 
-    .line 67
     iget-object v0, p0, Landroid/preference/EditTextPreference;->mEditText:Landroid/widget/EditText;
 
     const/4 v1, 0x5
 
     invoke-virtual {v0, v1}, Landroid/widget/EditText;->setTextDirection(I)V
 
-    .line 75
     iget-object v0, p0, Landroid/preference/EditTextPreference;->mEditText:Landroid/widget/EditText;
 
     const/4 v1, 0x1
 
     invoke-virtual {v0, v1}, Landroid/widget/EditText;->setEnabled(Z)V
 
-    .line 58
     return-void
 .end method
 
@@ -144,30 +138,23 @@
     .param p2, "editText"    # Landroid/widget/EditText;
 
     .prologue
-    .line 145
-    const v1, 0x10204d5
+    const v1, #android:id@edittext_container#t
 
-    .line 144
     invoke-virtual {p1, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
 
     check-cast v0, Landroid/view/ViewGroup;
 
-    .line 146
     .local v0, "container":Landroid/view/ViewGroup;
     if-eqz v0, :cond_0
 
-    .line 147
     const/4 v1, -0x1
 
-    .line 148
     const/4 v2, -0x2
 
-    .line 147
     invoke-virtual {v0, p2, v1, v2}, Landroid/view/ViewGroup;->addView(Landroid/view/View;II)V
 
-    .line 143
     :cond_0
     return-void
 .end method
@@ -191,14 +178,12 @@
 
     invoke-virtual {v0, v2}, Landroid/widget/EditText;->setText(Ljava/lang/CharSequence;)V
 
-    .line 125
     invoke-virtual {p0}, Landroid/preference/EditTextPreference;->getText()Ljava/lang/String;
 
     move-result-object v2
 
     if-eqz v2, :cond_0
 
-    .line 126
     invoke-virtual {p0}, Landroid/preference/EditTextPreference;->getText()Ljava/lang/String;
 
     move-result-object v2
@@ -209,30 +194,24 @@
 
     invoke-virtual {v0, v2}, Landroid/widget/EditText;->setSelection(I)V
 
-    .line 129
     :cond_0
     invoke-virtual {v0}, Landroid/widget/EditText;->getParent()Landroid/view/ViewParent;
 
     move-result-object v1
 
-    .line 130
     .local v1, "oldParent":Landroid/view/ViewParent;
     if-eq v1, p1, :cond_2
 
-    .line 131
     if-eqz v1, :cond_1
 
-    .line 132
     check-cast v1, Landroid/view/ViewGroup;
 
     .end local v1    # "oldParent":Landroid/view/ViewParent;
     invoke-virtual {v1, v0}, Landroid/view/ViewGroup;->removeView(Landroid/view/View;)V
 
-    .line 134
     :cond_1
     invoke-virtual {p0, p1, v0}, Landroid/preference/EditTextPreference;->onAddEditTextToDialogView(Landroid/view/View;Landroid/widget/EditText;)V
 
-    .line 118
     :cond_2
     return-void
 .end method
@@ -466,4 +445,92 @@
     const/4 v0, 0x1
 
     goto :goto_0
+.end method
+
+.method private getFlymeAlertDialogTheme(Landroid/content/Context;)I
+    .locals 4
+    .param p1, "context"    # Landroid/content/Context;
+
+    .prologue
+    new-instance v0, Landroid/util/TypedValue;
+
+    invoke-direct {v0}, Landroid/util/TypedValue;-><init>()V
+
+    .local v0, "typedValue":Landroid/util/TypedValue;
+    invoke-virtual {p1}, Landroid/content/Context;->getTheme()Landroid/content/res/Resources$Theme;
+
+    move-result-object v1
+
+    const v2, #android:attr@alertDialogTheme#t
+
+    const/4 v3, 0x1
+
+    invoke-virtual {v1, v2, v0, v3}, Landroid/content/res/Resources$Theme;->resolveAttribute(ILandroid/util/TypedValue;Z)Z
+
+    iget v1, v0, Landroid/util/TypedValue;->resourceId:I
+
+    return v1
+.end method
+
+.method private setFlymeDialogStyleEditText(Landroid/content/Context;Landroid/util/AttributeSet;)V
+    .locals 3
+    .param p1, "context"    # Landroid/content/Context;
+    .param p2, "attrs"    # Landroid/util/AttributeSet;
+
+    .prologue
+    invoke-virtual {p1}, Landroid/content/Context;->isDeviceDefaultTheme()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_0
+
+    invoke-direct {p0, p1}, Landroid/preference/EditTextPreference;->getFlymeAlertDialogTheme(Landroid/content/Context;)I
+
+    move-result v1
+
+    .local v1, "editTextContextTheme":I
+    if-eqz v1, :cond_0
+
+    new-instance v0, Landroid/view/ContextThemeWrapper;
+
+    invoke-direct {v0, p1, v1}, Landroid/view/ContextThemeWrapper;-><init>(Landroid/content/Context;I)V
+
+    .end local p1    # "context":Landroid/content/Context;
+    .local v0, "context":Landroid/content/Context;
+    new-instance v2, Landroid/widget/EditText;
+
+    invoke-direct {v2, v0, p2}, Landroid/widget/EditText;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V
+
+    iput-object v2, p0, Landroid/preference/EditTextPreference;->mEditText:Landroid/widget/EditText;
+
+    move-object p1, v0
+
+    .end local v0    # "context":Landroid/content/Context;
+    .end local v1    # "editTextContextTheme":I
+    .restart local p1    # "context":Landroid/content/Context;
+    :cond_0
+    return-void
+.end method
+
+.method private setFlymeEditTextSelection()V
+    .locals 3
+
+    .prologue
+    const/4 v2, 0x0
+
+    iget-object v1, p0, Landroid/preference/EditTextPreference;->mEditText:Landroid/widget/EditText;
+
+    invoke-virtual {v1}, Landroid/widget/EditText;->length()I
+
+    move-result v0
+
+    .local v0, "length":I
+    if-lez v0, :cond_0
+
+    iget-object v1, p0, Landroid/preference/EditTextPreference;->mEditText:Landroid/widget/EditText;
+
+    invoke-virtual {v1, v2, v0}, Landroid/widget/EditText;->setSelection(II)V
+
+    :cond_0
+    return-void
 .end method

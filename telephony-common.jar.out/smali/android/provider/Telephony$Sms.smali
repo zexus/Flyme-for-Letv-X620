@@ -672,32 +672,24 @@
 
     const/4 v9, 0x0
 
-    .line 777
     if-nez p1, :cond_0
 
-    .line 778
     return v9
 
-    .line 781
     :cond_0
     const/4 v7, 0x0
 
-    .line 782
     .local v7, "markAsUnread":Z
     const/4 v6, 0x0
 
-    .line 783
     .local v6, "markAsRead":Z
     packed-switch p2, :pswitch_data_0
 
-    .line 796
     return v9
 
-    .line 789
     :pswitch_0
     const/4 v6, 0x1
 
-    .line 799
     :goto_0
     :pswitch_1
     new-instance v3, Landroid/content/ContentValues;
@@ -706,9 +698,8 @@
 
     invoke-direct {v3, v0}, Landroid/content/ContentValues;-><init>(I)V
 
-    .line 801
     .local v3, "values":Landroid/content/ContentValues;
-    const-string/jumbo v0, "type"
+    const-string v0, "type"
 
     invoke-static {p2}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
@@ -901,4 +892,24 @@
 
     .line 485
     goto :goto_0
+.end method
+
+.method private static putFlymeExtraValues(Landroid/content/ContentValues;)V
+    .locals 4
+    .param p0, "values"    # Landroid/content/ContentValues;
+
+    .prologue
+    const-string v0, "date"
+
+    new-instance v1, Ljava/lang/Long;
+
+    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+
+    move-result-wide v2
+
+    invoke-direct {v1, v2, v3}, Ljava/lang/Long;-><init>(J)V
+
+    invoke-virtual {p0, v0, v1}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/Long;)V
+
+    return-void
 .end method

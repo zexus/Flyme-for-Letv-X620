@@ -466,15 +466,12 @@
 
     invoke-static {v2, v3}, Landroid/util/Slog;->v(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 8268
     :cond_2
     return-void
 
-    .line 8277
     :pswitch_1
     const/4 v15, 0x0
 
-    .line 8279
     .local v15, "accessibilityController":Lcom/android/server/wm/AccessibilityController;
     move-object/from16 v0, p0
 
@@ -4127,4 +4124,16 @@
         :pswitch_25
         :pswitch_26
     .end packed-switch
+.end method
+
+.method private handleFlymeMessage(Landroid/os/Message;)V
+    .locals 1
+    .param p1, "msg"    # Landroid/os/Message;
+
+    .prologue
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService$H;->this$0:Lcom/android/server/wm/WindowManagerService;
+
+    invoke-static {v0, p1}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->handleFlymeMessage(Lcom/android/server/wm/WindowManagerService;Landroid/os/Message;)V
+
+    return-void
 .end method

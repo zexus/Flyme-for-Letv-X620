@@ -598,30 +598,24 @@
     .prologue
     const/4 v6, 0x0
 
-    .line 429
     invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v4
 
-    .line 430
-    const v5, 0x108027c
+    const v5, #android:drawable@default_lock_wallpaper#t
 
-    .line 429
     invoke-virtual {v4, v5}, Landroid/content/res/Resources;->openRawResource(I)Ljava/io/InputStream;
 
     move-result-object v2
 
-    .line 431
     .local v2, "is":Ljava/io/InputStream;
     if-eqz v2, :cond_0
 
-    .line 433
     :try_start_0
     new-instance v3, Landroid/graphics/BitmapFactory$Options;
 
     invoke-direct {v3}, Landroid/graphics/BitmapFactory$Options;-><init>()V
 
-    .line 434
     .local v3, "options":Landroid/graphics/BitmapFactory$Options;
     const/4 v4, 0x0
 
@@ -728,33 +722,27 @@
     .prologue
     const/4 v6, 0x0
 
-    .line 547
     invoke-direct {p0, p1}, Landroid/app/WallpaperManager$Globals;->openDefaultWallpaperRes(Landroid/content/Context;)Ljava/io/InputStream;
 
     move-result-object v2
 
-    .line 548
     .local v2, "is":Ljava/io/InputStream;
     if-eqz v2, :cond_0
 
-    .line 550
     :try_start_0
     new-instance v3, Landroid/graphics/BitmapFactory$Options;
 
     invoke-direct {v3}, Landroid/graphics/BitmapFactory$Options;-><init>()V
 
-    .line 552
     .local v3, "options":Landroid/graphics/BitmapFactory$Options;
     const/4 v4, 0x1
 
     iput-boolean v4, v3, Landroid/graphics/BitmapFactory$Options;->inPostProc:Z
 
-    .line 553
     const/4 v4, 0x1
 
     iput v4, v3, Landroid/graphics/BitmapFactory$Options;->inPostProcFlag:I
 
-    .line 554
     const/4 v4, 0x0
 
     invoke-static {v2, v4, v3}, Landroid/graphics/BitmapFactory;->decodeStream(Ljava/io/InputStream;Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;
@@ -889,44 +877,37 @@
 
     if-nez v4, :cond_1
 
-    .line 528
     :cond_0
     invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v4
 
-    .line 529
-    const v5, 0x108027f
+    const v5, #android:drawable@default_wallpaper#t
 
-    .line 528
     invoke-virtual {v4, v5}, Landroid/content/res/Resources;->openRawResource(I)Ljava/io/InputStream;
 
     move-result-object v2
 
-    .line 535
     .local v2, "is":Ljava/io/InputStream;
     :goto_1
     return-object v2
 
-    .line 523
     .local v2, "is":Ljava/io/InputStream;
     .restart local v3    # "mWallpaperPlugin":Lcom/mediatek/common/wallpaper/IWallpaperPlugin;
     :catch_0
     move-exception v1
 
-    .line 524
     .local v1, "e":Ljava/lang/Exception;
     invoke-static {}, Landroid/app/WallpaperManager;->-get0()Ljava/lang/String;
 
     move-result-object v4
 
-    const-string/jumbo v5, "Catch IWallpaperPlugin exception: "
+    const-string v5, "Catch IWallpaperPlugin exception: "
 
     invoke-static {v4, v5, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
     goto :goto_0
 
-    .line 531
     .end local v1    # "e":Ljava/lang/Exception;
     .end local v3    # "mWallpaperPlugin":Lcom/mediatek/common/wallpaper/IWallpaperPlugin;
     :cond_1

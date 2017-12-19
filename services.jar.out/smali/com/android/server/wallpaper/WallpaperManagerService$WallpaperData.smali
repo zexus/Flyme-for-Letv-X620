@@ -15,6 +15,8 @@
 
 
 # instance fields
+.field mFlymeData:Lcom/android/server/wallpaper/FlymeWallpaperService$FlymeWallpaperData;
+
 .field private callbacks:Landroid/os/RemoteCallbackList;
     .annotation system Ldalvik/annotation/Signature;
         value = {
@@ -312,4 +314,18 @@
     invoke-static {v3, v4}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     goto :goto_0
+.end method
+
+
+.method private initFlymeWallpaperData()V
+    .locals 1
+
+    .prologue
+    new-instance v0, Lcom/android/server/wallpaper/FlymeWallpaperService$FlymeWallpaperData;
+
+    invoke-direct {v0}, Lcom/android/server/wallpaper/FlymeWallpaperService$FlymeWallpaperData;-><init>()V
+
+    iput-object v0, p0, Lcom/android/server/wallpaper/WallpaperManagerService$WallpaperData;->mFlymeData:Lcom/android/server/wallpaper/FlymeWallpaperService$FlymeWallpaperData;
+
+    return-void
 .end method

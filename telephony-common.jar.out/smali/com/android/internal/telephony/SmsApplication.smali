@@ -336,7 +336,7 @@
 
     .line 346
     .local v10, "r":Landroid/content/res/Resources;
-    const v13, 0x104002d
+    const v13, #android:string@default_sms_application#t
 
     invoke-virtual {v10, v13}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
@@ -2033,32 +2033,27 @@
 
     if-ge v4, v9, :cond_2
 
-    .line 505
     aget-object v9, v8, v4
 
-    .line 504
     invoke-static {p1, v7, v0, v9}, Lcom/android/internal/telephony/SmsApplication;->assignWriteSmsPermissionToSystemApp(Landroid/content/Context;Landroid/content/pm/PackageManager;Landroid/app/AppOpsManager;Ljava/lang/String;)V
 
-    .line 503
     add-int/lit8 v4, v4, 0x1
 
     goto :goto_1
 
-    .line 470
     .end local v4    # "i":I
     .end local v8    # "specialApps":[Ljava/lang/String;
     :catch_0
     move-exception v3
 
-    .line 471
     .local v3, "e":Landroid/content/pm/PackageManager$NameNotFoundException;
-    const-string/jumbo v9, "SmsApplication"
+    const-string v9, "SmsApplication"
 
     new-instance v10, Ljava/lang/StringBuilder;
 
     invoke-direct {v10}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string/jumbo v11, "Old SMS package not found: "
+    const-string v11, "Old SMS package not found: "
 
     invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -2117,4 +2112,61 @@
 
     :cond_1
     return v0
+.end method
+
+.method private static sendFlymeExtraBroadcast(Ljava/lang/String;Landroid/content/Context;)V
+    .locals 7
+    .param p0, "packageName"    # Ljava/lang/String;
+    .param p1, "context"    # Landroid/content/Context;
+
+    .prologue
+    invoke-virtual {p1}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+
+    move-result-object v4
+
+    .local v4, "packageManager":Landroid/content/pm/PackageManager;
+    invoke-static {p1}, Lcom/android/internal/telephony/SmsApplication;->getApplicationCollection(Landroid/content/Context;)Ljava/util/Collection;
+
+    move-result-object v1
+
+    .local v1, "applications":Ljava/util/Collection;, "Ljava/util/Collection<Lcom/android/internal/telephony/SmsApplication$SmsApplicationData;>;"
+    invoke-static {v1, p0}, Lcom/android/internal/telephony/SmsApplication;->getApplicationForPackage(Ljava/util/Collection;Ljava/lang/String;)Lcom/android/internal/telephony/SmsApplication$SmsApplicationData;
+
+    move-result-object v0
+
+    .local v0, "applicationData":Lcom/android/internal/telephony/SmsApplication$SmsApplicationData;
+    if-eqz v0, :cond_0
+
+    new-instance v3, Landroid/content/Intent;
+
+    invoke-direct {v3}, Landroid/content/Intent;-><init>()V
+
+    .local v3, "intent":Landroid/content/Intent;
+    new-instance v2, Landroid/content/ComponentName;
+
+    const-string v5, "com.android.mms"
+
+    const-string v6, "com.android.mms.transaction.MmsSystemEventReceiver"
+
+    invoke-direct {v2, v5, v6}, Landroid/content/ComponentName;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    .local v2, "component":Landroid/content/ComponentName;
+    invoke-virtual {v3, v2}, Landroid/content/Intent;->setComponent(Landroid/content/ComponentName;)Landroid/content/Intent;
+
+    const-string v5, "com.meizu.action.SMS_DEFAULT_APPLICATION_CHANGED"
+
+    invoke-virtual {v3, v5}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    const-string v5, "packageName"
+
+    iget-object v6, v0, Lcom/android/internal/telephony/SmsApplication$SmsApplicationData;->mPackageName:Ljava/lang/String;
+
+    invoke-virtual {v3, v5, v6}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
+
+    invoke-virtual {p1, v3}, Landroid/content/Context;->sendBroadcast(Landroid/content/Intent;)V
+
+    .end local v2    # "component":Landroid/content/ComponentName;
+    .end local v3    # "intent":Landroid/content/Intent;
+    :cond_0
+    return-void
 .end method

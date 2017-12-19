@@ -2074,29 +2074,24 @@
     .prologue
     const/4 v4, 0x0
 
-    .line 558
     invoke-static {}, Landroid/hardware/Camera;->isPermissionGranted()Z
 
     move-result v3
 
     if-nez v3, :cond_0
 
-    .line 559
     return-object v4
 
-    .line 561
     :cond_0
     invoke-static {}, Landroid/hardware/Camera;->getNumberOfCameras()I
 
     move-result v2
 
-    .line 562
     .local v2, "numberOfCameras":I
     new-instance v0, Landroid/hardware/Camera$CameraInfo;
 
     invoke-direct {v0}, Landroid/hardware/Camera$CameraInfo;-><init>()V
 
-    .line 563
     .local v0, "cameraInfo":Landroid/hardware/Camera$CameraInfo;
     const/4 v1, 0x0
 
@@ -2135,19 +2130,16 @@
     .param p0, "cameraId"    # I
 
     .prologue
-    .line 545
     invoke-static {}, Landroid/hardware/Camera;->isPermissionGranted()Z
 
     move-result v0
 
     if-nez v0, :cond_0
 
-    .line 546
     const/4 v0, 0x0
 
     return-object v0
 
-    .line 548
     :cond_0
     new-instance v0, Landroid/hardware/Camera;
 
@@ -4163,4 +4155,27 @@
 .end method
 
 .method public final native unlock()V
+.end method
+
+.method private static isFlymePermissionGranted()Z
+    .locals 1
+
+    .prologue
+    const/16 v0, 0x4c
+
+    invoke-static {v0}, Lmeizu/security/FlymePermissionManager;->isFlymePermissionGranted(I)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x0
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x1
+
+    goto :goto_0
 .end method

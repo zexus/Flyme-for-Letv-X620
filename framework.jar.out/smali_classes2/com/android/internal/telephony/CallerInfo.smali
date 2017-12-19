@@ -1793,20 +1793,16 @@
 
     iput-object v1, v0, Lcom/android/internal/telephony/CallerYellowPageInfo;->yellowPageTag:Ljava/lang/String;
 
-    .line 498
     iput-object p2, p0, Lcom/android/internal/telephony/CallerInfo;->phoneNumber:Ljava/lang/String;
 
-    .line 499
-    const v0, 0x108071a
+    const v0, #android:drawable@picture_emergency#t
 
     iput v0, p0, Lcom/android/internal/telephony/CallerInfo;->photoResource:I
 
-    .line 500
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Lcom/android/internal/telephony/CallerInfo;->mIsEmergency:Z
 
-    .line 501
     return-object p0
 .end method
 
@@ -2003,4 +1999,26 @@
 
     .restart local v0    # "number":Ljava/lang/String;
     goto :goto_0
+.end method
+
+.method public markAsEmergencyMz()V
+    .locals 1
+
+    .prologue
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcom/android/internal/telephony/CallerInfo;->mIsEmergency:Z
+
+    return-void
+.end method
+
+.method public markAsVoiceMailMz()V
+    .locals 1
+
+    .prologue
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcom/android/internal/telephony/CallerInfo;->mIsVoiceMail:Z
+
+    return-void
 .end method

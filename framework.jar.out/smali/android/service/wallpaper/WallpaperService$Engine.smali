@@ -161,165 +161,140 @@
     .param p1, "this$0"    # Landroid/service/wallpaper/WallpaperService;
 
     .prologue
-    .line 156
     iput-object p1, p0, Landroid/service/wallpaper/WallpaperService$Engine;->this$0:Landroid/service/wallpaper/WallpaperService;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 164
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mInitializing:Z
 
-    .line 182
     const/16 v0, 0x10
 
     iput v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mWindowFlags:I
 
-    .line 184
     const/4 v0, 0x4
 
-    .line 183
     iput v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mWindowPrivateFlags:I
 
-    .line 185
     iget v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mWindowFlags:I
 
     iput v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mCurWindowFlags:I
 
-    .line 186
     iget v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mWindowPrivateFlags:I
 
     iput v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mCurWindowPrivateFlags:I
 
-    .line 187
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mVisibleInsets:Landroid/graphics/Rect;
 
-    .line 188
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mWinFrame:Landroid/graphics/Rect;
 
-    .line 189
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mOverscanInsets:Landroid/graphics/Rect;
 
-    .line 190
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mContentInsets:Landroid/graphics/Rect;
 
-    .line 191
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mStableInsets:Landroid/graphics/Rect;
 
-    .line 192
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mOutsets:Landroid/graphics/Rect;
 
-    .line 193
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mDispatchedOverscanInsets:Landroid/graphics/Rect;
 
-    .line 194
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mDispatchedContentInsets:Landroid/graphics/Rect;
 
-    .line 195
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mDispatchedStableInsets:Landroid/graphics/Rect;
 
-    .line 196
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mDispatchedOutsets:Landroid/graphics/Rect;
 
-    .line 197
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mFinalSystemInsets:Landroid/graphics/Rect;
 
-    .line 198
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mFinalStableInsets:Landroid/graphics/Rect;
 
-    .line 199
     new-instance v0, Landroid/content/res/Configuration;
 
     invoke-direct {v0}, Landroid/content/res/Configuration;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mConfiguration:Landroid/content/res/Configuration;
 
-    .line 202
     new-instance v0, Landroid/view/WindowManager$LayoutParams;
 
     invoke-direct {v0}, Landroid/view/WindowManager$LayoutParams;-><init>()V
 
-    .line 201
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mLayout:Landroid/view/WindowManager$LayoutParams;
 
-    .line 206
     new-instance v0, Ljava/lang/Object;
 
     invoke-direct {v0}, Ljava/lang/Object;-><init>()V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mLock:Ljava/lang/Object;
 
-    .line 233
     new-instance v0, Landroid/service/wallpaper/WallpaperService$Engine$1;
 
     invoke-direct {v0, p0}, Landroid/service/wallpaper/WallpaperService$Engine$1;-><init>(Landroid/service/wallpaper/WallpaperService$Engine;)V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mSurfaceHolder:Lcom/android/internal/view/BaseSurfaceHolder;
 
-    .line 312
     new-instance v0, Landroid/service/wallpaper/WallpaperService$Engine$2;
 
     invoke-direct {v0, p0}, Landroid/service/wallpaper/WallpaperService$Engine$2;-><init>(Landroid/service/wallpaper/WallpaperService$Engine;)V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mWindow:Lcom/android/internal/view/BaseIWindow;
 
-    .line 1119
     new-instance v0, Landroid/service/wallpaper/WallpaperService$Engine$3;
 
     invoke-direct {v0, p0}, Landroid/service/wallpaper/WallpaperService$Engine$3;-><init>(Landroid/service/wallpaper/WallpaperService$Engine;)V
 
     iput-object v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mDisplayListener:Landroid/hardware/display/DisplayManager$DisplayListener;
 
-    .line 156
+    invoke-direct/range {p0 .. p0}, Landroid/service/wallpaper/WallpaperService$Engine;->initFlymeExtraFields()V
+
     return-void
 .end method
 
@@ -2906,18 +2881,14 @@
 
     invoke-virtual {v2, v3}, Landroid/view/WindowManager$LayoutParams;->setTitle(Ljava/lang/CharSequence;)V
 
-    .line 691
     move-object/from16 v0, p0
 
     iget-object v2, v0, Landroid/service/wallpaper/WallpaperService$Engine;->mLayout:Landroid/view/WindowManager$LayoutParams;
 
-    .line 692
-    const v3, 0x10302ea
+    const v3, #android:style@Animation.Wallpaper#t
 
-    .line 691
     iput v3, v2, Landroid/view/WindowManager$LayoutParams;->windowAnimations:I
 
-    .line 693
     new-instance v2, Landroid/view/InputChannel;
 
     invoke-direct {v2}, Landroid/view/InputChannel;-><init>()V
@@ -4800,4 +4771,17 @@
     throw v2
     :try_end_4
     .catch Landroid/os/RemoteException; {:try_start_4 .. :try_end_4} :catch_0
+.end method
+
+.method private initFlymeExtraFields()V
+    .locals 1
+
+    .prologue
+    const/high16 v0, 0x3f000000    # 0.5f
+
+    iput v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mPendingXOffset:F
+
+    iput v0, p0, Landroid/service/wallpaper/WallpaperService$Engine;->mPendingYOffset:F
+
+    return-void
 .end method

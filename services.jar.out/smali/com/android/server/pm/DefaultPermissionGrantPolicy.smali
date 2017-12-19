@@ -4567,52 +4567,17 @@
 .end method
 
 .method public grantPermissionsToApps(IZ)V
-    .locals 11
+    .locals 9
     .param p1, "userId"    # I
     .param p2, "onlySystem"    # Z
 
     .prologue
-    .line 227
-    const-string/jumbo v7, "DefaultPermGrantPolicy"
-
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string/jumbo v9, "Granting app permissions for user "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    const-string/jumbo v9, " onlySystem "
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8, p2}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
-
-    move-result-object v8
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-static {v7, v8}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-
-    .line 229
     iget-object v7, p0, Lcom/android/server/pm/DefaultPermissionGrantPolicy;->mService:Lcom/android/server/pm/PackageManagerService;
 
     iget-object v8, v7, Lcom/android/server/pm/PackageManagerService;->mPackages:Landroid/util/ArrayMap;
 
     monitor-enter v8
 
-    .line 230
     :try_start_0
     iget-object v7, p0, Lcom/android/server/pm/DefaultPermissionGrantPolicy;->mService:Lcom/android/server/pm/PackageManagerService;
 
@@ -4633,7 +4598,7 @@
 
     move-result v7
 
-    if-eqz v7, :cond_5
+    if-eqz v7, :cond_4
 
     invoke-interface {v6}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
@@ -4647,26 +4612,23 @@
 
     move-result v7
 
-    if-eqz v7, :cond_3
+    if-eqz v7, :cond_0
 
-    .line 232
     iget-object v7, v5, Landroid/content/pm/PackageParser$Package;->requestedPermissions:Ljava/util/ArrayList;
 
     invoke-virtual {v7}, Ljava/util/ArrayList;->isEmpty()Z
 
     move-result v7
 
-    .line 231
-    if-nez v7, :cond_3
+    if-nez v7, :cond_0
 
-    .line 233
     if-eqz p2, :cond_1
 
     invoke-virtual {v5}, Landroid/content/pm/PackageParser$Package;->isSystemApp()Z
 
     move-result v7
 
-    if-eqz v7, :cond_3
+    if-eqz v7, :cond_0
 
     .line 237
     :cond_1
@@ -4688,7 +4650,7 @@
 
     .local v1, "i":I
     :goto_1
-    if-ge v1, v3, :cond_4
+    if-ge v1, v3, :cond_3
 
     .line 240
     iget-object v7, v5, Landroid/content/pm/PackageParser$Package;->requestedPermissions:Ljava/util/ArrayList;
@@ -4723,68 +4685,16 @@
 
     if-eqz v7, :cond_2
 
-    .line 243
     invoke-interface {v4, v2}, Ljava/util/Set;->add(Ljava/lang/Object;)Z
 
-    .line 239
     :cond_2
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_1
 
-    .line 234
     .end local v0    # "bp":Lcom/android/server/pm/BasePermission;
-    .end local v1    # "i":I
     .end local v2    # "permission":Ljava/lang/String;
-    .end local v3    # "permissionCount":I
-    .end local v4    # "permissions":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/String;>;"
     :cond_3
-    const-string/jumbo v7, "DefaultPermGrantPolicy"
-
-    new-instance v9, Ljava/lang/StringBuilder;
-
-    invoke-direct {v9}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string/jumbo v10, "Skip package "
-
-    invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v9
-
-    iget-object v10, v5, Landroid/content/pm/PackageParser$Package;->packageName:Ljava/lang/String;
-
-    invoke-virtual {v9, v10}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v9
-
-    invoke-virtual {v9}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v9
-
-    invoke-static {v7, v9}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
-
-    goto :goto_0
-
-    .line 229
-    .end local v5    # "pkg":Landroid/content/pm/PackageParser$Package;
-    .end local v6    # "pkg$iterator":Ljava/util/Iterator;
-    :catchall_0
-    move-exception v7
-
-    monitor-exit v8
-
-    throw v7
-
-    .line 246
-    .restart local v1    # "i":I
-    .restart local v3    # "permissionCount":I
-    .restart local v4    # "permissions":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/String;>;"
-    .restart local v5    # "pkg":Landroid/content/pm/PackageParser$Package;
-    .restart local v6    # "pkg$iterator":Ljava/util/Iterator;
-    :cond_4
-    :try_start_1
     invoke-interface {v4}, Ljava/util/Set;->isEmpty()Z
 
     move-result v7
@@ -4795,8 +4705,8 @@
     const/4 v7, 0x1
 
     invoke-direct {p0, v5, v4, v7, p1}, Lcom/android/server/pm/DefaultPermissionGrantPolicy;->grantRuntimePermissionsLPw(Landroid/content/pm/PackageParser$Package;Ljava/util/Set;ZI)V
-    :try_end_1
-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
     goto :goto_0
 
@@ -4804,7 +4714,16 @@
     .end local v3    # "permissionCount":I
     .end local v4    # "permissions":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/String;>;"
     .end local v5    # "pkg":Landroid/content/pm/PackageParser$Package;
-    :cond_5
+    .end local v6    # "pkg$iterator":Ljava/util/Iterator;
+    :catchall_0
+    move-exception v7
+
+    monitor-exit v8
+
+    throw v7
+
+    .restart local v6    # "pkg$iterator":Ljava/util/Iterator;
+    :cond_4
     monitor-exit v8
 
     .line 226

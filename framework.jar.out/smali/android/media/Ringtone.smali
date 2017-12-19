@@ -446,28 +446,23 @@
 
     move-result-object v8
 
-    .line 233
     .local v8, "actualTitle":Ljava/lang/String;
     const/4 v3, 0x1
 
     new-array v3, v3, [Ljava/lang/Object;
 
-    .line 235
     const/4 v4, 0x0
 
     aput-object v8, v3, v4
 
-    .line 234
-    const v4, 0x1040392
+    const v4, #android:string@ringtone_default_with_actual#t
 
-    .line 233
     move-object/from16 v0, p0
 
     invoke-virtual {v0, v4, v3}, Landroid/content/Context;->getString(I[Ljava/lang/Object;)Ljava/lang/String;
 
     move-result-object v16
 
-    .line 274
     .end local v8    # "actualTitle":Ljava/lang/String;
     .end local v9    # "actualUri":Landroid/net/Uri;
     .end local v11    # "authority":Ljava/lang/String;
@@ -476,8 +471,7 @@
     :goto_0
     if-nez v16, :cond_1
 
-    .line 275
-    const v3, 0x1040395
+    const v3, #android:string@ringtone_unknown#t
 
     move-object/from16 v0, p0
 
@@ -752,26 +746,21 @@
 
     move-result-object v0
 
-    .line 434
-    const v1, 0x1100005
+    const v1, #android:raw@fallbackring#t
 
-    .line 433
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->openRawResourceFd(I)Landroid/content/res/AssetFileDescriptor;
 
     move-result-object v6
 
-    .line 435
     .local v6, "afd":Landroid/content/res/AssetFileDescriptor;
     if-eqz v6, :cond_2
 
-    .line 436
     new-instance v0, Landroid/media/MediaPlayer;
 
     invoke-direct {v0}, Landroid/media/MediaPlayer;-><init>()V
 
     iput-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
 
-    .line 437
     invoke-virtual {v6}, Landroid/content/res/AssetFileDescriptor;->getDeclaredLength()J
 
     move-result-wide v0
@@ -1745,4 +1734,98 @@
     invoke-static {v1, v2}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
 
     goto :goto_0
+.end method
+
+.method public isLocalPlayerValid()Z
+    .locals 1
+
+    .prologue
+    iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x1
+
+    :goto_0
+    return v0
+
+    :cond_0
+    const/4 v0, 0x0
+
+    goto :goto_0
+.end method
+
+.method public playLocal()Z
+    .locals 2
+
+    .prologue
+    const/4 v1, 0x0
+
+    iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
+
+    if-eqz v0, :cond_1
+
+    iget-object v0, p0, Landroid/media/Ringtone;->mAudioManager:Landroid/media/AudioManager;
+
+    iget-object v1, p0, Landroid/media/Ringtone;->mAudioAttributes:Landroid/media/AudioAttributes;
+
+    invoke-static {v1}, Landroid/media/AudioAttributes;->toLegacyStreamType(Landroid/media/AudioAttributes;)I
+
+    move-result v1
+
+    invoke-virtual {v0, v1}, Landroid/media/AudioManager;->getStreamVolume(I)I
+
+    move-result v0
+
+    if-ltz v0, :cond_0
+
+    iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
+
+    invoke-virtual {v0}, Landroid/media/MediaPlayer;->start()V
+
+    :cond_0
+    const/4 v0, 0x1
+
+    return v0
+
+    :cond_1
+    return v1
+.end method
+
+.method public setOnCompletionListener(Landroid/media/MediaPlayer$OnCompletionListener;)V
+    .locals 1
+    .param p1, "listener"    # Landroid/media/MediaPlayer$OnCompletionListener;
+
+    .prologue
+    iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
+
+    if-nez v0, :cond_0
+
+    return-void
+
+    :cond_0
+    iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
+
+    invoke-virtual {v0, p1}, Landroid/media/MediaPlayer;->setOnCompletionListener(Landroid/media/MediaPlayer$OnCompletionListener;)V
+
+    return-void
+.end method
+
+.method public setOnErrorListener(Landroid/media/MediaPlayer$OnErrorListener;)V
+    .locals 1
+    .param p1, "listener"    # Landroid/media/MediaPlayer$OnErrorListener;
+
+    .prologue
+    iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
+
+    if-nez v0, :cond_0
+
+    return-void
+
+    :cond_0
+    iget-object v0, p0, Landroid/media/Ringtone;->mLocalPlayer:Landroid/media/MediaPlayer;
+
+    invoke-virtual {v0, p1}, Landroid/media/MediaPlayer;->setOnErrorListener(Landroid/media/MediaPlayer$OnErrorListener;)V
+
+    return-void
 .end method

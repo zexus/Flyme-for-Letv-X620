@@ -18,12 +18,29 @@
 
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Landroid/view/WindowManager$LayoutParams$FlymeInjector;,
         Landroid/view/WindowManager$LayoutParams$1;
     }
 .end annotation
 
 
 # static fields
+.field public static final MEIZU_FLAGS_CHANGED:I = 0x800000
+
+.field public static final MEIZU_FLAG_CHANGE_TOAST:I = 0x10
+
+.field public static final MEIZU_FLAG_DARK_STATUS_BAR_ICON:I = 0x200
+
+.field public static final MEIZU_STATUS_BAR_CHANGED:I = 0x1000000
+
+.field public static final TYPE_MEIZU_TOP_MOST:I = 0x7f8
+
+.field public meizuFlags:I
+
+.field public meizuParams:Landroid/view/MeizuLayoutParams;
+
+.field public statusBarColor:I
+
 .field public static final ALPHA_CHANGED:I = 0x80
 
 .field public static final ANIMATION_CHANGED:I = 0x10
@@ -810,71 +827,54 @@
 
     const/4 v2, -0x1
 
-    .line 1718
     invoke-direct {p0, v2, v2}, Landroid/view/ViewGroup$LayoutParams;-><init>(II)V
 
-    .line 1262
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
-    .line 1442
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->surfaceInsets:Landroid/graphics/Rect;
 
-    .line 1471
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->alpha:F
 
-    .line 1478
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->dimAmount:F
 
-    .line 1507
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->screenBrightness:F
 
-    .line 1515
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->buttonBrightness:F
 
-    .line 1547
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->rotationAnimation:I
 
-    .line 1553
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->token:Landroid/os/IBinder;
 
-    .line 1558
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->packageName:Ljava/lang/String;
 
-    .line 1568
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->screenOrientation:I
 
-    .line 1600
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->systemUiIconColor:I
 
-    .line 1703
     const-wide/16 v0, -0x1
 
     iput-wide v0, p0, Landroid/view/WindowManager$LayoutParams;->userActivityTimeout:J
 
-    .line 1714
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->flagsEx:I
 
-    .line 1923
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->mCompatibilityParamsBackup:[I
 
-    .line 2267
-    const-string/jumbo v0, ""
+    const-string v0, ""
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->mTitle:Ljava/lang/CharSequence;
 
-    .line 1719
     const/4 v0, 0x2
 
     iput v0, p0, Landroid/view/WindowManager$LayoutParams;->type:I
 
-    .line 1720
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->format:I
 
-    .line 1717
+    invoke-static/range {p0 .. p0}, Landroid/view/WindowManager$LayoutParams$FlymeInjector;->initFlymeExtraFields(Landroid/view/WindowManager$LayoutParams;)V
+
     return-void
 .end method
 
@@ -893,69 +893,52 @@
 
     const/4 v2, -0x1
 
-    .line 1724
     invoke-direct {p0, v2, v2}, Landroid/view/ViewGroup$LayoutParams;-><init>(II)V
 
-    .line 1262
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
-    .line 1442
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->surfaceInsets:Landroid/graphics/Rect;
 
-    .line 1471
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->alpha:F
 
-    .line 1478
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->dimAmount:F
 
-    .line 1507
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->screenBrightness:F
 
-    .line 1515
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->buttonBrightness:F
 
-    .line 1547
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->rotationAnimation:I
 
-    .line 1553
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->token:Landroid/os/IBinder;
 
-    .line 1558
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->packageName:Ljava/lang/String;
 
-    .line 1568
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->screenOrientation:I
 
-    .line 1600
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->systemUiIconColor:I
 
-    .line 1703
     const-wide/16 v0, -0x1
 
     iput-wide v0, p0, Landroid/view/WindowManager$LayoutParams;->userActivityTimeout:J
 
-    .line 1714
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->flagsEx:I
 
-    .line 1923
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->mCompatibilityParamsBackup:[I
 
-    .line 2267
-    const-string/jumbo v0, ""
+    const-string v0, ""
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->mTitle:Ljava/lang/CharSequence;
 
-    .line 1725
     iput p1, p0, Landroid/view/WindowManager$LayoutParams;->type:I
 
-    .line 1726
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->format:I
 
-    .line 1723
+    invoke-static/range {p0 .. p0}, Landroid/view/WindowManager$LayoutParams$FlymeInjector;->initFlymeExtraFields(Landroid/view/WindowManager$LayoutParams;)V
+
     return-void
 .end method
 
@@ -975,72 +958,54 @@
 
     const/4 v2, -0x1
 
-    .line 1730
     invoke-direct {p0, v2, v2}, Landroid/view/ViewGroup$LayoutParams;-><init>(II)V
 
-    .line 1262
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
-    .line 1442
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->surfaceInsets:Landroid/graphics/Rect;
 
-    .line 1471
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->alpha:F
 
-    .line 1478
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->dimAmount:F
 
-    .line 1507
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->screenBrightness:F
 
-    .line 1515
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->buttonBrightness:F
 
-    .line 1547
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->rotationAnimation:I
 
-    .line 1553
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->token:Landroid/os/IBinder;
 
-    .line 1558
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->packageName:Ljava/lang/String;
 
-    .line 1568
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->screenOrientation:I
 
-    .line 1600
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->systemUiIconColor:I
 
-    .line 1703
     const-wide/16 v0, -0x1
 
     iput-wide v0, p0, Landroid/view/WindowManager$LayoutParams;->userActivityTimeout:J
 
-    .line 1714
     iput v3, p0, Landroid/view/WindowManager$LayoutParams;->flagsEx:I
 
-    .line 1923
     iput-object v4, p0, Landroid/view/WindowManager$LayoutParams;->mCompatibilityParamsBackup:[I
 
-    .line 2267
-    const-string/jumbo v0, ""
+    const-string v0, ""
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->mTitle:Ljava/lang/CharSequence;
 
-    .line 1731
     iput p1, p0, Landroid/view/WindowManager$LayoutParams;->type:I
 
-    .line 1732
     iput p2, p0, Landroid/view/WindowManager$LayoutParams;->flags:I
 
-    .line 1733
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->format:I
 
-    .line 1729
+    invoke-static/range {p0 .. p0}, Landroid/view/WindowManager$LayoutParams$FlymeInjector;->initFlymeExtraFields(Landroid/view/WindowManager$LayoutParams;)V
+
     return-void
 .end method
 
@@ -1061,72 +1026,54 @@
 
     const/4 v1, -0x1
 
-    .line 1737
     invoke-direct {p0, v1, v1}, Landroid/view/ViewGroup$LayoutParams;-><init>(II)V
 
-    .line 1262
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
-    .line 1442
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->surfaceInsets:Landroid/graphics/Rect;
 
-    .line 1471
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->alpha:F
 
-    .line 1478
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->dimAmount:F
 
-    .line 1507
     iput v4, p0, Landroid/view/WindowManager$LayoutParams;->screenBrightness:F
 
-    .line 1515
     iput v4, p0, Landroid/view/WindowManager$LayoutParams;->buttonBrightness:F
 
-    .line 1547
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->rotationAnimation:I
 
-    .line 1553
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->token:Landroid/os/IBinder;
 
-    .line 1558
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->packageName:Ljava/lang/String;
 
-    .line 1568
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->screenOrientation:I
 
-    .line 1600
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->systemUiIconColor:I
 
-    .line 1703
     const-wide/16 v0, -0x1
 
     iput-wide v0, p0, Landroid/view/WindowManager$LayoutParams;->userActivityTimeout:J
 
-    .line 1714
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->flagsEx:I
 
-    .line 1923
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->mCompatibilityParamsBackup:[I
 
-    .line 2267
-    const-string/jumbo v0, ""
+    const-string v0, ""
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->mTitle:Ljava/lang/CharSequence;
 
-    .line 1738
     iput p1, p0, Landroid/view/WindowManager$LayoutParams;->type:I
 
-    .line 1739
     iput p2, p0, Landroid/view/WindowManager$LayoutParams;->flags:I
 
-    .line 1740
     iput p3, p0, Landroid/view/WindowManager$LayoutParams;->format:I
 
-    .line 1736
+    invoke-static/range {p0 .. p0}, Landroid/view/WindowManager$LayoutParams$FlymeInjector;->initFlymeExtraFields(Landroid/view/WindowManager$LayoutParams;)V
+
     return-void
 .end method
 
@@ -1149,72 +1096,54 @@
 
     const/4 v2, 0x0
 
-    .line 1744
     invoke-direct {p0, p1, p2}, Landroid/view/ViewGroup$LayoutParams;-><init>(II)V
 
-    .line 1262
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
-    .line 1442
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->surfaceInsets:Landroid/graphics/Rect;
 
-    .line 1471
     iput v4, p0, Landroid/view/WindowManager$LayoutParams;->alpha:F
 
-    .line 1478
     iput v4, p0, Landroid/view/WindowManager$LayoutParams;->dimAmount:F
 
-    .line 1507
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->screenBrightness:F
 
-    .line 1515
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->buttonBrightness:F
 
-    .line 1547
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->rotationAnimation:I
 
-    .line 1553
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->token:Landroid/os/IBinder;
 
-    .line 1558
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->packageName:Ljava/lang/String;
 
-    .line 1568
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->screenOrientation:I
 
-    .line 1600
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->systemUiIconColor:I
 
-    .line 1703
     const-wide/16 v0, -0x1
 
     iput-wide v0, p0, Landroid/view/WindowManager$LayoutParams;->userActivityTimeout:J
 
-    .line 1714
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->flagsEx:I
 
-    .line 1923
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->mCompatibilityParamsBackup:[I
 
-    .line 2267
-    const-string/jumbo v0, ""
+    const-string v0, ""
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->mTitle:Ljava/lang/CharSequence;
 
-    .line 1745
     iput p3, p0, Landroid/view/WindowManager$LayoutParams;->type:I
 
-    .line 1746
     iput p4, p0, Landroid/view/WindowManager$LayoutParams;->flags:I
 
-    .line 1747
     iput p5, p0, Landroid/view/WindowManager$LayoutParams;->format:I
 
-    .line 1743
+    invoke-static/range {p0 .. p0}, Landroid/view/WindowManager$LayoutParams$FlymeInjector;->initFlymeExtraFields(Landroid/view/WindowManager$LayoutParams;)V
+
     return-void
 .end method
 
@@ -1239,78 +1168,58 @@
 
     const/4 v2, 0x0
 
-    .line 1752
     invoke-direct {p0, p1, p2}, Landroid/view/ViewGroup$LayoutParams;-><init>(II)V
 
-    .line 1262
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
-    .line 1442
     new-instance v0, Landroid/graphics/Rect;
 
     invoke-direct {v0}, Landroid/graphics/Rect;-><init>()V
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->surfaceInsets:Landroid/graphics/Rect;
 
-    .line 1471
     iput v4, p0, Landroid/view/WindowManager$LayoutParams;->alpha:F
 
-    .line 1478
     iput v4, p0, Landroid/view/WindowManager$LayoutParams;->dimAmount:F
 
-    .line 1507
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->screenBrightness:F
 
-    .line 1515
     iput v1, p0, Landroid/view/WindowManager$LayoutParams;->buttonBrightness:F
 
-    .line 1547
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->rotationAnimation:I
 
-    .line 1553
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->token:Landroid/os/IBinder;
 
-    .line 1558
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->packageName:Ljava/lang/String;
 
-    .line 1568
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->screenOrientation:I
 
-    .line 1600
     iput v5, p0, Landroid/view/WindowManager$LayoutParams;->systemUiIconColor:I
 
-    .line 1703
     const-wide/16 v0, -0x1
 
     iput-wide v0, p0, Landroid/view/WindowManager$LayoutParams;->userActivityTimeout:J
 
-    .line 1714
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->flagsEx:I
 
-    .line 1923
     iput-object v3, p0, Landroid/view/WindowManager$LayoutParams;->mCompatibilityParamsBackup:[I
 
-    .line 2267
-    const-string/jumbo v0, ""
+    const-string v0, ""
 
     iput-object v0, p0, Landroid/view/WindowManager$LayoutParams;->mTitle:Ljava/lang/CharSequence;
 
-    .line 1753
     iput p3, p0, Landroid/view/WindowManager$LayoutParams;->x:I
 
-    .line 1754
     iput p4, p0, Landroid/view/WindowManager$LayoutParams;->y:I
 
-    .line 1755
     iput p5, p0, Landroid/view/WindowManager$LayoutParams;->type:I
 
-    .line 1756
     iput p6, p0, Landroid/view/WindowManager$LayoutParams;->flags:I
 
-    .line 1757
     iput p7, p0, Landroid/view/WindowManager$LayoutParams;->format:I
 
-    .line 1751
+    invoke-static/range {p0 .. p0}, Landroid/view/WindowManager$LayoutParams$FlymeInjector;->initFlymeExtraFields(Landroid/view/WindowManager$LayoutParams;)V
+
     return-void
 .end method
 
@@ -1659,20 +1568,19 @@
     :cond_0
     iput-boolean v1, p0, Landroid/view/WindowManager$LayoutParams;->hasManualSurfaceInsets:Z
 
-    .line 1880
     invoke-virtual {p1}, Landroid/os/Parcel;->readInt()I
 
     move-result v0
 
     iput v0, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
-    .line 1841
+    invoke-static/range {p0 .. p1}, Landroid/view/WindowManager$LayoutParams$FlymeInjector;->readFromParcel(Landroid/view/WindowManager$LayoutParams;Landroid/os/Parcel;)V
+
     return-void
 
     :cond_1
     move v0, v1
 
-    .line 1872
     goto :goto_0
 .end method
 
@@ -2393,17 +2301,14 @@
 
     if-eq v2, v3, :cond_24
 
-    .line 2087
     iget v2, p1, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
     iput v2, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
-    .line 2088
     const/high16 v2, 0x400000
 
     or-int/2addr v0, v2
 
-    .line 2091
     :cond_24
     return v0
 .end method
@@ -3278,52 +3183,44 @@
 
     invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
 
-    .line 2210
     iget-boolean v1, p0, Landroid/view/WindowManager$LayoutParams;->hasManualSurfaceInsets:Z
 
     if-eqz v1, :cond_17
 
-    .line 2211
-    const-string/jumbo v1, " (manual)"
+    const-string v1, " (manual)"
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 2214
     :cond_17
     iget v1, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
     if-eqz v1, :cond_18
 
-    .line 2215
-    const-string/jumbo v1, " needsMenuKey="
+    const-string v1, " needsMenuKey="
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    .line 2216
     iget v1, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    .line 2218
     :cond_18
     const/16 v1, 0x7d
 
     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
 
-    .line 2219
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
     move-result-object v1
 
     return-object v1
 
-    .line 2114
     :cond_19
     iget v1, p0, Landroid/view/WindowManager$LayoutParams;->width:I
 
     if-ne v1, v2, :cond_1a
 
-    const-string/jumbo v1, "wrap"
+    const-string v1, "wrap"
 
     goto/16 :goto_0
 
@@ -3584,23 +3481,21 @@
     :goto_1
     invoke-virtual {p1, v1}, Landroid/os/Parcel;->writeInt(I)V
 
-    .line 1826
     iget v0, p0, Landroid/view/WindowManager$LayoutParams;->needsMenuKey:I
 
     invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
 
-    .line 1787
+    invoke-static/range {p0 .. p1}, Landroid/view/WindowManager$LayoutParams$FlymeInjector;->writeToParcel(Landroid/view/WindowManager$LayoutParams;Landroid/os/Parcel;)V
+
     return-void
 
     :cond_0
     move v0, v2
 
-    .line 1818
     goto :goto_0
 
     :cond_1
     move v1, v2
 
-    .line 1825
     goto :goto_1
 .end method

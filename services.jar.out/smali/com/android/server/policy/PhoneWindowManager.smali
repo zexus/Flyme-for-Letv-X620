@@ -9,6 +9,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;,
         Lcom/android/server/policy/PhoneWindowManager$PolicyHandler;,
         Lcom/android/server/policy/PhoneWindowManager$SettingsObserver;,
         Lcom/android/server/policy/PhoneWindowManager$MyWakeGestureListener;,
@@ -6243,40 +6244,33 @@
     .prologue
     const/4 v2, 0x0
 
-    .line 1763
     iget-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
 
     invoke-virtual {v0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v0
 
-    .line 1764
-    const v1, 0x10e0059
+    const v1, #android:integer@config_longPressOnHomeBehavior#t
 
-    .line 1763
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v0
 
     iput v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mLongPressOnHomeBehavior:I
 
-    .line 1765
     iget v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mLongPressOnHomeBehavior:I
 
     if-ltz v0, :cond_0
 
-    .line 1766
     iget v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mLongPressOnHomeBehavior:I
 
     const/4 v1, 0x2
 
     if-le v0, v1, :cond_1
 
-    .line 1767
     :cond_0
     iput v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mLongPressOnHomeBehavior:I
 
-    .line 1770
     :cond_1
     iget-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
 
@@ -6284,33 +6278,27 @@
 
     move-result-object v0
 
-    .line 1771
-    const v1, 0x10e005a
+    const v1, #android:integer@config_doubleTapOnHomeBehavior#t
 
-    .line 1770
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v0
 
     iput v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mDoubleTapOnHomeBehavior:I
 
-    .line 1772
     iget v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mDoubleTapOnHomeBehavior:I
 
     if-ltz v0, :cond_2
 
-    .line 1773
     iget v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mDoubleTapOnHomeBehavior:I
 
     const/4 v1, 0x1
 
     if-le v0, v1, :cond_3
 
-    .line 1774
     :cond_2
     iput v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mDoubleTapOnHomeBehavior:I
 
-    .line 1762
     :cond_3
     return-void
 .end method
@@ -8230,32 +8218,25 @@
 
     if-eqz v0, :cond_2
 
-    .line 7283
     return v1
 
-    .line 7286
     :cond_2
     invoke-static {v3, v12}, Lcom/android/server/policy/PolicyControl;->getSystemUiVisibility(Landroid/view/WindowManagerPolicy$WindowState;Landroid/view/WindowManager$LayoutParams;)I
 
     move-result v0
 
-    .line 7287
     iget v11, p0, Lcom/android/server/policy/PhoneWindowManager;->mResettingSystemUiFlags:I
 
     not-int v11, v11
 
-    .line 7286
     and-int/2addr v0, v11
 
-    .line 7288
     iget v11, p0, Lcom/android/server/policy/PhoneWindowManager;->mForceClearedSystemUiFlags:I
 
     not-int v11, v11
 
-    .line 7286
     and-int v10, v0, v11
 
-    .line 7289
     .local v10, "tmpVisibility":I
     iget-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mForcingShowNavBar:Z
 
@@ -10644,23 +10625,19 @@
     :goto_8
     iput-boolean v5, p0, Lcom/android/server/policy/PhoneWindowManager;->mForceStatusBarFromKeyguard:Z
 
-    .line 4959
     :cond_15
     :goto_9
     and-int/lit8 v5, v3, 0x1
 
     if-eqz v5, :cond_16
 
-    .line 4960
     iput-boolean v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mAllowLockscreenWhenOn:Z
 
-    .line 4964
     :cond_16
     iget-object v5, p0, Lcom/android/server/policy/PhoneWindowManager;->mWinShowWhenLocked:Landroid/view/WindowManagerPolicy$WindowState;
 
     if-eqz v5, :cond_5
 
-    .line 4965
     iget-object v5, p0, Lcom/android/server/policy/PhoneWindowManager;->mWinShowWhenLocked:Landroid/view/WindowManagerPolicy$WindowState;
 
     invoke-interface {v5}, Landroid/view/WindowManagerPolicy$WindowState;->getAppToken()Landroid/view/IApplicationToken;
@@ -12901,70 +12878,52 @@
 
     const/4 v0, 0x0
 
-    .line 4837
     iput-object v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mTopFullscreenOpaqueWindowState:Landroid/view/WindowManagerPolicy$WindowState;
 
-    .line 4838
     iput-object v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mTopFullscreenOpaqueOrDimmingWindowState:Landroid/view/WindowManagerPolicy$WindowState;
 
-    .line 4839
     iget-object v1, p0, Lcom/android/server/policy/PhoneWindowManager;->mAppsToBeHidden:Ljava/util/HashSet;
 
     invoke-virtual {v1}, Ljava/util/HashSet;->clear()V
 
-    .line 4840
     iget-object v1, p0, Lcom/android/server/policy/PhoneWindowManager;->mAppsThatDismissKeyguard:Ljava/util/HashSet;
 
     invoke-virtual {v1}, Ljava/util/HashSet;->clear()V
 
-    .line 4841
     iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mForceStatusBar:Z
 
-    .line 4842
     iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mForceStatusBarFromKeyguard:Z
 
-    .line 4843
     iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mForceStatusBarTransparent:Z
 
-    .line 4844
     iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mForcingShowNavBar:Z
 
-    .line 4845
     const/4 v1, -0x1
 
     iput v1, p0, Lcom/android/server/policy/PhoneWindowManager;->mForcingShowNavBarLayer:I
 
-    .line 4847
-    iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mHideLockScreen:Z
+    #iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mHideLockScreen:Z
 
-    .line 4848
     iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mAllowLockscreenWhenOn:Z
 
-    .line 4849
     iput v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mDismissKeyguard:I
 
-    .line 4850
     iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mShowingLockscreen:Z
 
-    .line 4851
     iput-boolean v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mShowingDream:Z
 
-    .line 4852
     iput-object v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mWinShowWhenLocked:Landroid/view/WindowManagerPolicy$WindowState;
 
-    .line 4853
     invoke-virtual {p0}, Lcom/android/server/policy/PhoneWindowManager;->isKeyguardSecure()Z
 
     move-result v1
 
     iput-boolean v1, p0, Lcom/android/server/policy/PhoneWindowManager;->mKeyguardSecure:Z
 
-    .line 4854
     iget-boolean v1, p0, Lcom/android/server/policy/PhoneWindowManager;->mKeyguardSecure:Z
 
     if-eqz v1, :cond_0
 
-    .line 4855
     iget-object v1, p0, Lcom/android/server/policy/PhoneWindowManager;->mKeyguardDelegate:Lcom/android/server/policy/keyguard/KeyguardServiceDelegate;
 
     if-eqz v1, :cond_0
@@ -13133,63 +13092,54 @@
 
     if-le v3, v4, :cond_3
 
-    .line 2067
     :cond_1
     if-lt v3, v6, :cond_2
 
     if-le v3, v9, :cond_3
 
-    .line 2068
     :cond_2
     const/16 v4, -0xa
 
     return v4
 
-    .line 2071
     :cond_3
     if-lt v3, v6, :cond_4
 
     if-le v3, v9, :cond_5
 
-    .line 2073
     :cond_4
     return v7
 
-    .line 2075
     :cond_5
     const/4 v2, 0x0
 
-    .line 2076
     .local v2, "permission":Ljava/lang/String;
     sparse-switch v3, :sswitch_data_0
 
-    .line 2104
-    const-string/jumbo v2, "android.permission.INTERNAL_SYSTEM_WINDOW"
+    const-string v2, "android.permission.INTERNAL_SYSTEM_WINDOW"
 
-    .line 2106
     .end local v2    # "permission":Ljava/lang/String;
     :goto_0
     :sswitch_0
+    invoke-static {p1, p2, v2}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->checkAddPermission(Landroid/view/WindowManager$LayoutParams;[ILjava/lang/String;)Ljava/lang/String;
+
+    move-result-object v2
+
     if-eqz v2, :cond_9
 
-    .line 2107
-    const-string/jumbo v4, "android.permission.SYSTEM_ALERT_WINDOW"
+    const-string v4, "android.permission.SYSTEM_ALERT_WINDOW"
 
     if-ne v2, v4, :cond_8
 
-    .line 2108
     invoke-static {}, Landroid/os/Binder;->getCallingUid()I
 
     move-result v0
 
-    .line 2110
     .local v0, "callingUid":I
     if-ne v0, v5, :cond_6
 
-    .line 2111
     return v7
 
-    .line 2081
     .end local v0    # "callingUid":I
     .restart local v2    # "permission":Ljava/lang/String;
     :sswitch_1
@@ -13310,6 +13260,21 @@
     .param p1, "attrs"    # Landroid/view/WindowManager$LayoutParams;
 
     .prologue
+
+    invoke-static/range {p1 .. p1}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->getManifestPermission(Landroid/view/WindowManager$LayoutParams;)Ljava/lang/String;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_flyme_0
+
+    invoke-static {p0, v0}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->checkShowToOwnerOnly(Lcom/android/server/policy/PhoneWindowManager;Ljava/lang/String;)Z
+
+    move-result v0
+
+    return v0
+
+    :cond_flyme_0
+
     const/4 v0, 0x1
 
     const/4 v1, 0x0
@@ -13383,13 +13348,22 @@
     .param p2, "goingToNotificationShade"    # Z
 
     .prologue
-    .line 2818
+
+    if-nez p2, :cond_flyme_0
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->getSlideAnimation(Lcom/android/server/policy/PhoneWindowManager;)Landroid/view/animation/AnimationSet;
+
+    move-result-object v0
+
+    return-object v0
+
+    :cond_flyme_0
+
     if-eqz p2, :cond_0
 
-    .line 2819
     iget-object v3, p0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
 
-    const v4, 0x10a005d
+    const v4, #android:anim@lock_screen_behind_enter_fade_in#t
 
     invoke-static {v3, v4}, Landroid/view/animation/AnimationUtils;->loadAnimation(Landroid/content/Context;I)Landroid/view/animation/Animation;
 
@@ -13397,16 +13371,13 @@
 
     return-object v3
 
-    .line 2822
     :cond_0
     iget-object v4, p0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
 
     if-eqz p1, :cond_1
 
-    .line 2823
-    const v3, 0x10a005e
+    const v3, #android:anim@lock_screen_behind_enter_wallpaper#t
 
-    .line 2822
     :goto_0
     invoke-static {v4, v3}, Landroid/view/animation/AnimationUtils;->loadAnimation(Landroid/content/Context;I)Landroid/view/animation/Animation;
 
@@ -13453,7 +13424,7 @@
     .end local v1    # "i":I
     .end local v2    # "set":Landroid/view/animation/AnimationSet;
     :cond_1
-    const v3, 0x10a005c
+    const v3, #android:anim@lock_screen_behind_enter#t
 
     goto :goto_0
 
@@ -13470,19 +13441,27 @@
     .param p1, "goingToNotificationShade"    # Z
 
     .prologue
-    .line 2838
+
+    if-nez p1, :cond_flyme_0
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->getForceHideWallpaperExitAnimation(Lcom/android/server/policy/PhoneWindowManager;)Landroid/view/animation/Animation;
+
+    move-result-object v0
+
+    return-object v0
+
+    :cond_flyme_0
+
     if-eqz p1, :cond_0
 
-    .line 2839
     const/4 v0, 0x0
 
     return-object v0
 
-    .line 2841
     :cond_0
     iget-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
 
-    const v1, 0x10a0061
+    const v1, #android:anim@lock_screen_wallpaper_exit#t
 
     invoke-static {v0, v1}, Landroid/view/animation/AnimationUtils;->loadAnimation(Landroid/content/Context;I)Landroid/view/animation/Animation;
 
@@ -18306,14 +18285,23 @@
     .locals 2
 
     .prologue
-    .line 6850
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->hideBootMessages(Lcom/android/server/policy/PhoneWindowManager;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
     iget-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mHandler:Landroid/os/Handler;
 
     const/16 v1, 0xb
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->sendEmptyMessage(I)Z
 
-    .line 6849
     return-void
 .end method
 
@@ -18466,22 +18454,18 @@
 
     iput-object v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mAppOpsManager:Landroid/app/AppOpsManager;
 
-    .line 1460
     invoke-virtual/range {p1 .. p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v2
 
-    .line 1461
-    const v3, 0x1120098
+    const v3, #android:bool@config_enableBurnInProtection#t
 
-    .line 1460
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v10
 
-    .line 1464
     .local v10, "burnInProtectionEnabled":Z
-    const-string/jumbo v2, "persist.debug.force_burn_in"
+    const-string v2, "persist.debug.force_burn_in"
 
     const/4 v3, 0x0
 
@@ -18650,15 +18634,12 @@
 
     iput-object v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mShortcutManager:Lcom/android/server/policy/ShortcutManager;
 
-    .line 1503
     invoke-virtual/range {p1 .. p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v2
 
-    .line 1504
-    const v3, 0x10e0046
+    const v3, #android:integer@config_defaultUiModeType#t
 
-    .line 1503
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v2
@@ -18849,10 +18830,8 @@
 
     move-result-object v2
 
-    .line 1525
-    const v3, 0x1120033
+    const v3, #android:bool@config_supportAutoRotation#t
 
-    .line 1524
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -18861,10 +18840,8 @@
 
     iput-boolean v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mSupportAutoRotation:Z
 
-    .line 1527
-    const v2, 0x10e003e
+    const v2, #android:integer@config_lidOpenRotation#t
 
-    .line 1526
     move-object/from16 v0, p0
 
     invoke-direct {v0, v2}, Lcom/android/server/policy/PhoneWindowManager;->readRotation(I)I
@@ -18875,10 +18852,8 @@
 
     iput v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mLidOpenRotation:I
 
-    .line 1529
-    const v2, 0x10e0043
+    const v2, #android:integer@config_carDockRotation#t
 
-    .line 1528
     move-object/from16 v0, p0
 
     invoke-direct {v0, v2}, Lcom/android/server/policy/PhoneWindowManager;->readRotation(I)I
@@ -18889,10 +18864,8 @@
 
     iput v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mCarDockRotation:I
 
-    .line 1531
-    const v2, 0x10e0041
+    const v2, #android:integer@config_deskDockRotation#t
 
-    .line 1530
     move-object/from16 v0, p0
 
     invoke-direct {v0, v2}, Lcom/android/server/policy/PhoneWindowManager;->readRotation(I)I
@@ -18903,10 +18876,8 @@
 
     iput v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mDeskDockRotation:I
 
-    .line 1533
-    const v2, 0x10e0045
+    const v2, #android:integer@config_undockedHdmiRotation#t
 
-    .line 1532
     move-object/from16 v0, p0
 
     invoke-direct {v0, v2}, Lcom/android/server/policy/PhoneWindowManager;->readRotation(I)I
@@ -18926,10 +18897,8 @@
 
     move-result-object v2
 
-    .line 1535
-    const v3, 0x1120038
+    const v3, #android:bool@config_carDockEnablesAccelerometer#t
 
-    .line 1534
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -18947,10 +18916,8 @@
 
     move-result-object v2
 
-    .line 1537
-    const v3, 0x1120037
+    const v3, #android:bool@config_deskDockEnablesAccelerometer#t
 
-    .line 1536
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -18968,10 +18935,8 @@
 
     move-result-object v2
 
-    .line 1539
-    const v3, 0x10e003f
+    const v3, #android:integer@config_lidKeyboardAccessibility#t
 
-    .line 1538
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v2
@@ -18989,10 +18954,8 @@
 
     move-result-object v2
 
-    .line 1541
-    const v3, 0x10e0040
+    const v3, #android:integer@config_lidNavigationAccessibility#t
 
-    .line 1540
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v2
@@ -19010,10 +18973,8 @@
 
     move-result-object v2
 
-    .line 1543
-    const v3, 0x1120036
+    const v3, #android:bool@config_lidControlsSleep#t
 
-    .line 1542
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19031,10 +18992,8 @@
 
     move-result-object v2
 
-    .line 1545
-    const v3, 0x1120041
+    const v3, #android:bool@config_enableTranslucentDecor#t
 
-    .line 1544
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19052,10 +19011,8 @@
 
     move-result-object v2
 
-    .line 1548
-    const v3, 0x112002b
+    const v3, #android:bool@config_allowTheaterModeWakeFromKey#t
 
-    .line 1547
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19080,21 +19037,17 @@
 
     move-result-object v2
 
-    .line 1551
-    const v3, 0x112002a
+    const v3, #android:bool@config_allowTheaterModeWakeFromPowerKey#t
 
-    .line 1550
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
 
-    .line 1549
     :goto_2
     move-object/from16 v0, p0
 
     iput-boolean v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mAllowTheaterModeWakeFromPowerKey:Z
 
-    .line 1552
     move-object/from16 v0, p0
 
     iget-object v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
@@ -19103,10 +19056,8 @@
 
     move-result-object v2
 
-    .line 1553
-    const v3, 0x112002c
+    const v3, #android:bool@config_allowTheaterModeWakeFromMotion#t
 
-    .line 1552
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19124,10 +19075,8 @@
 
     move-result-object v2
 
-    .line 1555
-    const v3, 0x112002d
+    const v3, #android:bool@config_allowTheaterModeWakeFromMotionWhenNotDreaming#t
 
-    .line 1554
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19145,10 +19094,8 @@
 
     move-result-object v2
 
-    .line 1557
-    const v3, 0x1120029
+    const v3, #android:bool@config_allowTheaterModeWakeFromCameraLens#t
 
-    .line 1556
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19166,10 +19113,8 @@
 
     move-result-object v2
 
-    .line 1559
-    const v3, 0x112002e
+    const v3, #android:bool@config_allowTheaterModeWakeFromLidSwitch#t
 
-    .line 1558
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19187,10 +19132,8 @@
 
     move-result-object v2
 
-    .line 1561
-    const v3, 0x1120028
+    const v3, #android:bool@config_allowTheaterModeWakeFromGesture#t
 
-    .line 1560
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19208,10 +19151,8 @@
 
     move-result-object v2
 
-    .line 1564
-    const v3, 0x1120031
+    const v3, #android:bool@config_goToSleepOnButtonPressTheaterMode#t
 
-    .line 1563
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19229,10 +19170,8 @@
 
     move-result-object v2
 
-    .line 1567
-    const v3, 0x1120032
+    const v3, #android:bool@config_supportLongPressPowerWhenNonInteractive#t
 
-    .line 1566
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19250,10 +19189,8 @@
 
     move-result-object v2
 
-    .line 1570
-    const v3, 0x10e0049
+    const v3, #android:integer@config_shortPressOnPowerBehavior#t
 
-    .line 1569
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v2
@@ -19271,10 +19208,8 @@
 
     move-result-object v2
 
-    .line 1572
-    const v3, 0x10e0048
+    const v3, #android:integer@config_longPressOnPowerBehavior#t
 
-    .line 1571
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v2
@@ -19292,10 +19227,8 @@
 
     move-result-object v2
 
-    .line 1574
-    const v3, 0x10e004a
+    const v3, #android:integer@config_doublePressOnPowerBehavior#t
 
-    .line 1573
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v2
@@ -19313,10 +19246,8 @@
 
     move-result-object v2
 
-    .line 1576
-    const v3, 0x10e004b
+    const v3, #android:integer@config_triplePressOnPowerBehavior#t
 
-    .line 1575
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v2
@@ -19334,10 +19265,8 @@
 
     move-result-object v2
 
-    .line 1578
-    const v3, 0x10e004c
+    const v3, #android:integer@config_shortPressOnSleepBehavior#t
 
-    .line 1577
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v2
@@ -19656,10 +19585,8 @@
 
     move-result-object v2
 
-    .line 1698
-    const v3, 0x107001c
+    const v3, #android:array@config_longPressVibePattern#t
 
-    .line 1697
     invoke-static {v2, v3}, Lcom/android/server/policy/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
     move-result-object v2
@@ -19677,10 +19604,8 @@
 
     move-result-object v2
 
-    .line 1700
-    const v3, 0x107001d
+    const v3, #android:array@config_virtualKeyVibePattern#t
 
-    .line 1699
     invoke-static {v2, v3}, Lcom/android/server/policy/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
     move-result-object v2
@@ -19698,10 +19623,8 @@
 
     move-result-object v2
 
-    .line 1702
-    const v3, 0x107001e
+    const v3, #android:array@config_keyboardTapVibePattern#t
 
-    .line 1701
     invoke-static {v2, v3}, Lcom/android/server/policy/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
     move-result-object v2
@@ -19719,10 +19642,8 @@
 
     move-result-object v2
 
-    .line 1704
-    const v3, 0x107001f
+    const v3, #android:array@config_clockTickVibePattern#t
 
-    .line 1703
     invoke-static {v2, v3}, Lcom/android/server/policy/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
     move-result-object v2
@@ -19740,10 +19661,8 @@
 
     move-result-object v2
 
-    .line 1706
-    const v3, 0x1070020
+    const v3, #android:array@config_calendarDateVibePattern#t
 
-    .line 1705
     invoke-static {v2, v3}, Lcom/android/server/policy/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
     move-result-object v2
@@ -19761,10 +19680,8 @@
 
     move-result-object v2
 
-    .line 1708
-    const v3, 0x1070021
+    const v3, #android:array@config_safeModeDisabledVibePattern#t
 
-    .line 1707
     invoke-static {v2, v3}, Lcom/android/server/policy/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
     move-result-object v2
@@ -19782,10 +19699,8 @@
 
     move-result-object v2
 
-    .line 1710
-    const v3, 0x1070022
+    const v3, #android:array@config_safeModeEnabledVibePattern#t
 
-    .line 1709
     invoke-static {v2, v3}, Lcom/android/server/policy/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
     move-result-object v2
@@ -19803,10 +19718,8 @@
 
     move-result-object v2
 
-    .line 1712
-    const v3, 0x1070024
+    const v3, #android:array@config_contextClickVibePattern#t
 
-    .line 1711
     invoke-static {v2, v3}, Lcom/android/server/policy/PhoneWindowManager;->getLongIntArray(Landroid/content/res/Resources;I)[J
 
     move-result-object v2
@@ -19824,10 +19737,8 @@
 
     move-result-object v2
 
-    .line 1715
-    const v3, 0x1120026
+    const v3, #android:bool@config_enableScreenshotChord#t
 
-    .line 1714
     invoke-virtual {v2, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -19990,18 +19901,15 @@
 
     iput-object v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mSettingsObserverForLongPressKey:Lcom/android/server/policy/PhoneWindowManager$SettingsObserverForLongPressKey;
 
-    .line 1751
     move-object/from16 v0, p0
 
     iget-object v2, v0, Lcom/android/server/policy/PhoneWindowManager;->mSettingsObserverForLongPressKey:Lcom/android/server/policy/PhoneWindowManager$SettingsObserverForLongPressKey;
 
     invoke-virtual {v2}, Lcom/android/server/policy/PhoneWindowManager$SettingsObserverForLongPressKey;->observe()V
 
-    .line 1445
     :cond_5
     return-void
 
-    .line 1476
     .end local v12    # "filter":Landroid/content/IntentFilter;
     .end local v13    # "intent":Landroid/content/Intent;
     .end local v14    # "ipoEventFilter":Landroid/content/IntentFilter;
@@ -20030,55 +19938,45 @@
 
     move-result-object v16
 
-    .line 1480
     .local v16, "resources":Landroid/content/res/Resources;
-    const v2, 0x10e0093
+    const v2, #android:integer@config_burnInProtectionMinHorizontalOffset#t
 
-    .line 1479
     move-object/from16 v0, v16
 
     invoke-virtual {v0, v2}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v4
 
-    .line 1482
     .restart local v4    # "minHorizontal":I
-    const v2, 0x10e0094
+    const v2, #android:integer@config_burnInProtectionMaxHorizontalOffset#t
 
-    .line 1481
     move-object/from16 v0, v16
 
     invoke-virtual {v0, v2}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v5
 
-    .line 1484
     .restart local v5    # "maxHorizontal":I
-    const v2, 0x10e0095
+    const v2, #android:integer@config_burnInProtectionMinVerticalOffset#t
 
-    .line 1483
     move-object/from16 v0, v16
 
     invoke-virtual {v0, v2}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v6
 
-    .line 1486
     .restart local v6    # "minVertical":I
-    const v2, 0x10e0096
+    const v2, #android:integer@config_burnInProtectionMaxVerticalOffset#t
 
-    .line 1485
     move-object/from16 v0, v16
 
     invoke-virtual {v0, v2}, Landroid/content/res/Resources;->getInteger(I)I
 
     move-result v7
 
-    .line 1488
     .restart local v7    # "maxVertical":I
-    const v2, 0x10e0092
+    const v2, #android:integer@config_burnInProtectionMaxRadius#t
 
-    .line 1487
     move-object/from16 v0, v16
 
     invoke-virtual {v0, v2}, Landroid/content/res/Resources;->getInteger(I)I
@@ -22261,35 +22159,30 @@
 
     invoke-virtual {v4, v6, v7}, Landroid/app/StatusBarManager;->sendSystemuiKeyevent(IZ)V
 
-    .line 3222
     :cond_34
     :goto_8
     const-wide/16 v6, -0x1
 
     return-wide v6
 
-    .line 3219
     :cond_35
-    const-string/jumbo v4, "WindowManager"
+    const-string v4, "WindowManager"
 
-    const-string/jumbo v6, "long press back but device not Provisioned"
+    const-string v6, "long press back but device not Provisioned"
 
     invoke-static {v4, v6}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
     goto :goto_8
 
-    .line 3223
     :cond_36
     if-nez v21, :cond_37
 
-    .line 3224
     const/4 v4, 0x0
 
     move-object/from16 v0, p0
 
     iput-boolean v4, v0, Lcom/android/server/policy/PhoneWindowManager;->mLongPressBackKeyConsumed:Z
 
-    .line 3336
     :cond_37
     :goto_9
     move-object/from16 v0, p0
@@ -25043,16 +24936,13 @@
 
     if-eqz v18, :cond_2f
 
-    .line 5713
     and-int/lit8 v15, v15, -0x2
 
-    .line 5715
     :cond_2f
     and-int/lit8 v18, v15, 0x1
 
     if-nez v18, :cond_17
 
-    .line 5721
     move-object/from16 v0, p0
 
     iget-object v0, v0, Lcom/android/server/policy/PhoneWindowManager;->mBroadcastWakeLock:Landroid/os/PowerManager$WakeLock;
@@ -25098,48 +24988,49 @@
 
     invoke-virtual {v14, v0}, Landroid/os/Message;->setAsynchronous(Z)V
 
-    .line 5725
     invoke-virtual {v14}, Landroid/os/Message;->sendToTarget()V
+
+    :cond_flyme_0
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p1
+
+    invoke-static {v0, v1, v15}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->interceptFlymeKeyBeforeQueueing(Lcom/android/server/policy/PhoneWindowManager;Landroid/view/KeyEvent;I)I
+
+    move-result v15
 
     goto/16 :goto_7
 
-    .line 5731
     .end local v14    # "msg":Landroid/os/Message;
     :sswitch_6
     if-eqz v7, :cond_17
 
-    .line 5732
     invoke-virtual/range {p0 .. p0}, Lcom/android/server/policy/PhoneWindowManager;->getTelecommService()Landroid/telecom/TelecomManager;
 
     move-result-object v16
 
-    .line 5733
     .restart local v16    # "telecomManager":Landroid/telecom/TelecomManager;
     if-eqz v16, :cond_17
 
-    .line 5734
     invoke-virtual/range {v16 .. v16}, Landroid/telecom/TelecomManager;->isRinging()Z
 
     move-result v18
 
     if-eqz v18, :cond_17
 
-    .line 5735
-    const-string/jumbo v18, "WindowManager"
+    const-string v18, "WindowManager"
 
-    const-string/jumbo v19, "interceptKeyBeforeQueueing: CALL key-down while ringing: Answer the call!"
+    const-string v19, "interceptKeyBeforeQueueing: CALL key-down while ringing: Answer the call!"
 
     invoke-static/range {v18 .. v19}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 5737
     invoke-virtual/range {v16 .. v16}, Landroid/telecom/TelecomManager;->acceptRingingCall()V
 
-    .line 5741
     and-int/lit8 v15, v15, -0x2
 
     goto/16 :goto_7
 
-    .line 5752
     .end local v16    # "telecomManager":Landroid/telecom/TelecomManager;
     :sswitch_7
     and-int/lit8 v18, v15, 0x1
@@ -31227,88 +31118,73 @@
 
     if-nez v2, :cond_d
 
-    .line 6468
     iget v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mUndockedHdmiRotation:I
 
     if-ltz v2, :cond_d
 
-    .line 6473
     iget v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mUndockedHdmiRotation:I
 
     .restart local v0    # "preferredRotation":I
     goto/16 :goto_0
 
-    .line 6474
     .end local v0    # "preferredRotation":I
     :cond_d
     iget-boolean v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mDemoRotationLock:Z
 
     if-eqz v2, :cond_e
 
-    .line 6477
     iget v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mDemoRotation:I
 
     .restart local v0    # "preferredRotation":I
     goto/16 :goto_0
 
-    .line 6478
     .end local v0    # "preferredRotation":I
     :cond_e
     const/16 v2, 0xe
 
     if-ne p1, v2, :cond_f
 
-    .line 6480
     move v0, p2
 
     .restart local v0    # "preferredRotation":I
     goto/16 :goto_0
 
-    .line 6481
     .end local v0    # "preferredRotation":I
     :cond_f
     iget-boolean v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mSupportAutoRotation:Z
 
     if-nez v2, :cond_10
 
-    .line 6484
     const/4 v0, -0x1
 
     .restart local v0    # "preferredRotation":I
     goto/16 :goto_0
 
-    .line 6485
     .end local v0    # "preferredRotation":I
     :cond_10
     iget v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mUserRotationMode:I
 
     if-nez v2, :cond_15
 
-    .line 6486
     if-eq p1, v7, :cond_11
 
-    .line 6487
     const/4 v2, -0x1
 
     if-ne p1, v2, :cond_14
 
-    .line 6497
     :cond_11
     iget v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mAllowAllRotations:I
 
     if-gez v2, :cond_12
 
-    .line 6501
     iget-object v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
 
     invoke-virtual {v2}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v2
 
-    .line 6502
-    const v6, 0x1120034
+    const v6, #android:bool@config_allowAllRotations#t
 
-    .line 6501
     invoke-virtual {v2, v6}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v2
@@ -31938,6 +31814,21 @@
     .param p2, "transit"    # I
 
     .prologue
+
+    invoke-static/range {p0 .. p2}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->selectStatusBarAnimation(Lcom/android/server/policy/PhoneWindowManager;Landroid/view/WindowManagerPolicy$WindowState;I)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    invoke-static/range {p0 .. p2}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->getStatusBarAnimation(Lcom/android/server/policy/PhoneWindowManager;Landroid/view/WindowManagerPolicy$WindowState;I)I
+
+    move-result v0
+
+    return v0
+
+    :cond_flyme_0
+
     const/4 v6, 0x3
 
     const/4 v3, 0x2
@@ -31991,20 +31882,16 @@
     .restart local v0    # "isKeyguard":Z
     goto :goto_0
 
-    .line 2725
     :cond_2
-    const v1, 0x10a001e
+    const v1, #android:anim@dock_top_exit#t
 
     goto :goto_1
 
-    .line 2726
     :cond_3
     if-eq p2, v5, :cond_4
 
-    .line 2727
     if-ne p2, v6, :cond_f
 
-    .line 2728
     :cond_4
     if-eqz v0, :cond_5
 
@@ -32012,7 +31899,7 @@
     return v1
 
     :cond_5
-    const v1, 0x10a001d
+    const v1, #android:anim@dock_top_enter#t
 
     goto :goto_2
 
@@ -32032,89 +31919,71 @@
 
     if-eqz v2, :cond_7
 
-    .line 2732
     return v4
 
-    .line 2735
     :cond_7
     iget-boolean v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarOnBottom:Z
 
     if-eqz v2, :cond_b
 
-    .line 2736
     if-eq p2, v3, :cond_8
 
-    .line 2737
     const/4 v2, 0x4
 
     if-ne p2, v2, :cond_9
 
-    .line 2738
     :cond_8
-    const v1, 0x10a0018
+    const v1, #android:anim@dock_bottom_exit#t
 
     return v1
 
-    .line 2739
     :cond_9
     if-eq p2, v5, :cond_a
 
-    .line 2740
     if-ne p2, v6, :cond_f
 
-    .line 2741
     :cond_a
-    const v1, 0x10a0017
+    const v1, #android:anim@dock_bottom_enter#t
 
     return v1
 
-    .line 2744
     :cond_b
     if-eq p2, v3, :cond_c
 
-    .line 2745
     const/4 v2, 0x4
 
     if-ne p2, v2, :cond_d
 
-    .line 2746
     :cond_c
-    const v1, 0x10a001c
+    const v1, #android:anim@dock_right_exit#t
 
     return v1
 
-    .line 2747
     :cond_d
     if-eq p2, v5, :cond_e
 
-    .line 2748
     if-ne p2, v6, :cond_f
 
-    .line 2749
     :cond_e
-    const v1, 0x10a001b
+    const v1, #android:anim@dock_right_enter#t
 
     return v1
 
-    .line 2754
     :cond_f
     const/4 v2, 0x5
 
     if-ne p2, v2, :cond_10
 
-    .line 2755
     invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->hasAppShownWindows()Z
 
     move-result v1
 
     if-eqz v1, :cond_11
 
-    .line 2757
-    const v1, 0x10a0011
+    const v1, #android:anim@app_starting_exit#t
 
     return v1
 
-    .line 2759
     :cond_10
     invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getAttrs()Landroid/view/WindowManager$LayoutParams;
 
@@ -32146,7 +32015,7 @@
     .param p1, "anim"    # [I
 
     .prologue
-    const v3, 0x10a0074
+    const v3, #android:anim@rotation_animation_enter#t
 
     const/4 v2, 0x1
 
@@ -32172,38 +32041,31 @@
 
     packed-switch v0, :pswitch_data_0
 
-    .line 2789
     aput v1, p1, v2
 
     aput v1, p1, v1
 
-    .line 2772
     :goto_0
     return-void
 
-    .line 2780
     :pswitch_0
-    const v0, 0x10a0076
+    const v0, #android:anim@rotation_animation_xfade_exit#t
 
     aput v0, p1, v1
 
-    .line 2781
     aput v3, p1, v2
 
     goto :goto_0
 
-    .line 2784
     :pswitch_1
-    const v0, 0x10a0075
+    const v0, #android:anim@rotation_animation_jump_exit#t
 
     aput v0, p1, v1
 
-    .line 2785
     aput v3, p1, v2
 
     goto :goto_0
 
-    .line 2793
     :cond_0
     aput v1, p1, v2
 
@@ -32728,45 +32590,36 @@
 
     if-eqz v6, :cond_1
 
-    .line 1783
     :cond_0
     return-void
 
-    .line 1785
     :cond_1
     iput-object p1, p0, Lcom/android/server/policy/PhoneWindowManager;->mDisplay:Landroid/view/Display;
 
-    .line 1787
     iget-object v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
 
     invoke-virtual {v6}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
 
     move-result-object v3
 
-    .line 1789
     .local v3, "res":Landroid/content/res/Resources;
     if-le p2, p3, :cond_5
 
-    .line 1790
     move v4, p3
 
-    .line 1791
     .local v4, "shortSize":I
     move v0, p2
 
-    .line 1792
     .local v0, "longSize":I
     const/4 v6, 0x0
 
     iput v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mLandscapeRotation:I
 
-    .line 1793
     const/4 v6, 0x2
 
     iput v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mSeascapeRotation:I
 
-    .line 1794
-    const v6, 0x1120035
+    const v6, #android:bool@config_reverseDefaultRotation#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -32786,46 +32639,38 @@
 
     .line 1816
     :goto_0
-    const v6, 0x1050017
+    const v6, #android:dimen@status_bar_height#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
     move-result v6
 
-    .line 1815
     iput v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mStatusBarHeight:I
 
-    .line 1819
     iget-object v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarHeightForRotation:[I
 
     iget v7, p0, Lcom/android/server/policy/PhoneWindowManager;->mPortraitRotation:I
 
-    .line 1821
-    const v8, 0x1050018
+    const v8, #android:dimen@navigation_bar_height#t
 
     invoke-virtual {v3, v8}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
     move-result v8
 
-    .line 1820
     iget-object v9, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarHeightForRotation:[I
 
     iget v10, p0, Lcom/android/server/policy/PhoneWindowManager;->mUpsideDownRotation:I
 
     aput v8, v9, v10
 
-    .line 1819
     aput v8, v6, v7
 
-    .line 1822
     iget-object v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarHeightForRotation:[I
 
     iget v7, p0, Lcom/android/server/policy/PhoneWindowManager;->mLandscapeRotation:I
 
-    .line 1824
-    const v8, 0x1050019
+    const v8, #android:dimen@navigation_bar_height_landscape#t
 
-    .line 1823
     invoke-virtual {v3, v8}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
     move-result v8
@@ -32836,57 +32681,47 @@
 
     aput v8, v9, v10
 
-    .line 1822
     aput v8, v6, v7
 
-    .line 1827
     iget-object v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarWidthForRotation:[I
 
     iget v7, p0, Lcom/android/server/policy/PhoneWindowManager;->mPortraitRotation:I
 
-    .line 1831
-    const v8, 0x105001a
+    const v8, #android:dimen@navigation_bar_width#t
 
     invoke-virtual {v3, v8}, Landroid/content/res/Resources;->getDimensionPixelSize(I)I
 
     move-result v8
 
-    .line 1830
     iget-object v9, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarWidthForRotation:[I
 
     iget v10, p0, Lcom/android/server/policy/PhoneWindowManager;->mSeascapeRotation:I
 
     aput v8, v9, v10
 
-    .line 1829
     iget-object v9, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarWidthForRotation:[I
 
     iget v10, p0, Lcom/android/server/policy/PhoneWindowManager;->mLandscapeRotation:I
 
     aput v8, v9, v10
 
-    .line 1828
     iget-object v9, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarWidthForRotation:[I
 
     iget v10, p0, Lcom/android/server/policy/PhoneWindowManager;->mUpsideDownRotation:I
 
     aput v8, v9, v10
 
-    .line 1827
     aput v8, v6, v7
 
-    .line 1834
     mul-int/lit16 v6, v4, 0xa0
 
     div-int v5, v6, p4
 
-    .line 1835
     .local v5, "shortSizeDp":I
     mul-int/lit16 v6, v0, 0xa0
 
     div-int v1, v6, p4
 
-    .line 1838
     .local v1, "longSizeDp":I
     if-eq p2, p3, :cond_7
 
@@ -32899,8 +32734,7 @@
     :goto_1
     iput-boolean v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mNavigationBarCanMove:Z
 
-    .line 1840
-    const v6, 0x1120060
+    const v6, #android:bool@config_showNavigationBar#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -33006,20 +32840,17 @@
 
     if-lt v5, v6, :cond_c
 
-    .line 1872
-    const v6, 0x112007a
+    const v6, #android:bool@config_forceDefaultOrientation#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getBoolean(I)Z
 
     move-result v6
 
-    .line 1871
     if-eqz v6, :cond_c
 
-    .line 1876
-    const-string/jumbo v6, "true"
+    const-string v6, "true"
 
-    const-string/jumbo v7, "config.override_forced_orient"
+    const-string v7, "config.override_forced_orient"
 
     invoke-static {v7}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
 
@@ -33033,12 +32864,10 @@
 
     const/4 v6, 0x0
 
-    .line 1871
     :goto_5
     iput-boolean v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mForceDefaultOrientation:Z
 
-    .line 1879
-    const v6, 0x104058f
+    const v6, #android:string@config_voiceAssistPackageName#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
@@ -33046,8 +32875,7 @@
 
     iput-object v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mVoiceAssisPkgName:Ljava/lang/String;
 
-    .line 1880
-    const v6, 0x1040590
+    const v6, #android:string@config_voiceAssistClassName#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
 
@@ -33116,36 +32944,30 @@
 
     iput v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mPortraitRotation:I
 
-    .line 1799
     const/4 v6, 0x1
 
     iput v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mUpsideDownRotation:I
 
     goto/16 :goto_0
 
-    .line 1802
     .end local v0    # "longSize":I
     .end local v4    # "shortSize":I
     :cond_5
     move v4, p2
 
-    .line 1803
     .restart local v4    # "shortSize":I
     move v0, p3
 
-    .line 1804
     .restart local v0    # "longSize":I
     const/4 v6, 0x0
 
     iput v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mPortraitRotation:I
 
-    .line 1805
     const/4 v6, 0x2
 
     iput v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mUpsideDownRotation:I
 
-    .line 1806
-    const v6, 0x1120035
+    const v6, #android:bool@config_reverseDefaultRotation#t
 
     invoke-virtual {v3, v6}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -33363,7 +33185,17 @@
     .param p2, "always"    # Z
 
     .prologue
-    .line 6756
+
+    invoke-static/range {p0 .. p1}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->showBootMessage(Lcom/android/server/policy/PhoneWindowManager;Ljava/lang/CharSequence;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
     iget-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mHandler:Landroid/os/Handler;
 
     new-instance v1, Lcom/android/server/policy/PhoneWindowManager$30;
@@ -33400,17 +33232,25 @@
     .locals 5
 
     .prologue
-    .line 1279
-    const-string/jumbo v1, "globalactions"
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/policy/PhoneWindowManager$FlymeInjector;->showFlymeGlobalActions(Lcom/android/server/policy/PhoneWindowManager;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
+    const-string v1, "globalactions"
 
     invoke-virtual {p0, v1}, Lcom/android/server/policy/PhoneWindowManager;->sendCloseSystemWindows(Ljava/lang/String;)V
 
-    .line 1284
     iget-object v1, p0, Lcom/android/server/policy/PhoneWindowManager;->mGlobalActionViewMediator:Lcom/android/server/policy/global/GlobalActionViewMediator;
 
     if-nez v1, :cond_0
 
-    .line 1285
     new-instance v1, Lcom/android/server/policy/global/GlobalActionViewMediator;
 
     iget-object v2, p0, Lcom/android/server/policy/PhoneWindowManager;->mContext:Landroid/content/Context;
@@ -34994,7 +34834,7 @@
 
     .line 2800
     :pswitch_data_0
-    .packed-switch 0x10a0075
+    .packed-switch #android:anim@rotation_animation_jump_exit#t
         :pswitch_0
         :pswitch_0
     .end packed-switch
@@ -35306,4 +35146,225 @@
     move-result v1
 
     return v1
+.end method
+
+.method flymeInvokeMethodRequestTransientBars(Landroid/view/WindowManagerPolicy$WindowState;)V
+    .locals 0
+    .param p1, "swipeTarget"    # Landroid/view/WindowManagerPolicy$WindowState;
+
+    .prologue
+    invoke-direct {p0, p1}, Lcom/android/server/policy/PhoneWindowManager;->requestTransientBars(Landroid/view/WindowManagerPolicy$WindowState;)V
+
+    return-void
+.end method
+
+.method flymeInvokeMethodUpdateLightStatusBarLw(I)I
+    .locals 1
+    .param p1, "vis"    # I
+
+    .prologue
+    invoke-direct {p0, p1}, Lcom/android/server/policy/PhoneWindowManager;->updateLightStatusBarLw(I)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method flymeInvokeMethodUpdateSystemBarsLw(Landroid/view/WindowManagerPolicy$WindowState;II)I
+    .locals 1
+    .param p1, "win"    # Landroid/view/WindowManagerPolicy$WindowState;
+    .param p2, "oldVis"    # I
+    .param p3, "vis"    # I
+
+    .prologue
+    invoke-direct {p0, p1, p2, p3}, Lcom/android/server/policy/PhoneWindowManager;->updateSystemBarsLw(Landroid/view/WindowManagerPolicy$WindowState;II)I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method getFlymeStatusBarService()Lmeizu/statusbar/IFlymeStatusBarService;
+    .locals 2
+
+    .prologue
+    iget-object v1, p0, Lcom/android/server/policy/PhoneWindowManager;->mServiceAquireLock:Ljava/lang/Object;
+
+    monitor-enter v1
+
+    :try_start_0
+    iget-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mFlymeStatusBarService:Lmeizu/statusbar/IFlymeStatusBarService;
+
+    if-nez v0, :cond_0
+
+    const-string v0, "flyme_statusbar"
+
+    invoke-static {v0}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lmeizu/statusbar/IFlymeStatusBarService$Stub;->asInterface(Landroid/os/IBinder;)Lmeizu/statusbar/IFlymeStatusBarService;
+
+    move-result-object v0
+
+    iput-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mFlymeStatusBarService:Lmeizu/statusbar/IFlymeStatusBarService;
+
+    :cond_0
+    iget-object v0, p0, Lcom/android/server/policy/PhoneWindowManager;->mFlymeStatusBarService:Lmeizu/statusbar/IFlymeStatusBarService;
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    monitor-exit v1
+
+    return-object v0
+
+    :catchall_0
+    move-exception v0
+
+    monitor-exit v1
+
+    throw v0
+.end method
+
+.method public isShowingAndNotOccluded()Z
+    .locals 1
+
+    .prologue
+    invoke-direct {p0}, Lcom/android/server/policy/PhoneWindowManager;->isKeyguardShowingAndNotOccluded()Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public shouldWindowAffectDarkStatusBarIcon(Landroid/view/WindowManagerPolicy$WindowState;)Z
+    .locals 5
+    .param p1, "win"    # Landroid/view/WindowManagerPolicy$WindowState;
+
+    .prologue
+    const/4 v4, 0x0
+
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getContentFrameLw()Landroid/graphics/Rect;
+
+    move-result-object v2
+
+    iget v2, v2, Landroid/graphics/Rect;->top:I
+
+    iget v3, p0, Lcom/android/server/policy/PhoneWindowManager;->mStatusBarHeight:I
+
+    if-gt v2, v3, :cond_0
+
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getFrameLw()Landroid/graphics/Rect;
+
+    move-result-object v2
+
+    iget v2, v2, Landroid/graphics/Rect;->top:I
+
+    iget v3, p0, Lcom/android/server/policy/PhoneWindowManager;->mStatusBarHeight:I
+
+    if-lt v2, v3, :cond_1
+
+    :cond_0
+    return v4
+
+    :cond_1
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getContentFrameLw()Landroid/graphics/Rect;
+
+    move-result-object v2
+
+    iget v2, v2, Landroid/graphics/Rect;->left:I
+
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getDisplayFrameLw()Landroid/graphics/Rect;
+
+    move-result-object v3
+
+    iget v3, v3, Landroid/graphics/Rect;->left:I
+
+    if-le v2, v3, :cond_3
+
+    const/4 v0, 0x1
+
+    .local v0, "hasLeftPadding":Z
+    :goto_0
+    if-eqz v0, :cond_4
+
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getDisplayFrameLw()Landroid/graphics/Rect;
+
+    move-result-object v2
+
+    iget v2, v2, Landroid/graphics/Rect;->left:I
+
+    if-ltz v2, :cond_4
+
+    const/4 v0, 0x1
+
+    :goto_1
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getContentFrameLw()Landroid/graphics/Rect;
+
+    move-result-object v2
+
+    iget v2, v2, Landroid/graphics/Rect;->right:I
+
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getDisplayFrameLw()Landroid/graphics/Rect;
+
+    move-result-object v3
+
+    iget v3, v3, Landroid/graphics/Rect;->right:I
+
+    if-ge v2, v3, :cond_5
+
+    const/4 v1, 0x1
+
+    .local v1, "hasRightPadding":Z
+    :goto_2
+    if-eqz v1, :cond_6
+
+    invoke-interface {p1}, Landroid/view/WindowManagerPolicy$WindowState;->getDisplayFrameLw()Landroid/graphics/Rect;
+
+    move-result-object v2
+
+    iget v2, v2, Landroid/graphics/Rect;->right:I
+
+    const/16 v3, 0xbb8
+
+    if-ge v2, v3, :cond_6
+
+    const/4 v1, 0x1
+
+    :goto_3
+    if-nez v0, :cond_2
+
+    if-eqz v1, :cond_7
+
+    :cond_2
+    return v4
+
+    .end local v0    # "hasLeftPadding":Z
+    .end local v1    # "hasRightPadding":Z
+    :cond_3
+    const/4 v0, 0x0
+
+    .restart local v0    # "hasLeftPadding":Z
+    goto :goto_0
+
+    :cond_4
+    const/4 v0, 0x0
+
+    goto :goto_1
+
+    :cond_5
+    const/4 v1, 0x0
+
+    .restart local v1    # "hasRightPadding":Z
+    goto :goto_2
+
+    :cond_6
+    const/4 v1, 0x0
+
+    goto :goto_3
+
+    :cond_7
+    const/4 v2, 0x1
+
+    return v2
 .end method

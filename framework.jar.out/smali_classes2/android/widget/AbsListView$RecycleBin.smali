@@ -722,28 +722,22 @@
     .prologue
     const/4 v7, 0x1
 
-    .line 7594
     invoke-virtual {p1}, Landroid/view/View;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
 
     move-result-object v0
 
     check-cast v0, Landroid/widget/AbsListView$LayoutParams;
 
-    .line 7595
     .local v0, "lp":Landroid/widget/AbsListView$LayoutParams;
     if-nez v0, :cond_0
 
-    .line 7598
     return-void
 
-    .line 7601
     :cond_0
     iput p2, v0, Landroid/widget/AbsListView$LayoutParams;->scrappedFromPosition:I
 
-    .line 7605
     iget v3, v0, Landroid/widget/AbsListView$LayoutParams;->viewType:I
 
-    .line 7606
     .local v3, "viewType":I
     invoke-static {}, Landroid/widget/AbsListView;->-get0()Z
 
@@ -2856,4 +2850,53 @@
 
     :cond_0
     return v0
+.end method
+
+.method private flymeProcessScrapView(Landroid/view/View;)V
+    .locals 3
+    .param p1, "scrap"    # Landroid/view/View;
+
+    .prologue
+    invoke-virtual {p1}, Landroid/view/View;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/widget/AbsListView$LayoutParams;
+
+    .local v0, "lp":Landroid/widget/AbsListView$LayoutParams;
+    if-nez v0, :cond_0
+
+    return-void
+
+    :cond_0
+    iget v1, v0, Landroid/widget/AbsListView$LayoutParams;->viewType:I
+
+    .local v1, "viewType":I
+    invoke-virtual {p0, v1}, Landroid/widget/AbsListView$RecycleBin;->shouldRecycleViewType(I)Z
+
+    move-result v2
+
+    if-nez v2, :cond_2
+
+    const/4 v2, -0x2
+
+    if-eq v1, v2, :cond_2
+
+    iget-object v2, p0, Landroid/widget/AbsListView$RecycleBin;->mSkippedScrap:Ljava/util/ArrayList;
+
+    if-nez v2, :cond_1
+
+    new-instance v2, Ljava/util/ArrayList;
+
+    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+
+    iput-object v2, p0, Landroid/widget/AbsListView$RecycleBin;->mSkippedScrap:Ljava/util/ArrayList;
+
+    :cond_1
+    iget-object v2, p0, Landroid/widget/AbsListView$RecycleBin;->mSkippedScrap:Ljava/util/ArrayList;
+
+    invoke-virtual {v2, p1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    :cond_2
+    return-void
 .end method

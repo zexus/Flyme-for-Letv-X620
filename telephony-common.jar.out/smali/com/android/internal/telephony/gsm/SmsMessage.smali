@@ -104,7 +104,7 @@
 
     .line 833
     .local v1, "r":Landroid/content/res/Resources;
-    const v3, 0x1120092
+    const v3, #android:bool@config_sms_force_7bit_encoding#t
 
     invoke-virtual {v1, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -169,7 +169,7 @@
 
     .line 2011
     .local v1, "r":Landroid/content/res/Resources;
-    const v3, 0x1120092
+    const v3, #android:bool@config_sms_force_7bit_encoding#t
 
     invoke-virtual {v1, v3}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -4446,31 +4446,28 @@
     :cond_0
     iput-boolean v4, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mReplyPathPresent:Z
 
-    .line 1080
     invoke-virtual {p1}, Lcom/android/internal/telephony/gsm/SmsMessage$PduParser;->getByte()I
 
     move-result v4
 
     iput v4, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mMessageRef:I
 
-    .line 1082
     invoke-virtual {p1}, Lcom/android/internal/telephony/gsm/SmsMessage$PduParser;->getAddress()Lcom/android/internal/telephony/gsm/GsmSmsAddress;
 
     move-result-object v4
 
     iput-object v4, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mRecipientAddress:Lcom/android/internal/telephony/gsm/GsmSmsAddress;
 
-    .line 1085
+    invoke-direct/range {p0 .. p0}, Lcom/android/internal/telephony/gsm/SmsMessage;->setFlymeDestinationAddress()V
+
     iget-object v4, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mRecipientAddress:Lcom/android/internal/telephony/gsm/GsmSmsAddress;
 
     iput-object v4, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->destinationAddress:Lcom/android/internal/telephony/SmsAddress;
 
-    .line 1088
     iget-object v4, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mRecipientAddress:Lcom/android/internal/telephony/gsm/GsmSmsAddress;
 
     if-eqz v4, :cond_1
 
-    .line 1094
     :cond_1
     invoke-virtual {p1}, Lcom/android/internal/telephony/gsm/SmsMessage$PduParser;->getByte()I
 
@@ -4882,7 +4879,7 @@
 
     .line 1167
     .local v7, "r":Landroid/content/res/Resources;
-    const v9, 0x112008d
+    const v9, #android:bool@config_sms_decode_gsm_8bit_data#t
 
     invoke-virtual {v7, v9}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -5410,7 +5407,7 @@
 
     .line 1336
     .restart local v7    # "r":Landroid/content/res/Resources;
-    const v9, 0x112008d
+    const v9, #android:bool@config_sms_decode_gsm_8bit_data#t
 
     invoke-virtual {v7, v9}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -5978,4 +5975,15 @@
 
     .line 1400
     goto :goto_0
+.end method
+
+.method private setFlymeDestinationAddress()V
+    .locals 1
+
+    .prologue
+    iget-object v0, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mRecipientAddress:Lcom/android/internal/telephony/gsm/GsmSmsAddress;
+
+    iput-object v0, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mFlymeDestinationAddress:Lcom/android/internal/telephony/SmsAddress;
+
+    return-void
 .end method
