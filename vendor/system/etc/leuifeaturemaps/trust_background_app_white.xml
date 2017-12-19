@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Features Maps for permission init -->
+<leui_feature_map name="TRUST_BG_APP" type="FeatureTypeWhite">
+    <leui_feature_item name="com.tencent.mm" />
+    <leui_feature_item name="com.tencent.mobileqq"/>
+    <leui_feature_item name="com.eg.android.AlipayGphone"/>
+    <leui_feature_item name="com.yahoo.mobile.client.android.weather"/>
+    <leui_feature_item name="com.whatsapp"/>
+</leui_feature_map>

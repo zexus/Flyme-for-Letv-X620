@@ -1,0 +1,4 @@
+<leui_feature_map name="NETWORK_BACKGROUND" type="FeatureTypeWhite">
+    <leui_feature_item name="com.letv.android.freeflow" />
+    <leui_feature_item name="com.letv.android.phonecontrol" />
+</leui_feature_map>

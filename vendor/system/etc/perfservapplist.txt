@@ -1,0 +1,27 @@
+CMD_SET_CPU_CORE_MIN com.imangi.templerun2 3
+CMD_SET_VCORE com.antutu.ABenchMark 3
+CMD_SET_VCORE com.antutu.benchmark 3
+CMD_SET_CLUSTER_CPU_CORE_MIN com.antutu.ABenchMark 2 2
+CMD_SET_CLUSTER_CPU_CORE_MIN com.antutu.benchmark 2 2
+CMD_SET_SCHED_HTASK_THRESH com.antutu.ABenchMark 650
+CMD_SET_SCHED_AVG_HTASK_AC com.antutu.ABenchMark 39
+CMD_SET_SCHED_AVG_HTASK_THRESH com.antutu.ABenchMark 500
+CMD_SET_PPM_MODE com.sina.weibo 0
+CMD_SET_PPM_MODE com.tencent.mm 0
+CMD_SET_PPM_MODE com.duokan.reader 0
+CMD_SET_CPU_HEAVY_TASK_THRESHOLD com.antutu.ABenckMark 650
+CMD_SET_CPU_HEAVY_TASK_THRESHOLD com.antutu.benchmark 650
+CMD_SET_CLUSTER_CPU_CORE_MAX com.android.browser 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.android.chrome 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.android.letv.browser 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.UCMobile.intl 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.UCMobile 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.uc.browser.en 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.tencent.mtt.intl 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.tencent.mtt 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.baidu.browser.apps 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.android.browser 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.android.letv.browser 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.sina.weibo 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.tencent.mm 2 0
+CMD_SET_CLUSTER_CPU_CORE_MAX com.duokan.reader 2 0

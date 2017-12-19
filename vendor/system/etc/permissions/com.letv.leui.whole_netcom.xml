@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Features for whole_netcom market -->
+<permissions>
+      <feature name="telephony.whole_netcom"/>
+      <feature name="telephony.ct.apn"/>
+      <feature name="mms.has_cancel_download_mms"/>
+      <feature name="telephony.wholenetcom.lteswitch"/>
+      <feature name="dialer.mmi_ct_subinfo"/>
+</permissions>

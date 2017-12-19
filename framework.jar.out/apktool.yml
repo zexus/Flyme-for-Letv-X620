@@ -1,0 +1,13 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: framework.jar
+compressionType: false
+doNotCompress: null
+isFrameworkApk: false
+packageInfo: null
+sdkInfo: null
+sharedLibrary: false
+unknownFiles:
+  com/letv/tracker/agnes/agnes.properties: '8'
+usesFramework: null
+version: 2.2.2-6a4ae2-SNAPSHOT
+versionInfo: null
