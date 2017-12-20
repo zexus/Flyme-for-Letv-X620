@@ -335,7 +335,9 @@
 
     :cond_5
 
-    invoke-static {p0, p1, v0}, Landroid/text/util/Linkify;->flymeGatherLinksDateTime(Landroid/text/Spannable;ILjava/util/ArrayList;)V
+    move/from16 v1, p1
+
+    invoke-static {p0, v1, v0}, Landroid/text/util/Linkify;->flymeGatherLinksDateTime(Landroid/text/Spannable;ILjava/util/ArrayList;)V
 
     invoke-static {v0}, Landroid/text/util/Linkify;->pruneOverlaps(Ljava/util/ArrayList;)V
 

@@ -3882,7 +3882,7 @@
 
     move-object/from16 v1, p1
 
-    move/from16 v2, p2
+    move-object/from16 v2, p2
 
     move/from16 v3, p3
 

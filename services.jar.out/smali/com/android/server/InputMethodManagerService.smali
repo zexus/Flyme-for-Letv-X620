@@ -1188,7 +1188,12 @@
 
     .line 956
     :try_start_3
-    invoke-virtual {p0, p1}, Lcom/android/server/InputMethodManagerService;->resetDefaultImeLocked(Landroid/content/Context;)V
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v2, p1
+
+    invoke-virtual {v0, v2}, Lcom/android/server/InputMethodManagerService;->resetDefaultImeLocked(Landroid/content/Context;)V
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_2
 

@@ -850,7 +850,7 @@
     const/4 v6, 0x0
 
     .line 17389
-    invoke-virtual/range {v0 .. v6}, Lcom/android/server/pm/PackageDexOptimizer;->performDexOpt(Landroid/content/pm/PackageParser$Package;[Ljava/lang/String;ZZZZ)I
+    invoke-virtual/range {v0 .. v5}, Lcom/android/server/pm/PackageDexOptimizer;->performDexOpt(Landroid/content/pm/PackageParser$Package;[Ljava/lang/String;ZZZ)I
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
