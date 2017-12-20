@@ -2051,6 +2051,13 @@
 
     .line 1310
     :cond_2
+
+    invoke-static/range {p0 .. p0}, Landroid/widget/AbsListView$FlymeInjector;->flymeContentFits(Landroid/widget/AbsListView;)Z
+
+    move-result v3
+
+    return v3
+
     invoke-virtual {p0, v2}, Landroid/widget/AbsListView;->getChildAt(I)Landroid/view/View;
 
     move-result-object v3
@@ -2944,6 +2951,9 @@
     invoke-static {v1, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     :cond_0
+
+    invoke-static/range {p0 .. p0}, Landroid/widget/AbsListView$FlymeInjector;->initFlymeExtraFields(Landroid/widget/AbsListView;)V
+
     return-void
 
     :cond_1
@@ -9451,6 +9461,14 @@
 
     invoke-super {p0, p1}, Landroid/widget/AdapterView;->draw(Landroid/graphics/Canvas;)V
 
+    iget-boolean v0, p0, Landroid/widget/AbsListView;->mIsFlymeThemeLight:Z
+
+    if-eqz v0, :cond_flyme_0
+
+    return-void
+
+    :cond_flyme_0
+
     iget-boolean v10, p0, Landroid/widget/AbsListView;->mLeOverScrollEnable:Z
 
     if-eqz v10, :cond_0
@@ -11740,6 +11758,8 @@
 
     invoke-virtual {v7}, Landroid/view/View;->dispatchFinishTemporaryDetach()V
 
+    invoke-static {p0, v7}, Landroid/widget/AbsListView$FlymeInjector;->setFlymeHoldViewBackground(Landroid/widget/AbsListView;Landroid/view/View;)V
+
     return-object v7
 
     .end local v1    # "params":Landroid/widget/AbsListView$LayoutParams;
@@ -12063,6 +12083,9 @@
     iput-boolean v3, p0, Landroid/widget/AbsListView;->mNeedRestoreOverScroll:Z
 
     :cond_2
+
+    invoke-static/range {p0 .. p0}, Landroid/widget/AbsListView$FlymeInjector;->setFlymeDrawDuringWindowsAnimating(Landroid/widget/AbsListView;)V
+
     return-void
 
     :cond_3
@@ -14137,6 +14160,9 @@
     invoke-virtual {v2, v3, v4}, Landroid/widget/FastScroller;->onItemCountChanged(II)V
 
     :cond_5
+
+    invoke-static/range {p0 .. p0}, Landroid/widget/AbsListView$FlymeInjector;->mzOnLayout2(Landroid/widget/AbsListView;)V
+
     return-void
 
     :cond_6
@@ -14548,6 +14574,8 @@
     invoke-virtual {p0}, Landroid/widget/AbsListView;->invalidateParentIfNeeded()V
 
     invoke-virtual {p0}, Landroid/widget/AbsListView;->awakenScrollBars()Z
+
+    invoke-static/range {p0 .. p0}, Landroid/widget/AbsListView$FlymeInjector;->mzOnOverScrolled(Landroid/widget/AbsListView;)V
 
     goto :goto_0
 .end method
@@ -15447,6 +15475,9 @@
     invoke-virtual {v0, p1, p2, p3, p4}, Landroid/widget/FastScroller;->onSizeChanged(IIII)V
 
     :cond_3
+
+    invoke-static/range {p0 .. p4}, Landroid/widget/AbsListView$FlymeInjector;->mzOnSizeChanged(Landroid/widget/AbsListView;IIII)V
+
     return-void
 .end method
 
@@ -15894,6 +15925,9 @@
     move-result-object v11
 
     .local v11, "vtev":Landroid/view/MotionEvent;
+
+    invoke-static/range {p0 .. p1}, Landroid/widget/AbsListView$FlymeInjector;->mzOnTouchEvent(Landroid/widget/AbsListView;Landroid/view/MotionEvent;)V
+
     invoke-virtual/range {p1 .. p1}, Landroid/view/MotionEvent;->getActionMasked()I
 
     move-result v3
@@ -16658,6 +16692,9 @@
 
     :cond_1
     :goto_1
+
+    invoke-static/range {p0 .. p1}, Landroid/widget/AbsListView$FlymeInjector;->mzOnWindowFocusChanged(Landroid/widget/AbsListView;Z)V
+
     if-nez p1, :cond_8
 
     invoke-virtual {p0, v4}, Landroid/widget/AbsListView;->setChildrenDrawingCacheEnabled(Z)V
@@ -17114,6 +17151,17 @@
 
     .end local v8    # "handled":Z
     :cond_6
+
+    move-object/from16 v2, p0
+
+    move-object/from16 v3, p1
+
+    move/from16 v4, p2
+
+    move-wide/from16 v5, p3
+
+    invoke-static/range {v2 .. v7}, Landroid/widget/AbsListView$FlymeInjector;->performItemHold(Landroid/widget/AbsListView;Landroid/view/View;IJZ)V
+
     return v8
 
     .restart local v0    # "checkedStateChanged":Z
@@ -22058,7 +22106,7 @@
     .local v3, "absIncrementalDeltaY":I
     move/from16 v0, v30
 
-    if-lt v0, v3, :cond_b
+    if-le v0, v3, :cond_b
 
     move/from16 v0, v31
 
@@ -22404,6 +22452,9 @@
 
     .end local v34    # "trackBack":I
     :cond_13
+
+    invoke-static/range {p0 .. p2}, Landroid/widget/AbsListView$FlymeInjector;->mzTrackMotionScroll(Landroid/widget/AbsListView;II)V
+
     const/16 v35, 0x0
 
     move/from16 v0, v35

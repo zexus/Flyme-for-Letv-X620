@@ -18,6 +18,18 @@
 
 
 # instance fields
+.field private mFlymeCanDragSelection:Z
+
+.field private mFlymeDownMotionX:I
+
+.field private mFlymeDownMotionY:I
+
+.field private mFlymeDragSlop:I
+
+.field private mIsFlymeDragSelectionToTop:Z
+
+.field private mIsFlymeMoved:Z
+
 .field private mBottomHandle:Landroid/widget/Editor$SectionBottomHandleView;
 
 .field private mDownPositionX:F

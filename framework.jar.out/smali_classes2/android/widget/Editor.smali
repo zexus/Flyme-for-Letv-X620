@@ -8489,7 +8489,7 @@
 
     move-result v7
 
-    invoke-direct {p0, v12, v6, v4, v7}, Landroid/widget/Editor;->updateCursorPosition(IIIF)V
+    invoke-direct {p0, v12, v6, v4, v7}, Landroid/widget/Editor;->updateCursorPositionMz(IIIF)V
 
     iget v7, p0, Landroid/widget/Editor;->mCursorCount:I
 

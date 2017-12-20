@@ -15,6 +15,8 @@
 
 
 # instance fields
+.field mFlymeLockWallpaperFile:Ljava/io/File;
+
 .field final mLockWallpaperFile:Ljava/io/File;
 
 .field final mLockWallpaperInfoFile:Ljava/io/File;
@@ -111,6 +113,8 @@
     invoke-direct {v0, v1, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
     iput-object v0, p0, Lcom/android/server/wallpaper/WallpaperManagerService$WallpaperObserver;->mLockWallpaperInfoFile:Ljava/io/File;
+
+    invoke-direct/range {p0 .. p0}, Lcom/android/server/wallpaper/WallpaperManagerService$WallpaperObserver;->initFlymeLockWallpaperFile()V
 
     return-void
 .end method
@@ -359,6 +363,9 @@
     .end local v10    # "written":Z
     :cond_8
     :goto_2
+
+    invoke-direct {p0, v7}, Lcom/android/server/wallpaper/WallpaperManagerService$WallpaperObserver;->notifyFlymeLockWallpaperChanged(Ljava/io/File;)V
+
     monitor-exit v11
 
     .line 183

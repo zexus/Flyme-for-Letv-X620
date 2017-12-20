@@ -320,6 +320,8 @@
 
     iput-object v2, p0, Landroid/app/Activity;->mLeImmersiveStatusBarManager:Lcom/letv/leui/util/statusbar/LeImmersiveStatusBarManager;
 
+    invoke-direct/range {p0 .. p0}, Landroid/app/Activity;->initFlymeExtraFields()V
+
     return-void
 .end method
 

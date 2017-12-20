@@ -7364,6 +7364,18 @@
     .local v2, "uidRules":I
     monitor-exit v4
 
+    invoke-direct/range {p0 .. p2}, Lcom/android/server/ConnectivityService;->isFlymeNetworkWithLinkPropertiesBlocked(Landroid/net/LinkProperties;I)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_flyme_0
+
+    const/4 v3, 0x1
+
+    return v3
+
+    :cond_flyme_0
+
     and-int/lit8 v3, v2, 0x2
 
     if-nez v3, :cond_0

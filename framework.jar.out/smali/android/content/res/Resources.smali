@@ -1567,6 +1567,9 @@
     sget-object v1, Landroid/content/res/Resources;->mSystem:Landroid/content/res/Resources;
 
     invoke-direct {v1}, Landroid/content/res/Resources;->setThemeResource()V
+
+    invoke-static {}, Landroid/content/res/Resources$FlymeInjector;->setFlymeSystemThemeResource()V
+
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -2043,7 +2046,7 @@
     :cond_4
     const/4 v8, 0x0
 
-    invoke-static {p0, p1, v4, v3, v8}, Landroid/graphics/drawable/Drawable;->createFromResourceStream(Landroid/content/res/Resources;Landroid/util/TypedValue;Ljava/io/InputStream;Ljava/lang/String;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/drawable/Drawable;
+    invoke-static/range {p0 .. p2}, Landroid/content/res/Resources$FlymeInjector;->createFromResourceStream(Landroid/content/res/Resources;Landroid/util/TypedValue;I)Landroid/graphics/drawable/Drawable;
 
     move-result-object v1
 
@@ -6646,6 +6649,16 @@
     const/4 v3, 0x1
 
     invoke-virtual {p0, p1, p2, v3}, Landroid/content/res/Resources;->getValue(ILandroid/util/TypedValue;Z)V
+
+    invoke-static/range {p0 .. p2}, Landroid/content/res/Resources$FlymeInjector;->openFlymeThemeRawResource(Landroid/content/res/Resources;ILandroid/util/TypedValue;)Ljava/io/InputStream;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_flyme_0
+
+    return-object v0
+
+    :cond_flyme_0
 
     iget-object v3, p0, Landroid/content/res/Resources;->mResourceHelper:Landroid/content/res/theme/LeResourceHelper;
 

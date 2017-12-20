@@ -2015,6 +2015,8 @@
     .line 495
     invoke-static {p1, v7, v0, v9}, Lcom/android/internal/telephony/SmsApplication;->assignWriteSmsPermissionToSystemApp(Landroid/content/Context;Landroid/content/pm/PackageManager;Landroid/app/AppOpsManager;Ljava/lang/String;)V
 
+    invoke-static/range {p0 .. p1}, Lcom/android/internal/telephony/SmsApplication;->sendFlymeExtraBroadcast(Ljava/lang/String;Landroid/content/Context;)V
+
     .line 501
     invoke-static {}, Lcom/mediatek/sms/SmsDbVisitor;->getPackageNames()[Ljava/lang/String;
 

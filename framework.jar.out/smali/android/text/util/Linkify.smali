@@ -284,6 +284,7 @@
     .end local v14    # "plugin":Lcom/mediatek/common/util/IWebProtocolNames;
     :cond_2
     :goto_1
+    :goto_flyme_0
     and-int/lit8 v1, p1, 0x2
 
     if-eqz v1, :cond_3

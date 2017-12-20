@@ -1051,6 +1051,8 @@
     :goto_0
     iput-boolean v1, p0, Landroid/app/Notification;->isShadow:Z
 
+    invoke-static/range {p0 .. p1}, Landroid/app/Notification$FlymeInjector;->readFromParcelFlyme(Landroid/app/Notification;Landroid/os/Parcel;)V
+
     return-void
 
     :cond_d
@@ -1760,6 +1762,8 @@
 
     iput-boolean v5, p1, Landroid/app/Notification;->isShadow:Z
 
+    invoke-static/range {p0 .. p1}, Landroid/app/Notification$FlymeInjector;->cloneIntoFlyme(Landroid/app/Notification;Landroid/app/Notification;)V
+
     return-void
 .end method
 
@@ -1977,6 +1981,8 @@
     iget v1, p0, Landroid/app/Notification;->notificationIcon:I
 
     invoke-virtual {v0, v1}, Landroid/app/Notification$Builder;->setNotificationIcon(I)Landroid/app/Notification$Builder;
+
+    invoke-static {p0, v0}, Landroid/app/Notification$FlymeInjector;->setLatestEventInfoFlyme(Landroid/app/Notification;Landroid/app/Notification$Builder;)V
 
     iget v1, p0, Landroid/app/Notification;->priority:I
 

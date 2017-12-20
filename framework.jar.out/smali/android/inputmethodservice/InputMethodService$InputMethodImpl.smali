@@ -561,6 +561,9 @@
     .locals 4
 
     .prologue
+
+    invoke-direct/range {p0 .. p0}, Landroid/inputmethodservice/InputMethodService$InputMethodImpl;->unbindInputEnter()V
+
     const/4 v3, 0x0
 
     .line 404

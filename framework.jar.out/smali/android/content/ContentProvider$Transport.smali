@@ -251,6 +251,19 @@
 
     .line 518
     :cond_1
+
+    invoke-direct/range {p0 .. p1}, Landroid/content/ContentProvider$Transport;->isFlymeAllowedWriteSms(Ljava/lang/String;)I
+
+    move-result v0
+
+    if-nez v0, :cond_flyme_0
+
+    const/4 v0, 0x0
+
+    return v0
+
+    :cond_flyme_0
+
     iget v1, p0, Landroid/content/ContentProvider$Transport;->mWriteOp:I
 
     const/4 v2, -0x1

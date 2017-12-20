@@ -987,6 +987,8 @@
 
     invoke-virtual {v10, v12, p1, v11}, Lbase/core/java/com/letv/leui/notification/LeuiNotificationHelper;->updateNotificationSubscriptByStatistical(ZLandroid/service/notification/StatusBarNotification;Z)V
 
+    invoke-direct/range {p0 .. p2}, Lcom/android/server/notification/NotificationManagerService$NotificationListeners;->notifyFlymePosted(Landroid/service/notification/StatusBarNotification;Landroid/service/notification/StatusBarNotification;)V
+
     return-void
 .end method
 
@@ -1128,6 +1130,8 @@
     const/4 v6, 0x0
 
     invoke-virtual {v4, v6, v2, v5}, Lbase/core/java/com/letv/leui/notification/LeuiNotificationHelper;->updateNotificationSubscriptByStatistical(ZLandroid/service/notification/StatusBarNotification;Z)V
+
+    invoke-direct/range {p0 .. p1}, Lcom/android/server/notification/NotificationManagerService$NotificationListeners;->notifyFlymeRemoved(Landroid/service/notification/StatusBarNotification;)V
 
     return-void
 .end method

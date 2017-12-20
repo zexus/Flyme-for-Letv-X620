@@ -4399,6 +4399,9 @@
     .param p3, "now"    # J
 
     .prologue
+
+    invoke-static/range {p1 .. p1}, Lcom/android/server/am/ActivityManagerService$FlymeActivityManagerServiceInjector;->applyFlymeOomAdjLocked(Lcom/android/server/am/ProcessRecord;)V
+
     .line 22267
     const/16 v21, 0x1
 
@@ -9359,6 +9362,8 @@
     invoke-direct/range {v4 .. v13}, Lcom/android/server/am/ActivityManagerService;->forceStopPackageLocked(Ljava/lang/String;IZZZZZILjava/lang/String;)Z
 
     :cond_1f
+    :goto_flyme_0
+
     if-eqz v69, :cond_27
 
     const/4 v4, 0x1
@@ -90387,6 +90392,7 @@
 
     .local v12, "i":I
     :goto_5
+    :goto_flyme_0
     if-ge v12, v15, :cond_11
 
     if-lez p1, :cond_11
@@ -90403,6 +90409,17 @@
     check-cast v18, Lcom/android/server/am/TaskRecord;
 
     .local v18, "tr":Lcom/android/server/am/TaskRecord;
+
+    invoke-static/range {v18 .. v18}, Lcom/android/server/am/ActivityManagerService$FlymeActivityManagerServiceInjector;->isFlymeMayForbitPackage(Lcom/android/server/am/TaskRecord;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_flyme_0
+
+    goto :goto_flyme_0
+
+    :cond_flyme_0
+
     sget-boolean v2, Lcom/android/server/am/ActivityManagerDebugConfig;->DEBUG_TASKS:Z
 
     if-eqz v2, :cond_1
@@ -129830,6 +129847,9 @@
     .line 22652
     .end local v20    # "duration":J
     :cond_4b
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/am/ActivityManagerService$FlymeActivityManagerServiceInjector;->updateFlymeOomAdjLocked(Lcom/android/server/am/ActivityManagerService;)V
+
     return-void
 
     .line 23082

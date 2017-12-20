@@ -1114,7 +1114,7 @@
     return-void
 .end method
 
-.method private constructor <init>(Landroid/content/Context;Lcom/android/server/input/InputManagerService;ZZZ)V
+.method protected constructor <init>(Landroid/content/Context;Lcom/android/server/input/InputManagerService;ZZZ)V
     .locals 7
     .param p1, "context"    # Landroid/content/Context;
     .param p2, "inputManager"    # Lcom/android/server/input/InputManagerService;
@@ -4093,6 +4093,17 @@
 
     .line 3846
     .local v12, "a":Landroid/view/animation/Animation;
+
+    move-object/from16 v0, p0
+
+    move/from16 v2, p3
+
+    move/from16 v3, p4
+
+    invoke-static {v0, v2, v3, v13, v12}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->createFlymeCustomAnimation(Lcom/android/server/wm/WindowManagerService;IZLandroid/view/DisplayInfo;Landroid/view/animation/Animation;)Landroid/view/animation/Animation;
+
+    move-result-object v12
+
     if-eqz v12, :cond_5
 
     .line 3847
@@ -20541,6 +20552,23 @@
     iput v3, v0, Lcom/android/server/wm/WindowManagerService;->mExitAnimId:I
 
     :cond_7
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->isFlymeDisableScreenRotation(Lcom/android/server/wm/WindowManagerService;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    move-object/from16 v0, p0
+
+    invoke-static {v0, v2}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->updateFlymeScreenRotationAnimation(Lcom/android/server/wm/WindowManagerService;Lcom/android/server/wm/ScreenRotationAnimation;)Z
+
+    move-result v17
+
+    goto :goto_flyme_0
+
+    :cond_flyme_0
+
     move-object/from16 v0, p0
 
     iget-object v3, v0, Lcom/android/server/wm/WindowManagerService;->mFxSession:Landroid/view/SurfaceSession;
@@ -24148,6 +24176,26 @@
 
     move-result v30
 
+    move-object/from16 v0, p0
+
+    invoke-static {v0, v2}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->isFlymeInterceptWindow(Lcom/android/server/wm/WindowManagerService;Lcom/android/server/wm/WindowState;)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_flyme_0
+
+    move-object/from16 v0, p0
+
+    invoke-static {v0, v2}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->sendFlymeMessage(Lcom/android/server/wm/WindowManagerService;Lcom/android/server/wm/WindowState;)I
+
+    move-result v3
+
+    monitor-exit v34
+
+    return v3
+
+    :cond_flyme_0
+
     if-eqz v30, :cond_1e
 
     monitor-exit v34
@@ -24155,6 +24203,13 @@
     return v30
 
     :cond_1e
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p4
+
+    invoke-static {v0, v1, v2}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->adjustFlymeKeyguardFlags(Lcom/android/server/wm/WindowManagerService;Landroid/view/WindowManager$LayoutParams;Lcom/android/server/wm/WindowState;)V
+
     if-eqz p10, :cond_1f
 
     :try_start_1a
@@ -25204,6 +25259,13 @@
     goto/16 :goto_0
 
     :cond_4
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, v36
+
+    invoke-static {v0, v1}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->adjustWallpaperMoveWindow(Lcom/android/server/wm/WindowManagerService;Lcom/android/server/wm/WindowState;)V
+
     sget-boolean v42, Lcom/android/server/wm/WindowManagerService;->DEBUG_WALLPAPER:Z
 
     if-eqz v42, :cond_5
@@ -38339,6 +38401,9 @@
 
     :cond_1b
     :goto_b
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->applyFlymeAnimateWallpaper(Lcom/android/server/wm/WindowManagerService;)V
+
     move-object/from16 v0, p0
 
     iget-object v2, v0, Lcom/android/server/wm/WindowManagerService;->mPolicy:Landroid/view/WindowManagerPolicy;
@@ -39397,6 +39462,7 @@
     iput-boolean v2, v0, Lcom/android/server/wm/AppWindowAnimator;->deferThumbnailDestruction:Z
 
     :goto_16
+    :goto_flyme_0
     const-wide/16 v10, 0x2710
 
     move-object/from16 v0, v17
@@ -45482,6 +45548,15 @@
     .restart local v33    # "win":Lcom/android/server/wm/WindowState;
     :cond_1
     :try_start_1
+
+    move-object/from16 v0, p0
+
+    move/from16 v1, p7
+
+    move-object/from16 v2, v33
+
+    invoke-static {v0, v1, v2}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->resetOnWindowChanged(Lcom/android/server/wm/WindowManagerService;ILcom/android/server/wm/WindowState;)V
+
     move-object/from16 v0, v33
 
     iget-object v0, v0, Lcom/android/server/wm/WindowState;->mWinAnimator:Lcom/android/server/wm/WindowStateAnimator;
@@ -45828,6 +45903,15 @@
     .restart local v20    # "leuiFlagChanges":I
     :cond_8
     :try_start_2
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p4
+
+    move-object/from16 v2, v33
+
+    invoke-static {v0, v1, v2}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->adjustBackupWindowFlag(Lcom/android/server/wm/WindowManagerService;Landroid/view/WindowManager$LayoutParams;Lcom/android/server/wm/WindowState;)V
+
     move-object/from16 v0, v33
 
     iget-object v0, v0, Lcom/android/server/wm/WindowState;->mAttrs:Landroid/view/WindowManager$LayoutParams;
@@ -45896,7 +45980,7 @@
 
     move/from16 v35, v0
 
-    if-eqz v35, :cond_9
+    if-eqz v35, :cond_flyme_0
 
     const/16 v35, 0x1
 
@@ -45912,7 +45996,7 @@
 
     move-object/from16 v1, p4
 
-    move-object/from16 v2, v29
+    move-object/from16 v2, v33
 
     invoke-static {v0, v1, v2}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->adjustFlymeKeyguardFlags(Lcom/android/server/wm/WindowManagerService;Landroid/view/WindowManager$LayoutParams;Lcom/android/server/wm/WindowState;)V
 
@@ -46779,6 +46863,15 @@
 
     .end local v9    # "displayInfo":Landroid/view/DisplayInfo;
     :cond_1b
+
+    move-object/from16 v0, p0
+
+    move/from16 v1, p7
+
+    move-object/from16 v2, v33
+
+    invoke-static {v0, v1, v2}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->adjustInputWindow(Lcom/android/server/wm/WindowManagerService;ILcom/android/server/wm/WindowState;)V
+
     move-object/from16 v0, v33
 
     iget-object v0, v0, Lcom/android/server/wm/WindowState;->mAppToken:Lcom/android/server/wm/AppWindowToken;
@@ -48956,6 +49049,9 @@
     .end local v1    # "cwin":Lcom/android/server/wm/WindowState;
     .end local v3    # "i":I
     :cond_1
+
+    invoke-static/range {p0 .. p1}, Lcom/android/server/wm/WindowManagerService$FlymeInjector;->notifyFlymeMoveWin(Lcom/android/server/wm/WindowManagerService;Lcom/android/server/wm/WindowState;)V
+
     const/4 v6, 0x1
 
     iput-boolean v6, p1, Lcom/android/server/wm/WindowState;->mRemoved:Z

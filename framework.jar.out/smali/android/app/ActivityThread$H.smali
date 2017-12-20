@@ -813,6 +813,9 @@
     invoke-static {v0, v1}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     :cond_2
+
+    invoke-direct/range {p0 .. p1}, Landroid/app/ActivityThread$H;->handleFlymeMessage(Landroid/os/Message;)V
+
     return-void
 
     :pswitch_1

@@ -3989,6 +3989,11 @@
     and-int/lit8 p3, p3, -0x5
 
     :cond_1
+
+    goto :goto_flyme_0
+
+    :goto_flyme_0
+
     move-object v0, p0
 
     move v2, p1

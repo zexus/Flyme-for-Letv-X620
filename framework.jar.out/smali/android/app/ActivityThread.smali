@@ -10789,6 +10789,13 @@
     invoke-static {v8, v9}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     :cond_1
+
+    invoke-static {p1, v6}, Landroid/app/ActivityThread$FlymeInjector;->isFlymePermissionGranted(Landroid/app/ActivityThread$ReceiverData;Landroid/app/LoadedApk;)Z
+
+    move-result v8
+
+    if-nez v8, :cond_flyme_0
+
     invoke-virtual {v3}, Landroid/app/ContextImpl;->getReceiverRestrictedContext()Landroid/content/Context;
 
     move-result-object v8
@@ -21408,6 +21415,9 @@
     .param p5, "reallyResume"    # Z
 
     .prologue
+
+    invoke-static/range {p0 .. p0}, Landroid/app/ActivityThread$FlymeInjector;->handleFlymeResumeActivity(Landroid/app/ActivityThread;)V
+
     .line 3429
     invoke-virtual {p0}, Landroid/app/ActivityThread;->unscheduleGcIdler()V
 

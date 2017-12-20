@@ -413,7 +413,7 @@
     .prologue
     const/4 v0, 0x0
 
-    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->-wrap14()V
+    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->checkCallerIsSystemOrSystemUI()V
 
     iget-object v1, p0, Lcom/android/server/notification/NotificationManagerService$5;->this$0:Lcom/android/server/notification/NotificationManagerService;
 
@@ -2941,7 +2941,7 @@
     .param p2, "uid"    # I
 
     .prologue
-    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->-wrap14()V
+    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->checkCallerIsSystemOrSystemUI()V
 
     iget-object v0, p0, Lcom/android/server/notification/NotificationManagerService$5;->this$0:Lcom/android/server/notification/NotificationManagerService;
 
@@ -2962,7 +2962,7 @@
     .param p2, "uid"    # I
 
     .prologue
-    invoke-direct {p0, p1}, Lcom/android/server/notification/NotificationManagerService$5;->enforceSystemOrSystemUI(Ljava/lang/String;)V
+    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->checkCallerIsSystemOrSystemUI()V
 
     iget-object v0, p0, Lcom/android/server/notification/NotificationManagerService$5;->this$0:Lcom/android/server/notification/NotificationManagerService;
 
@@ -2983,7 +2983,7 @@
     .param p2, "uid"    # I
 
     .prologue
-    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->-wrap14()V
+    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->checkCallerIsSystemOrSystemUI()V
 
     iget-object v0, p0, Lcom/android/server/notification/NotificationManagerService$5;->this$0:Lcom/android/server/notification/NotificationManagerService;
 
@@ -3830,7 +3830,7 @@
     .param p3, "enabled"    # Z
 
     .prologue
-    invoke-direct {p0, p1}, Lcom/android/server/notification/NotificationManagerService$5;->enforceSystemOrSystemUI(Ljava/lang/String;)V
+    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->checkCallerIsSystemOrSystemUI()V
 
     iget-object v0, p0, Lcom/android/server/notification/NotificationManagerService$5;->this$0:Lcom/android/server/notification/NotificationManagerService;
 
@@ -4130,7 +4130,7 @@
     .param p3, "peekable"    # Z
 
     .prologue
-    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->-wrap14()V
+    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->checkCallerIsSystemOrSystemUI()V
 
     iget-object v0, p0, Lcom/android/server/notification/NotificationManagerService$5;->this$0:Lcom/android/server/notification/NotificationManagerService;
 
@@ -4150,7 +4150,7 @@
     .param p3, "priority"    # I
 
     .prologue
-    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->-wrap14()V
+    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->checkCallerIsSystemOrSystemUI()V
 
     iget-object v0, p0, Lcom/android/server/notification/NotificationManagerService$5;->this$0:Lcom/android/server/notification/NotificationManagerService;
 
@@ -4174,7 +4174,7 @@
     .param p3, "visibility"    # I
 
     .prologue
-    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->-wrap14()V
+    invoke-static {}, Lcom/android/server/notification/NotificationManagerService;->checkCallerIsSystemOrSystemUI()V
 
     iget-object v0, p0, Lcom/android/server/notification/NotificationManagerService$5;->this$0:Lcom/android/server/notification/NotificationManagerService;
 

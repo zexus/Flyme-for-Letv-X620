@@ -213,6 +213,7 @@
     <attr name="resizeableActivity" format="boolean" />
     <attr name="cantSaveState" format="boolean" />
     <attr name="primaryUserOnly" format="boolean" />
+    <attr name="needAccessControl" format="boolean" />
     <attr name="leRequireGaussianBlur" format="boolean" />
     <attr name="leGaussianBlurRadiusRatio" format="float" />
     <attr name="Leui.LeListViewStyle" format="reference" />

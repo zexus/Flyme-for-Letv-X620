@@ -2107,6 +2107,9 @@
 
     :cond_8
     :goto_4
+
+    invoke-virtual/range {p0 .. p1}, Landroid/preference/Preference;->setPreferenceView(Landroid/view/View;)V
+
     return-void
 
     .end local v0    # "imageFrame":Landroid/view/View;

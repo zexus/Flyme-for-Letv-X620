@@ -3657,6 +3657,19 @@
     invoke-static {v5, v6}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
     :cond_4
+
+    invoke-static/range {p0 .. p1}, Lcom/android/internal/policy/PhoneWindow$FlymeInjector;->flymeDispatchKeyEvent(Lcom/android/internal/policy/PhoneWindow$DecorView;Landroid/view/KeyEvent;)Z
+
+    move-result v5
+
+    if-eqz v5, :cond_flyme_0
+
+    const/4 v5, 0x1
+
+    return v5
+
+    :cond_flyme_0
+
     if-eqz v2, :cond_6
 
     return v8

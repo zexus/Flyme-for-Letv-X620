@@ -712,6 +712,9 @@
     .end local v0    # "container":Landroid/os/Bundle;
     .end local v1    # "preferenceScreen":Landroid/preference/PreferenceScreen;
     :cond_2
+
+    invoke-direct/range {p0 .. p0}, Landroid/preference/PreferenceFragment;->resetFlymeListViewPaddingTop()V
+
     return-void
 .end method
 

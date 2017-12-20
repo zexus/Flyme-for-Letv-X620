@@ -11328,6 +11328,8 @@
 
     invoke-virtual {v1, v2}, Lbase/core/java/com/letv/leui/notification/LeuiNotificationHelper;->registerReceiver(Landroid/content/BroadcastReceiver;)V
 
+    invoke-direct/range {p0 .. p0}, Lcom/android/server/notification/NotificationManagerService;->initFlymeExtraFields()V
+
     return-void
 
     .end local v4    # "pkgFilter":Landroid/content/IntentFilter;

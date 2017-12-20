@@ -3064,6 +3064,11 @@
     .param p3, "flags"    # I
 
     .prologue
+
+    invoke-direct/range {p0 .. p3}, Landroid/media/AudioManager;->adjustFlymeFlags(III)I
+
+    move-result p3
+
     sget-object v1, Landroid/media/AudioManager;->TAG:Ljava/lang/String;
 
     new-instance v2, Ljava/lang/StringBuilder;

@@ -41,6 +41,13 @@
 
 
 # instance fields
+
+.field public mFlymeNotificationBuilder:Landroid/app/NotificationBuilderExt;
+
+.field private mFlymeReplyIntent:Landroid/app/PendingIntent;
+
+.field private mFlymeSnoozeIntent:Landroid/app/PendingIntent;
+
 .field private isShadow:Z
 
 .field private mActions:Ljava/util/ArrayList;

@@ -105,6 +105,11 @@
     move-result-object v0
 
     .local v0, "contentView":Landroid/widget/RemoteViews;
+
+    invoke-direct {p0, v0}, Landroid/app/Notification$BigPictureStyle;->getFlymeContentView(Landroid/widget/RemoteViews;)Landroid/widget/RemoteViews;
+
+    move-result-object v0
+
     iget-boolean v1, p0, Landroid/app/Notification$BigPictureStyle;->mBigLargeIconSet:Z
 
     if-eqz v1, :cond_1
@@ -169,6 +174,8 @@
 
     :goto_2
     invoke-static {v2, v0, v1}, Landroid/app/Notification$Builder;->-wrap2(Landroid/app/Notification$Builder;Landroid/widget/RemoteViews;I)Z
+
+    invoke-virtual {p0, v0}, Landroid/app/Notification$BigPictureStyle;->makeBigContentViewFlyme(Landroid/widget/RemoteViews;)V
 
     return-object v0
 

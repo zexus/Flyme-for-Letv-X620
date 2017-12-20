@@ -130,6 +130,9 @@
     .param p1, "event"    # Landroid/view/InputEvent;
 
     .prologue
+
+    invoke-direct/range {p0 .. p1}, Landroid/view/ViewRootImpl$WindowInputEventReceiver;->processEventForMoveWinIfNeed(Landroid/view/InputEvent;)V
+
     instance-of v0, p1, Landroid/view/KeyEvent;
 
     if-eqz v0, :cond_0

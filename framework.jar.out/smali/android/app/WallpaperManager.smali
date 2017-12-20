@@ -1800,9 +1800,17 @@
     .end annotation
 
     .prologue
-    const v0, #android:drawable@default_wallpaper#t
+    #const v0, #android:drawable@default_wallpaper#t
 
-    invoke-virtual {p0, v0}, Landroid/app/WallpaperManager;->setResource(I)V
+    #invoke-virtual {p0, v0}, Landroid/app/WallpaperManager;->setResource(I)V
+
+    iget-object v0, p0, Landroid/app/WallpaperManager;->mContext:Landroid/content/Context;
+
+    invoke-static {v0}, Landroid/app/WallpaperManager$FlymeInjector;->openFlymeDefaultWallpaper(Landroid/content/Context;)Ljava/io/InputStream;
+
+    move-result-object v0
+
+    invoke-virtual {p0, v0}, Landroid/app/WallpaperManager;->setStream(Ljava/io/InputStream;)V
 
     return-void
 .end method
@@ -2091,7 +2099,7 @@
 
     iget-object v6, v0, Landroid/app/WallpaperManager;->mContext:Landroid/content/Context;
 
-    invoke-static {v5, v6}, Landroid/app/WallpaperManager$Globals;->-wrap0(Landroid/app/WallpaperManager$Globals;Landroid/content/Context;)Ljava/io/InputStream;
+    invoke-static {v6}, Landroid/app/WallpaperManager$FlymeInjector;->openFlymeDefaultWallpaper(Landroid/content/Context;)Ljava/io/InputStream;
 
     move-result-object v5
 
@@ -2241,7 +2249,7 @@
 
     iget-object v6, v0, Landroid/app/WallpaperManager;->mContext:Landroid/content/Context;
 
-    invoke-static {v5, v6}, Landroid/app/WallpaperManager$Globals;->-wrap0(Landroid/app/WallpaperManager$Globals;Landroid/content/Context;)Ljava/io/InputStream;
+    invoke-static {v6}, Landroid/app/WallpaperManager$FlymeInjector;->openFlymeDefaultWallpaper(Landroid/content/Context;)Ljava/io/InputStream;
 
     move-result-object v5
 
@@ -2564,7 +2572,7 @@
 
     iget-object v6, v0, Landroid/app/WallpaperManager;->mContext:Landroid/content/Context;
 
-    invoke-static {v5, v6}, Landroid/app/WallpaperManager$Globals;->-wrap0(Landroid/app/WallpaperManager$Globals;Landroid/content/Context;)Ljava/io/InputStream;
+    invoke-static {v6}, Landroid/app/WallpaperManager$FlymeInjector;->openFlymeDefaultWallpaper(Landroid/content/Context;)Ljava/io/InputStream;
 
     move-result-object v5
 
@@ -4230,6 +4238,21 @@
     .end annotation
 
     .prologue
+
+    invoke-static/range {p0 .. p0}, Landroid/app/WallpaperManager$FlymeInjector;->isFlymeChildrenMode(Landroid/app/WallpaperManager;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    new-instance v0, Ljava/io/IOException;
+
+    invoke-direct {v0}, Ljava/io/IOException;-><init>()V
+
+    throw v0
+
+    :cond_flyme_0
+
     sget-object v5, Landroid/app/WallpaperManager;->sGlobals:Landroid/app/WallpaperManager$Globals;
 
     invoke-static {v5}, Landroid/app/WallpaperManager$Globals;->-get0(Landroid/app/WallpaperManager$Globals;)Landroid/app/IWallpaperManager;
@@ -4659,6 +4682,21 @@
     .end annotation
 
     .prologue
+
+    invoke-static/range {p0 .. p0}, Landroid/app/WallpaperManager$FlymeInjector;->isFlymeChildrenMode(Landroid/app/WallpaperManager;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    new-instance v0, Ljava/io/IOException;
+
+    invoke-direct {v0}, Ljava/io/IOException;-><init>()V
+
+    throw v0
+
+    :cond_flyme_0
+
     sget-object v6, Landroid/app/WallpaperManager;->sGlobals:Landroid/app/WallpaperManager$Globals;
 
     invoke-static {v6}, Landroid/app/WallpaperManager$Globals;->-get0(Landroid/app/WallpaperManager$Globals;)Landroid/app/IWallpaperManager;
@@ -4981,6 +5019,21 @@
     .end annotation
 
     .prologue
+
+    invoke-static/range {p0 .. p0}, Landroid/app/WallpaperManager$FlymeInjector;->isFlymeChildrenMode(Landroid/app/WallpaperManager;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_flyme_0
+
+    new-instance v0, Ljava/io/IOException;
+
+    invoke-direct {v0}, Ljava/io/IOException;-><init>()V
+
+    throw v0
+
+    :cond_flyme_0
+
     sget-object v5, Landroid/app/WallpaperManager;->sGlobals:Landroid/app/WallpaperManager$Globals;
 
     invoke-static {v5}, Landroid/app/WallpaperManager$Globals;->-get0(Landroid/app/WallpaperManager$Globals;)Landroid/app/IWallpaperManager;

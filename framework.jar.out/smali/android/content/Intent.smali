@@ -821,6 +821,8 @@
 
     iput-boolean v0, p0, Landroid/content/Intent;->mIsShadow:Z
 
+    invoke-static/range {p0 .. p0}, Landroid/content/Intent$FlymeInjector;->createFlymeIntent(Landroid/content/Intent;)V
+
     return-void
 .end method
 
@@ -843,6 +845,8 @@
     const/4 v0, -0x2
 
     iput v0, p0, Landroid/content/Intent;->mContentUserHint:I
+
+    invoke-static/range {p0 .. p0}, Landroid/content/Intent$FlymeInjector;->createFlymeIntent(Landroid/content/Intent;)V
 
     const/4 v0, 0x0
 
@@ -989,6 +993,8 @@
 
     iput-boolean v0, p0, Landroid/content/Intent;->mIsShadow:Z
 
+    invoke-static/range {p0 .. p1}, Landroid/content/Intent$FlymeInjector;->createFlymeIntent(Landroid/content/Intent;Landroid/content/Intent;)V
+
     return-void
 .end method
 
@@ -1055,6 +1061,8 @@
 
     iput-boolean v0, p0, Landroid/content/Intent;->mIsShadow:Z
 
+    invoke-static/range {p0 .. p0}, Landroid/content/Intent$FlymeInjector;->createFlymeIntent(Landroid/content/Intent;)V
+
     return-void
 .end method
 
@@ -1068,6 +1076,8 @@
     const/4 v0, -0x2
 
     iput v0, p0, Landroid/content/Intent;->mContentUserHint:I
+
+    invoke-static/range {p0 .. p0}, Landroid/content/Intent$FlymeInjector;->createFlymeIntent(Landroid/content/Intent;)V
 
     const/4 v0, 0x0
 
@@ -1089,6 +1099,8 @@
 
     iput v0, p0, Landroid/content/Intent;->mContentUserHint:I
 
+    invoke-static/range {p0 .. p0}, Landroid/content/Intent$FlymeInjector;->createFlymeIntent(Landroid/content/Intent;)V
+
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Landroid/content/Intent;->mIsShadow:Z
@@ -1109,6 +1121,8 @@
     const/4 v0, -0x2
 
     iput v0, p0, Landroid/content/Intent;->mContentUserHint:I
+
+    invoke-static/range {p0 .. p0}, Landroid/content/Intent$FlymeInjector;->createFlymeIntent(Landroid/content/Intent;)V
 
     const/4 v0, 0x0
 
@@ -1144,6 +1158,8 @@
     const/4 v0, -0x2
 
     iput v0, p0, Landroid/content/Intent;->mContentUserHint:I
+
+    invoke-static/range {p0 .. p0}, Landroid/content/Intent$FlymeInjector;->createFlymeIntent(Landroid/content/Intent;)V
 
     const/4 v0, 0x0
 
@@ -9012,6 +9028,9 @@
     move v2, v3
 
     :goto_1
+
+    invoke-static/range {p0 .. p1}, Landroid/content/Intent$FlymeInjector;->readIntentExt(Landroid/content/Intent;Landroid/os/Parcel;)V
+
     iput-boolean v2, p0, Landroid/content/Intent;->mIsShadow:Z
 
     return-void
@@ -11177,6 +11196,8 @@
     iget-object v2, p0, Landroid/content/Intent;->mExtras:Landroid/os/Bundle;
 
     invoke-virtual {p1, v2}, Landroid/os/Parcel;->writeBundle(Landroid/os/Bundle;)V
+
+    invoke-static/range {p0 .. p1}, Landroid/content/Intent$FlymeInjector;->writeIntentExt(Landroid/content/Intent;Landroid/os/Parcel;)V
 
     iget-boolean v2, p0, Landroid/content/Intent;->mIsShadow:Z
 

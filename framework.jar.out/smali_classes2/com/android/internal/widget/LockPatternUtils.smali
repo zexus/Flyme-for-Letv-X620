@@ -3877,6 +3877,19 @@
     .restart local v4    # "dpm":Landroid/app/admin/DevicePolicyManager;
     :cond_1
     :try_start_1
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p1
+
+    move/from16 v2, p2
+
+    move/from16 v3, p3
+
+    move/from16 v5, p6
+
+    invoke-direct {v0, v1, v2, v3, v5}, Lcom/android/internal/widget/LockPatternUtils;->saveFlymePasswordLength(Ljava/lang/String;Ljava/lang/String;II)V
+
     invoke-direct/range {p0 .. p0}, Lcom/android/internal/widget/LockPatternUtils;->getLockSettings()Lcom/android/internal/widget/ILockSettings;
 
     move-result-object v5

@@ -3125,6 +3125,8 @@
 
     invoke-interface {v0, v1}, Ljava/util/Set;->addAll(Ljava/util/Collection;)Z
 
+    invoke-static {}, Landroid/provider/Settings$System;->addFlymePublicSettings()V
+
     new-instance v0, Landroid/util/ArraySet;
 
     invoke-direct {v0}, Landroid/util/ArraySet;-><init>()V

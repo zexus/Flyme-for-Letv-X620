@@ -2679,6 +2679,10 @@
 
     sub-int v2, v3, v4
 
+    invoke-static {p0, p1, v2}, Landroid/content/res/Configuration$FlymeInjector;->compareTo(Landroid/content/res/Configuration;Landroid/content/res/Configuration;I)I
+
+    move-result v2
+
     return v2
 .end method
 
@@ -3048,6 +3052,11 @@
     or-int/2addr v0, v2
 
     :cond_12
+
+    invoke-static {p0, p1, v0}, Landroid/content/res/Configuration$FlymeInjector;->diff(Landroid/content/res/Configuration;Landroid/content/res/Configuration;I)I
+
+    move-result v0
+
     return v0
 
     .end local v1    # "deltaScreenLayoutDir":I
@@ -3279,6 +3288,10 @@
     iget v2, p0, Landroid/content/res/Configuration;->letvTheme:I
 
     add-int v0, v1, v2
+
+    invoke-static {p0, v0}, Landroid/content/res/Configuration$FlymeInjector;->hashCode(Landroid/content/res/Configuration;I)I
+
+    move-result v0
 
     return v0
 
@@ -3604,6 +3617,8 @@
 
     iput v0, p0, Landroid/content/res/Configuration;->letvTheme:I
 
+    invoke-static/range {p0 .. p1}, Landroid/content/res/Configuration$FlymeInjector;->readFromParcel(Landroid/content/res/Configuration;Landroid/os/Parcel;)V
+
     return-void
 
     :cond_1
@@ -3781,6 +3796,8 @@
 
     iput v0, p0, Landroid/content/res/Configuration;->letvTheme:I
 
+    invoke-static/range {p0 .. p1}, Landroid/content/res/Configuration$FlymeInjector;->initFlymeExtraFields(Landroid/content/res/Configuration;Landroid/content/res/Configuration;)V
+
     return-void
 .end method
 
@@ -3841,6 +3858,8 @@
     iput-boolean v1, p0, Landroid/content/res/Configuration;->simSetLocale:Z
 
     iput v1, p0, Landroid/content/res/Configuration;->letvTheme:I
+
+    invoke-static/range {p0 .. p0}, Landroid/content/res/Configuration$FlymeInjector;->initFlymeExtraFields(Landroid/content/res/Configuration;)V
 
     return-void
 .end method
@@ -5316,6 +5335,11 @@
     iput v2, p0, Landroid/content/res/Configuration;->letvTheme:I
 
     :cond_1b
+
+    invoke-static {p0, p1, v0}, Landroid/content/res/Configuration$FlymeInjector;->updateFrom(Landroid/content/res/Configuration;Landroid/content/res/Configuration;I)I
+
+    move-result v0
+
     return v0
 
     .end local v1    # "deltaScreenLayoutDir":I
@@ -5472,6 +5496,8 @@
     iget v0, p0, Landroid/content/res/Configuration;->letvTheme:I
 
     invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+
+    invoke-static/range {p0 .. p2}, Landroid/content/res/Configuration$FlymeInjector;->writeToParcel(Landroid/content/res/Configuration;Landroid/os/Parcel;I)V
 
     return-void
 

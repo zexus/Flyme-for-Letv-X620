@@ -467,6 +467,9 @@
     invoke-static {v2, v3}, Landroid/util/Slog;->v(Ljava/lang/String;Ljava/lang/String;)I
 
     :cond_2
+
+    invoke-direct/range {p0 .. p1}, Lcom/android/server/wm/WindowManagerService$H;->handleFlymeMessage(Landroid/os/Message;)V
+
     return-void
 
     :pswitch_1

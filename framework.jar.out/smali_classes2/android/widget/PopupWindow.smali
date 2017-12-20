@@ -3146,6 +3146,11 @@
     .line 1559
     .end local v5    # "res":Landroid/content/res/Resources;
     :cond_0
+
+    invoke-virtual {p0, v1}, Landroid/widget/PopupWindow;->computePopwindowPositionForMz(I)I
+
+    move-result v1
+
     aget v8, v0, v10
 
     invoke-virtual {p1}, Landroid/view/View;->getHeight()I

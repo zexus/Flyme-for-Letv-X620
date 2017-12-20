@@ -730,6 +730,8 @@
 
     invoke-virtual {v3, v0, v1}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/Integer;)V
 
+    invoke-static/range {v3 .. v3}, Landroid/provider/Telephony$Sms;->putFlymeExtraValues(Landroid/content/ContentValues;)V
+
     .line 811
     if-eqz p4, :cond_4
 

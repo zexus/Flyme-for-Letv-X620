@@ -6,6 +6,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/server/power/ShutdownThread$FlymeInjector;,
         Lcom/android/server/power/ShutdownThread$CloseDialogReceiver;,
         Lcom/android/server/power/ShutdownThread$1;
     }
@@ -743,7 +744,7 @@
     :try_start_6
     sget-boolean v4, Lcom/android/server/power/ShutdownThread;->mReboot:Z
 
-    invoke-static {p0, v4}, Lcom/android/server/power/ShutdownThread;->showShutdownWelcome(Landroid/content/Context;Z)V
+    invoke-static/range {p0 .. p0}, Lcom/android/server/power/ShutdownThread$FlymeInjector;->showShutDownAnimation(Landroid/content/Context;)V
 
     .line 580
     const-string/jumbo v4, "ShutdownThread"

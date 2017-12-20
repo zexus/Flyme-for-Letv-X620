@@ -23,6 +23,8 @@
 
 
 # instance fields
+.field private mIsFlymeThemeLight:Z
+
 .field private dividerFilter:Lcom/letv/leui/widget/DividerFilter;
 
 .field private mHandler:Landroid/os/Handler;

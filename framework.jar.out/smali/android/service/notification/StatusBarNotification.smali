@@ -373,6 +373,10 @@
 
     iget-object v4, p0, Landroid/service/notification/StatusBarNotification;->pkg:Ljava/lang/String;
 
+    invoke-virtual/range {p0 .. p0}, Landroid/service/notification/StatusBarNotification;->getOrigPackageName()Ljava/lang/String;
+
+    move-result-object v4
+
     invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v3

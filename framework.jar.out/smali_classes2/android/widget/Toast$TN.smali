@@ -123,6 +123,8 @@
 
     iput v1, v0, Landroid/view/WindowManager$LayoutParams;->privateFlags:I
 
+    invoke-direct {p0, v0}, Landroid/widget/Toast$TN;->initFlymeExtraFields(Landroid/view/WindowManager$LayoutParams;)V
+
     return-void
 .end method
 
@@ -407,6 +409,9 @@
 
     .line 439
     :goto_0
+
+    invoke-direct/range {p0 .. p0}, Landroid/widget/Toast$TN;->hookFlymeToastType()V
+
     iget-object v4, p0, Landroid/widget/Toast$TN;->mView:Landroid/view/View;
 
     invoke-virtual {v4}, Landroid/view/View;->getParent()Landroid/view/ViewParent;

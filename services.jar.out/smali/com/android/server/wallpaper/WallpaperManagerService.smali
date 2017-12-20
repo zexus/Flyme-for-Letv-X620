@@ -6,6 +6,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/server/wallpaper/WallpaperManagerService$FlymeChildrenModeToast;,
         Lcom/android/server/wallpaper/WallpaperManagerService$H;,
         Lcom/android/server/wallpaper/WallpaperManagerService$WallpaperObserver;,
         Lcom/android/server/wallpaper/WallpaperManagerService$WallpaperData;,
@@ -10322,6 +10323,8 @@
 
     .local v1, "wallpaperInfoFile":Ljava/io/File;
     invoke-virtual {v1}, Ljava/io/File;->delete()Z
+
+    invoke-direct/range {p0 .. p1}, Lcom/android/server/wallpaper/WallpaperManagerService;->onFlymeRemoveUser(I)V
 
     new-instance v0, Ljava/io/File;
 
