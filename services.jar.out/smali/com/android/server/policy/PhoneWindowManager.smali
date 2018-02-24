@@ -10195,6 +10195,8 @@
 
     move-result v6
 
+    const/4 v6, 0x2
+
     iput v6, p0, Lcom/android/server/policy/PhoneWindowManager;->mPressOnMenuBehavior:I
 
     const-string v6, "key_menu_long_press_action"

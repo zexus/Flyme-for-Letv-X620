@@ -1,3 +1,4 @@
 /board/*
 /autopatch/*
 /out/*
+/vendor/system/app/webview/*
