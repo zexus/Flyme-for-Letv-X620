@@ -1,0 +1,64 @@
+show_mtupdate_stage("/cache/recovery/last_mtupdate_stage");
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "1") ,
+(
+ui_print(" ");
+ui_print(" start to update general image...");
+package_extract_file("logo.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/logo");
+package_extract_file("md1dsp.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/md1dsp");
+package_extract_file("md3rom.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/md3img");
+package_extract_file("md1rom.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/md1img");
+package_extract_file("md1arm7.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/md1arm7");
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "1");
+),
+ui_print(" ");
+ui_print("general images are already updated...");
+);
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "3") ,
+(
+if less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "2") then
+ui_print(" ");
+ui_print(" start to update alt loader image...");
+package_extract_file("lk.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/lk2");
+package_extract_file("tinysys-scp.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/scp2");
+package_extract_file("trustzone.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/tee2");
+assert(package_extract_file("preloader_s2_plus.bin", "/tmp/preloader_s2_plus.bin"),
+       write_raw_image("/tmp/preloader_s2_plus.bin", "/dev/block/mmcblk0boot1"),
+       delete("/tmp/preloader_s2_plus.bin"));
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "2");
+endif;
+switch_active("lk", "lk2");
+switch_active("scp1", "scp2");
+switch_active("tee1", "tee2");
+switch_active("preloader", "preloader2");
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "3");
+),
+ui_print(" ");
+ui_print(" alt loder images are already updated...");
+);
+ifelse (
+less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "5") ,
+(
+if less_than_int(get_mtupdate_stage("/cache/recovery/last_mtupdate_stage"), "4") then
+ui_print(" ");
+ui_print(" start to update main loader image...");
+package_extract_file("lk.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/lk");
+package_extract_file("tinysys-scp.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/scp1");
+package_extract_file("trustzone.bin", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/tee1");
+assert(package_extract_file("preloader_s2_plus.bin", "/tmp/preloader_s2_plus.bin"),
+       write_raw_image("/tmp/preloader_s2_plus.bin", "/dev/block/mmcblk0boot0"),
+       delete("/tmp/preloader_s2_plus.bin"));
+set_mtupdate_stage("/cache/recovery/last_mtupdate_stage", "4");
+endif;
+switch_active("lk2", "lk");
+switch_active("scp2", "scp1");
+switch_active("tee2", "tee1");
+switch_active("preloader2", "preloader");
+),
+ui_print(" ");
+ui_print("main loader images are already updated...");
+);
+delete("/cache/recovery/last_mtupdate_stage");
+ui_print(" Installing TWRP...");
+package_extract_file("recovery.img", "/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/recovery");
